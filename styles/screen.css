@@ -1,0 +1,36 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+.allContent > div{
+    height: 100vh;    
+}
+.allContent div{
+    border: solid 2px black;
+}
+.head {
+	height: 35px;
+}
+.project {
+	height: 300px;
+}
+.categories{
+    transition: 1s;
+}
+.cat1{
+    background-color: lightgray;
+}
+.cat2{
+    background-color: red;
+}
+.cat3{
+    background-color: blue;
+}
+.cat4{
+    background-color: deeppink;
+}
+.cat5{
+    background-color: green;
+}
