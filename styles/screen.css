@@ -4,33 +4,35 @@
     box-sizing: border-box;
     text-decoration: none;
 }
-.allContent > div{
-    height: 100vh;    
+.all_cats{
+    height: 100vh;
+    width: 50px;
+    display: inline-block;
+    float: left;
+    transition: 0.3s;
+    border-right: solid 0px #b9ffb9;
 }
-.allContent div{
-    border: solid 2px black;
-}
-.head {
-	height: 35px;
-}
-.project {
-	height: 300px;
-}
-.categories{
-    transition: 1s;
+.closed:hover{
+    border-top: solid 15px black;
+    border-bottom: solid 15px black;
 }
 .cat1{
-    background-color: lightgray;
+    background-color: rgb(140, 200, 120);
 }
 .cat2{
-    background-color: red;
+    background-color: rgb(160, 170, 100);
 }
 .cat3{
-    background-color: blue;
+    background-color: rgb(180, 140, 80);
 }
 .cat4{
-    background-color: deeppink;
+    background-color: rgb(200, 110, 60);
 }
 .cat5{
-    background-color: green;
+    background-color: rgb(220, 80, 40);
+}
+.open{
+    width: 800px;
+    border-right: solid 5px black;
+    border-left: solid 5px black;    
 }

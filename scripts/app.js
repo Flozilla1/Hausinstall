@@ -1,6 +1,8 @@
 $(document).ready(function(){
-    $(".cat1").click(function(){
-        $(this).addClass("col-1").removeClass("col-8")
-        $(".cat1 div").css("display", "none")
+    
+    $(".all_cats").click(function(){
+    
+        $(".all_cats").removeClass("open").addClass("closed");
+        $(this).toggleClass("open").removeClass("closed");
     });
 })
