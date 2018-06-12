@@ -11,10 +11,15 @@
     float: left;
     transition: 0.3s;
     border-right: solid 0px #b9ffb9;
+    overflow-x: hidden;
+    overflow-y: scroll;
 }
-.closed:hover{
-    border-top: solid 15px black;
-    border-bottom: solid 15px black;
+.all_cats:hover .cat_bar{
+    height: 30px;
+    margin-bottom: -30px;
+    width: 100%;
+    background-color: black;
+    cursor: pointer;
 }
 .cat1{
     background-color: rgb(140, 200, 120);
@@ -34,5 +39,19 @@
 .open{
     width: 800px;
     border-right: solid 5px black;
-    border-left: solid 5px black;    
+    border-left: solid 5px black;
+    display: inline-block;
+}
+.cat_content{
+    margin: 50px;
+}
+.closed .cat_content{
+    display: none;
+}
+.createNew{
+    border: solid 3px darkgreen;
+    padding: 5px;
+    text-align: center;
+    display: inline-block;
+    float: right;
 }
