@@ -24,6 +24,9 @@
 .cat1{
     background-color: rgb(140, 200, 120);
 }
+.cat1 .cat_unit{
+    background-color: rgb(49, 121, 71);
+}
 .cat2{
     background-color: rgb(160, 170, 100);
 }
@@ -43,15 +46,17 @@
     display: inline-block;
 }
 .cat_content{
-    margin: 50px;
+    margin-left: 50px;
 }
 .closed .cat_content{
     display: none;
 }
-.createNew{
-    border: solid 3px darkgreen;
-    padding: 5px;
-    text-align: center;
-    display: inline-block;
-    float: right;
+.cat_unit{
+    width: 100%;
+    height: 100px;
+    padding-left: 100px;
+    padding-top: 20px;
+}
+.cat_titel{
+    margin: 50px;
 }
