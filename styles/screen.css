@@ -3,60 +3,150 @@
     padding: 0px;
     box-sizing: border-box;
     text-decoration: none;
+    list-style-type: none;
+    font-family: sans-serif;
 }
-.all_cats{
-    height: 100vh;
-    width: 50px;
+.all_fold-ups{
     display: inline-block;
+    position: relative;
     float: left;
     transition: 0.3s;
-    border-right: solid 0px #b9ffb9;
     overflow-x: hidden;
     overflow-y: scroll;
+    font-size: 13pt;
+    height: 100%;
+    width: 50px;
+    box-shadow: 10px 0px 35px rgba(0,0,0,0.3);
 }
-.all_cats:hover .cat_bar{
-    height: 30px;
-    margin-bottom: -30px;
-    width: 100%;
-    background-color: black;
-    cursor: pointer;
+.all_safties{
+    margin-bottom: 0px;
+    bottom: 0px;
 }
-.cat1{
+#cats{
+    height:  94vh;
+}
+#safties{
+    height: 6vh;
+}
+/* z-index musst folgend angepasst werden, wenn ein Folder dazu kommt */
+#cat-1{
     background-color: rgb(140, 200, 120);
+    color: rgb(24, 109, 70);
+    height: 100vh;
+    z-index: 4;
 }
-.cat1 .cat_unit{
-    background-color: rgb(49, 121, 71);
+#cat-1 .cat_unit{
+    background-color: rgb(24, 109, 70);
+    color: rgb(140, 200, 120);
 }
-.cat2{
+#cat-2{
     background-color: rgb(160, 170, 100);
+    color: rgb(60, 90, 50);
+    z-index: 3;
 }
-.cat3{
+#cat-2 .cat_unit{
+    background-color: rgb(60, 90, 50);
+    color: rgb(160, 170, 100);
+
+}
+#cat-3{
     background-color: rgb(180, 140, 80);
+    color: rgb(80, 61, 31);
+    z-index: 2;
 }
-.cat4{
+#cat-3 .cat_unit{
+    background-color: rgb(80, 61, 31);
+    color:  rgb(180, 140, 80);
+}
+#cat-4{
+    background-color: rgb(200, 110, 60);
+    color: rgb(100, 30, 10);
+    z-index: 1;
+}
+#cat-4 .cat_unit{
+    background-color: rgb(100, 30, 10);
+    color: rgb(200, 110, 60);
+}
+#cat-5{
+    background-color: rgb(220, 80, 40);
+    color: rgb(120, 0, 0);
+}
+#cat-5 .cat_unit{
+    background-color: rgb(120, 0, 0);
+    color: rgb(220, 80, 40);
+}
+#safty-1{
+    background-color: rgb(181, 177, 73);
+    z-index: 1;
+}
+#safty-2{
     background-color: rgb(200, 110, 60);
 }
-.cat5{
-    background-color: rgb(220, 80, 40);
+.btn_new{
+    background-color: #63ff63;
+}
+.btn_update{
+    background-color: skyblue;
+}
+.btn_delete{
+    background-color: darksalmon;
+}
+.btn_list{
+    background-color: gainsboro;
+}
+.btn_shoplist{
+    background-color: gainsboro;
 }
 .open{
     width: 800px;
-    border-right: solid 5px black;
-    border-left: solid 5px black;
     display: inline-block;
 }
 .cat_content{
     margin-left: 50px;
+    margin-top: 20px;
 }
 .closed .cat_content{
     display: none;
 }
-.cat_unit{
-    width: 100%;
-    height: 100px;
-    padding-left: 100px;
-    padding-top: 20px;
+.cat_title{
+    display: inline-block;
+    position: relative;
 }
-.cat_titel{
-    margin: 50px;
+h1{
+    margin-right: 20px;
+    float: left;
+    margin-top: -3px;
+    font-size: 35pt;
+}
+.cat_unit{
+    margin-left: -50px;
+    margin-top: 20px;
+    padding-left: 50px;
+    padding-top: 20px;
+    padding-bottom: 30px;
+}
+li h2{
+    font-size: 25pt;
+    margin-bottom: 20px;
+}
+ul li span:first-child{
+    margin-left: 50px;
+}
+span + span{
+    font-weight: 800;
+}
+button{
+    padding: 10px 15px 7px 15px;
+    cursor: pointer;
+    font-weight: 800;
+    font-size: 12pt;
+    border: none;
+}
+.cat_unit button{
+    margin-top: 20px;
+}
+.shut{
+    height: 70px;
+    overflow: hidden;
+    cursor: pointer;
 }
