@@ -22,13 +22,29 @@
     margin-bottom: 0px;
     bottom: 0px;
 }
-#cats{
-    height:  94vh;
+.chosen_path{
+    height: 94vh;
+    transition: 0.5s;
 }
-#safties{
+.rejectet_path{
     height: 6vh;
+    transition: 0.5s;
+}
+.split_path{
+    height: 50vh;
+    transition: 0.5s;
 }
 /* z-index musst folgend angepasst werden, wenn ein Folder dazu kommt */
+#cat-0{
+    background-color: rgb(159, 229, 173);
+    color: rgb(24, 109, 70);
+    height: 100vh;
+    z-index: 5;
+}
+#cat-0 .cat_unit{
+    color: rgb(159, 229, 173);
+    background-color: rgb(24, 109, 70);
+}
 #cat-1{
     background-color: rgb(140, 200, 120);
     color: rgb(24, 109, 70);
@@ -75,12 +91,22 @@
     background-color: rgb(120, 0, 0);
     color: rgb(220, 80, 40);
 }
-#safty-1{
+#safty-2{
     background-color: rgb(181, 177, 73);
+    color: rgb(103, 86, 13);
     z-index: 1;
 }
-#safty-2{
+#safty-2 .cat_unit{
+    background-color: rgb(103, 86, 13);
+    color: rgb(181, 177, 73);
+}
+#safty-3{
     background-color: rgb(200, 110, 60);
+    color: rgb(116, 14, 5);
+}
+#safty-3 .cat_unit{
+    background-color: rgb(116, 14, 5);
+    color: rgb(200, 110, 60);
 }
 .btn_new{
     background-color: #63ff63;
@@ -98,8 +124,7 @@
     background-color: gainsboro;
 }
 .open{
-    width: 800px;
-    display: inline-block;
+    width: 700px;
 }
 .cat_content{
     margin-left: 50px;
@@ -119,11 +144,11 @@ h1{
     font-size: 35pt;
 }
 .cat_unit{
-    margin-left: -50px;
     margin-top: 20px;
-    padding-left: 50px;
+    padding-left: 25px;
     padding-top: 20px;
     padding-bottom: 30px;
+    overflow: hidden;
 }
 li h2{
     font-size: 25pt;
@@ -147,6 +172,5 @@ button{
 }
 .shut{
     height: 70px;
-    overflow: hidden;
     cursor: pointer;
 }

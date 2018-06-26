@@ -1,9 +1,28 @@
+EinkaufObjekt = {
+    "ware-1": {
+		"titel": "Kabel",
+        "parent_id": "2",
+		"specification": {
+			"preis": "100.000€"
+		}
+	},
+    "ware-2": {
+		"titel": "Birne",
+        "parent_id": "2",
+		"specification": {
+			"preis": "ein freundliches Lächeln"
+		}
+	},
+    "ware-3": {
+		"titel": "SicherungsSchalter",
+        "parent_id": "2",
+		"specification": {
+			"preis": "20"
+		}
+	}
+}
 ProjektObjekt = {
-    //Die einzelnen Instanzen müssen dringend folgende Namen haben, da ich durch sie entscheide, welche Html Struktur aufgebaut werden soll:
-    //project-x, floor-x, room-x, device-x, sensor-x
-    //Den Rest kann man besprechen, nur das erste ist schon a bissl eingefahren.
-    //Und es können keine Mischlinge daher kommen, Projekte und Floors zb müssen getrennt gehen
-	"project-1": {
+    "project-1": {
 		"titel": "Under the Bridge",
 		"specification": {
 			"baumeister": "Bob (der)",
@@ -133,3 +152,19 @@ SensorObjekt = {
         "parent_id": "2"
 	}
 }
+CircleObjekt = {
+    "circle-1": {
+        "titel": "Ec Xy",
+        "parent_id": "2"
+    }
+}
+SicherungsObjekt = {
+    "safty-1": {
+        "titel": "Schalter #1",
+        "parent_id": "1"
+    },
+    "safty-2": {
+        "titel": "Schalter #2",
+        "parent_id": "2"
+    }
+}   

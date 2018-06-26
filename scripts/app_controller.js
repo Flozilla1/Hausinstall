@@ -2,7 +2,7 @@ $(document).ready(function(){
     
     addContent("#cat-1", selectContent("#cat-1"));
     
-    $(".btn_list").click(callSubFolder);
+    $("[list_id]").click(callSubFolder);
     $(".shut").click(tell);
 });
 
@@ -10,9 +10,16 @@ function tell () {
     $(".cat_unit").addClass("shut");
     $(this).removeClass("shut");
 }
-function open (target) {
-    $(".all_cats").removeClass("open").addClass("closed");
+function open (target, nextType, btn) {
+    $(".all_fold-ups").removeClass("open").addClass("closed");
     $(target).addClass("open").removeClass("closed");
+    
+    $(".chosen_path").addClass("rejectet_path").removeClass("chosen_path");
+    $(nextType).addClass("chosen_path").removeClass("rejectet_path");
+
+    if ($(btn)[0].getAttribute("class").split(" ")[1] == "btn_devToSaf_list"){
+        $(".chosen_path,.rejectet_path").removeClass("*").addClass("split_path");
+    }
     
     addContent(target, selectContent(target));
 }
@@ -21,6 +28,10 @@ function selectContent (target){
     var createOneUnit;
     var jsObject;
     switch (target){
+        case "#cat-0":
+            createOneUnit = createOneShoppingList;
+            jsObject = EinkaufObjekt;
+            break;
         case "#cat-1":
             createOneUnit = createOneProject;
             jsObject = ProjektObjekt;
@@ -41,6 +52,13 @@ function selectContent (target){
             createOneUnit = createOneSensor;
             jsObject = SensorObjekt;
             break;
+        case "#safty-2":
+            createOneUnit = createOneElectricCircle;
+            jsObject = CircleObjekt;
+            break;
+        case "#safty-3":
+            createOneUnit = createOneSafty;
+            jsObject = SicherungsObjekt;
     }
     return ([jsObject, createOneUnit]);
 }
@@ -53,7 +71,7 @@ function addContent (target, JsoAndCommand) {
 
     $(targetContentArea)[0].innerHTML += finishedHtml;
     $(".shut").click(tell);
-    $(".btn_list").click(callSubFolder);
+    $("[list_id]").click(callSubFolder);
 }
 
 function callSubFolder (){
@@ -62,8 +80,35 @@ function callSubFolder (){
     var currFoldNode = $(this).parents(".all_fold-ups")[0];
     var currFoldName = currFoldNode.getAttributeNode("id").value;
     var currFoldNr = currFoldName.split("-")[1];
-    var currFoldType = currFoldName.split("-")[0];
-    var nextFold = "#" + currFoldType + "-" + ++currFoldNr;
     
-    open(nextFold);
+    var arrOfClasses = this.getAttribute("class").split(" ");
+    var nextType;
+    switch (arrOfClasses[1]){
+        case "btn_cat_list": case "btn_shopping_list":
+            nextType = "#cat";
+            break;
+        case "btn_safty_list": case "btn_devToSaf_list":
+            nextType = "#safty";
+            break;
+    }
+    var nextFoldNr = upOrDown (currFoldNr, this);
+    var nextFold = nextType + "-" + nextFoldNr;
+    open(nextFold, nextType, this);
+}
+
+function upOrDown (currFoldNr, that){
+    var btnType = that.getAttribute("class").split(" ")[1]
+    switch (btnType){
+        case "btn_cat_list": case "btn_safty_list":
+            ++currFoldNr;
+            break;
+        case "btn_shopping_list":
+            --currFoldNr;
+            break;
+        case "btn_devToSaf_list":
+            currFoldNr = 3;
+            break;
+    }
+    
+    return currFoldNr;
 }
