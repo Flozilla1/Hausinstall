@@ -24,6 +24,7 @@ EinkaufObjekt = {
 ProjektObjekt = {
     "project-1": {
 		"titel": "Under the Bridge",
+        "parent_id": "1",
 		"specification": {
 			"baumeister": "Bob (der)",
 			"kapital": "1.000c"
@@ -31,6 +32,7 @@ ProjektObjekt = {
 	},
 	"project-2": {
 		"titel": "Todesstern",
+        "parent_id": "1",
 		"specification": {
 			"baumeister": "Darth Vader & the bloody emperor",
 			"kapital": "100c"
@@ -38,6 +40,7 @@ ProjektObjekt = {
 	},
 	"project-3": {
 		"titel": "Große Höhle",
+        "parent_id": "1",
 		"specification": {
 			"baumeister": "Ulog der Mammutschlächter",
 			"kapital": "12 Steine"
@@ -45,6 +48,7 @@ ProjektObjekt = {
 	},
 	"project-4": {
 		"titel": "Angband",
+        "parent_id": "1",
 		"specification": {
 			"baumeister": "Melkor aka Morgoth",
 			"kapital": "∞"
@@ -52,6 +56,7 @@ ProjektObjekt = {
 	},
 	"project-5": {
 		"titel": "Chopper",
+        "parent_id": "1",
 		"specification": {
 			"baumeister": "Arnold Schwarzenegger",
 			"kapital": "50.000$"
@@ -131,15 +136,24 @@ RoomObjekt = {
 DeviceObjekt = {
 	"device-1": {
 		"titel": "Elektro-Fackel",
-        "parent_id": "3"
+        "parent_id": "3",
+        "specification": {
+			"Sicherung": "S1",
+		}
 	},
 	"device-2": {
 		"titel": "Kontroll-Anlage",
-        "parent_id": "2"
+        "parent_id": "2",
+        "specification": {
+			"Sicherung": "S2",
+		}
 	},
 	"device-3": {
 		"titel": "Steckdose",
-        "parent_id": "2"
+        "parent_id": "2",
+        "specification": {
+			"Sicherung": "S3",
+		}
 	}
 }
 SensorObjekt = {

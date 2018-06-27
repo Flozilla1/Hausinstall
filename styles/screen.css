@@ -111,20 +111,17 @@
 .btn_new{
     background-color: #63ff63;
 }
-.btn_update{
+.action_update{
     background-color: skyblue;
 }
-.btn_delete{
+.action_delete{
     background-color: darksalmon;
 }
-.btn_list{
-    background-color: gainsboro;
-}
-.btn_shoplist{
+.action_list_cat, .action_list_safty, .action_list_shopping{
     background-color: gainsboro;
 }
 .open{
-    width: 700px;
+    width: 750px;
 }
 .cat_content{
     margin-left: 50px;
@@ -173,4 +170,23 @@ button{
 .shut{
     height: 70px;
     cursor: pointer;
+}
+.menu{
+    background-color: darksalmon;
+    padding-left: 15px;
+    color: black;
+    height: 0px;
+    overflow: hidden;
+    transition: 0.5s;
+}
+.menu .titel{
+    margin-bottom: 10px;
+    margin-top: 15px;
+}
+.menu div{
+    margin-bottom: 5px;
+    margin-right: 5px;
+}
+.ask{
+    height: 150px;
 }

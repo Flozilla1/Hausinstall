@@ -1,8 +1,12 @@
+var that;
+var target = "#cat-1";
+
 $(document).ready(function(){
+
+    addContent(selectContent_createListTypeLine());
     
-    addContent("#cat-1", selectContent("#cat-1"));
-    
-    $("[list_id]").click(callSubFolder);
+    $("button").click(placeAction);
+//    $("[list_id]").click(callSubFolder);
     $(".shut").click(tell);
 });
 
@@ -10,20 +14,21 @@ function tell () {
     $(".cat_unit").addClass("shut");
     $(this).removeClass("shut");
 }
-function open (target, nextType, btn) {
+
+function open (nextType) {
     $(".all_fold-ups").removeClass("open").addClass("closed");
     $(target).addClass("open").removeClass("closed");
     
     $(".chosen_path").addClass("rejectet_path").removeClass("chosen_path");
     $(nextType).addClass("chosen_path").removeClass("rejectet_path");
 
-    if ($(btn)[0].getAttribute("class").split(" ")[1] == "btn_devToSaf_list"){
-        $(".chosen_path,.rejectet_path").removeClass("*").addClass("split_path");
-    }
-    
-    addContent(target, selectContent(target));
+//    Für später, um Devices und Sicherungen nebeneinander anzuzeigen (chosen_path und rejectet_path 50:50)
+//    if ($(btn)[0].getAttribute("class").split(" ")[1] == "btn_devToSaf_list"){
+//        $(".chosen_path,.rejectet_path").removeClass("*").addClass("split_path");
+//    }
+    addContent(selectContent_createListTypeLine);
 }
-function selectContent (target){
+function selectContent_createListTypeLine (){
         
     var createOneUnit;
     var jsObject;
@@ -31,39 +36,50 @@ function selectContent (target){
         case "#cat-0":
             createOneUnit = createOneShoppingList;
             jsObject = EinkaufObjekt;
+            createListTypeLine("shoppingList");
             break;
         case "#cat-1":
+            console.log(target)
             createOneUnit = createOneProject;
             jsObject = ProjektObjekt;
+            createListTypeLine("projects");
             break;
         case "#cat-2":
             createOneUnit = createOneFloor;
             jsObject = FloorObjekt;
+            createListTypeLine("floors");
             break;
         case "#cat-3":
             createOneUnit = createOneRoom;
             jsObject = RoomObjekt;
+            createListTypeLine("rooms");
             break;
         case "#cat-4":
             createOneUnit = createOneDevice;
             jsObject = DeviceObjekt;
+            createListTypeLine("device");
             break;
         case "#cat-5":
             createOneUnit = createOneSensor;
             jsObject = SensorObjekt;
+            createListTypeLine("sensor");
             break;
         case "#safty-2":
             createOneUnit = createOneElectricCircle;
             jsObject = CircleObjekt;
+            createListTypeLine("fi");
             break;
         case "#safty-3":
             createOneUnit = createOneSafty;
             jsObject = SicherungsObjekt;
+            createListTypeLine("fuse");
     }
+//console.log(requestedString)
     return ([jsObject, createOneUnit]);
 }
-function addContent (target, JsoAndCommand) {
-    
+
+function addContent (JsoAndCommand) {
+
     var jsObject = JsoAndCommand[0];
     var createOneUnit = JsoAndCommand[1];
     var finishedHtml = createAllUnits(jsObject, createOneUnit);
@@ -71,44 +87,43 @@ function addContent (target, JsoAndCommand) {
 
     $(targetContentArea)[0].innerHTML += finishedHtml;
     $(".shut").click(tell);
-    $("[list_id]").click(callSubFolder);
+    $("button").click(placeAction); //!!!Das verursacht doppelte auflistung (zweites Mal aufgerufen)!!!
 }
-
-function callSubFolder (){
+function getTarget (){
     
-    parentId = this.getAttribute("list_id")
-    var currFoldNode = $(this).parents(".all_fold-ups")[0];
+    var currFoldNode = $(that).parents(".all_fold-ups")[0];
     var currFoldName = currFoldNode.getAttributeNode("id").value;
     var currFoldNr = currFoldName.split("-")[1];
     
-    var arrOfClasses = this.getAttribute("class").split(" ");
+    var ArrDirectionAndNextType = directionAndNextType(currFoldNr, this);
+
+    var nextFoldNr = ArrDirectionAndNextType[0];
+    var nextFold = ArrDirectionAndNextType[1] + "-" + nextFoldNr;
+    
+    target = nextFold;
+    open(ArrDirectionAndNextType[1]);
+}
+function directionAndNextType (currFoldNr){
+    var btnType = that.getAttribute("class")
     var nextType;
-    switch (arrOfClasses[1]){
-        case "btn_cat_list": case "btn_shopping_list":
+    
+    switch (btnType){
+        case "action_list_cat":
+            ++currFoldNr;
             nextType = "#cat";
             break;
-        case "btn_safty_list": case "btn_devToSaf_list":
+         case "action_list_safty":
+            ++currFoldNr;
             nextType = "#safty";
             break;
-    }
-    var nextFoldNr = upOrDown (currFoldNr, this);
-    var nextFold = nextType + "-" + nextFoldNr;
-    open(nextFold, nextType, this);
-}
-
-function upOrDown (currFoldNr, that){
-    var btnType = that.getAttribute("class").split(" ")[1]
-    switch (btnType){
-        case "btn_cat_list": case "btn_safty_list":
-            ++currFoldNr;
-            break;
-        case "btn_shopping_list":
+        case "action_list_shopping":
             --currFoldNr;
+            nextType = "#cat";
             break;
-        case "btn_devToSaf_list":
-            currFoldNr = 3;
-            break;
+//        case "btn_devToSaf_list":
+//            currFoldNr = 3;
+//            break;
     }
-    
-    return currFoldNr;
+    var typeAndNr = [currFoldNr/*(= eigentlich nextFoldNr)*/, nextType];
+    return typeAndNr;
 }
