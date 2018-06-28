@@ -91,20 +91,24 @@ function addContent (JsoAndCommand) {
 }
 function getTarget (){
     
-    var currFoldNode = $(that).parents(".all_fold-ups")[0];
-    var currFoldName = currFoldNode.getAttributeNode("id").value;
+    var currFoldName = getCurrFold();
     var currFoldNr = currFoldName.split("-")[1];
     
-    var ArrDirectionAndNextType = directionAndNextType(currFoldNr, this);
+    var btnType = that.getAttribute("class")
+    var ArrDirectionAndNextType = directionAndNextType(btnType, currFoldNr);
 
     var nextFoldNr = ArrDirectionAndNextType[0];
     var nextFold = ArrDirectionAndNextType[1] + "-" + nextFoldNr;
     
     target = nextFold;
-    open(ArrDirectionAndNextType[1]);
+    return ArrDirectionAndNextType[1];  //Für die List-Fkt
 }
-function directionAndNextType (currFoldNr){
-    var btnType = that.getAttribute("class")
+function getCurrFold (){
+    var currFoldNode = $(that).parents(".all_fold-ups")[0];
+    var currFoldName = currFoldNode.getAttributeNode("id").value;
+    return currFoldName;
+}
+function directionAndNextType (btnType, currFoldNr){
     var nextType;
     
     switch (btnType){

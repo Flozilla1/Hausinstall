@@ -2,10 +2,17 @@ var requestedString = "";
 
 function placeAction (){
     that = this;
-    parentId = that.getAttribute("list_id")
     $(".menu").remove();
-
-    switch (that.getAttribute("class").split("_")[1]){
+    
+    var actionInput = that.getAttribute("class").split("_");
+    
+    if (actionInput[2] == "submit"){
+        actionInput = ["", "submit"]    //"submit" muss für den Switch in einem Array an 2ter Stelle stehen
+    } else {
+        parentId = that.getAttribute("list_id")     //Bei den Submit-Buttons steht ganz ökonomisch nicht nochmal extra die List_id drin, darum muss die List_id vom Ausgangs-Button gemerkt werden
+    }
+    
+    switch (actionInput[1]){
             
         case ("new"):
             $(that).parent()[0].innerHTML += addNewMenu();
@@ -23,23 +30,26 @@ function placeAction (){
             break;
             
         case ("list"):
-            getTarget();
+            open(getTarget());
             addContent(selectContent_createListTypeLine());
             getNextList();
             break;
             
-        case ("submit"):
+        case ("submit"):    //Ok-Buttons
             var submitAction = $(that).parent()[0].getAttribute("class").split(" ")[1].split("_")[1];
-
             switch (submitAction){
                 case ("new"):
-                    
+                    console.log("new")
                     break;
                 case ("update"):
-                    
+                    console.log("update")
                     break;
                 case ("delete"):
-                    console.log(that.getAttribute("class"))
+                    createActionLine();
+                    selectContent_createListTypeLine();
+                    createParentIdLine();
+                    
+                    console.log(requestedString)
                     break;
             }
             break;
@@ -47,6 +57,7 @@ function placeAction (){
 }
 
 function createActionLine (){
+    requestedString = ""; //Rücksetzen
     var actionLine = "{\n\"data\":\n{\n\"action\": \"";
     actionLine += that.getAttribute("class").split("_")[1] + "\",\n";
     
@@ -64,7 +75,6 @@ function createParentIdLine (){
 }
 
 function getNextList (){
-    requestedString = ""; //Rücksetzen
     createActionLine();
     selectContent_createListTypeLine();
     createParentIdLine();
