@@ -108,7 +108,7 @@
     background-color: rgb(116, 14, 5);
     color: rgb(200, 110, 60);
 }
-.btn_new{
+.action_new{
     background-color: #63ff63;
 }
 .action_update{
@@ -133,6 +133,7 @@
 .cat_title{
     display: inline-block;
     position: relative;
+    width: 100%;
 }
 h1{
     margin-right: 20px;
@@ -172,12 +173,21 @@ button{
     cursor: pointer;
 }
 .menu{
-    background-color: darksalmon;
     padding-left: 15px;
     color: black;
     height: 0px;
     overflow: hidden;
     transition: 0.5s;
+    width: 100%;
+}
+.menu_delete{
+    background-color: darksalmon;    
+}
+.menu_update{
+    background-color: skyblue;
+}
+.menu_new{
+    background-color: #63ff63;
 }
 .menu .titel{
     margin-bottom: 10px;

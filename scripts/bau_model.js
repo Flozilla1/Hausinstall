@@ -31,19 +31,13 @@ function createOneProject (unitNr, jsObject){
     html += "<li><span>Kapital: </span><span>" + jsObject[unitNr].specification.kapital + "</span></li>\n";
     html += "</ul>\n";
     
-    html += "<button type='button' class='action_list_shopping' list_id='" + unitNr.split("-")[1] + "'>Einkaufsliste</button>\n";
-    html += "<button type='button' class='action_update'>Bearbeiten</button>\n";
-    html += "<button type='button' class='action_delete'>Löschen</button>\n";
-    html += "<button type='button' class='action_list_cat' list_id='" + unitNr.split("-")[1] + "'>Nächste Ebene</button>\n";
-    html += "<button type='button' class='action_list_safty' list_id='" + unitNr.split("-")[1] + "'>Fi</button>\n";
-    
-    html += "<div class='menu'>"
-    html += "<div class='titel'>Wirklich Löschen?</div>"
-    html += "<div><input>Option blabliblu</div>"
-    html += "<div><input>Option blabliblu</div>"
-    html += "</div>"
+    html += "<button class='action_list_shopping' list_id='" + unitNr.split("-")[1] + "'>Einkaufsliste</button>\n";
+    html += "<button class='action_update'>Bearbeiten</button>\n";
+    html += "<button class='action_delete'>Löschen</button>\n";
+    html += "<button class='action_list_cat' list_id='" + unitNr.split("-")[1] + "'>Nächste Ebene</button>\n";
+    html += "<button class='action_list_safty' list_id='" + unitNr.split("-")[1] + "'>Fi</button>\n";
     html += "</div>";
-    
+        
     return(html);
 }
 
@@ -54,9 +48,9 @@ function createOneFloor (unitNr, jsObject){
     html += "<li><span>Ebene: </span><span>" + jsObject[unitNr].specification.countFromBasement + "</span></li>\n";
     html += "</ul>\n";
     
-    html += "<button type='button' class='action_update'>Bearbeiten</button>\n";
-    html += "<button type='button' class='action_delete'>Löschen</button>\n";
-    html += "<button type='button' class='action_list_cat' list_id='" + unitNr.split("-")[1] + "'>Nächste Ebene</button>\n";
+    html += "<button class='action_update'>Bearbeiten</button>\n";
+    html += "<button class='action_delete'>Löschen</button>\n";
+    html += "<button class='action_list_cat' list_id='" + unitNr.split("-")[1] + "'>Nächste Ebene</button>\n";
     html += "</div>";
     
     return(html);
@@ -68,9 +62,9 @@ function createOneRoom (unitNr, jsObject){
     html += "<li><span>Fläche: </span><span>" + jsObject[unitNr].specification.Fläche + "</span></li>\n";
     html += "</ul>\n";
     
-    html += "<button type='button' class='action_update'>Bearbeiten</button>\n";
-    html += "<button type='button' class='action_delete'>Löschen</button>\n";
-    html += "<button type='button' class='action_list_cat' list_id='" + unitNr.split("-")[1] + "'>Nächste Ebene</button>\n";
+    html += "<button class='action_update'>Bearbeiten</button>\n";
+    html += "<button class='action_delete'>Löschen</button>\n";
+    html += "<button class='action_list_cat' list_id='" + unitNr.split("-")[1] + "'>Nächste Ebene</button>\n";
     html += "</div>";
     
     return(html);
@@ -82,10 +76,10 @@ function createOneDevice (unitNr, jsObject){
     html += "<li><span>Sicherung: </span><span>" + jsObject[unitNr].specification.Sicherung + "</span></li>\n";
     html += "</ul>\n";
     
-    html += "<button type='button' class='action_update'>Bearbeiten</button>\n";
-    html += "<button type='button' class='action_delete'>Löschen</button>\n";
-    html += "<button type='button' class='action_list_safty' list_id='" + unitNr.split("-")[1] + "'>Sicherungen</button>\n";    
-    html += "<button type='button' class='action_list_cat' list_id='" + unitNr.split("-")[1] + "'>Nächste Ebene</button>\n";
+    html += "<button class='action_update'>Bearbeiten</button>\n";
+    html += "<button class='action_delete'>Löschen</button>\n";
+    html += "<button class='action_list_safty' list_id='" + unitNr.split("-")[1] + "'>Sicherungen</button>\n";    
+    html += "<button class='action_list_cat' list_id='" + unitNr.split("-")[1] + "'>Nächste Ebene</button>\n";
     html += "</div>";
     
     return(html);
@@ -96,8 +90,8 @@ function createOneSensor (unitNr, jsObject){
     html += "<li><h2>" + jsObject[unitNr].titel + "</h2></li>\n";
     html += "</ul>\n";
     
-    html += "<button type='button' class='action_update'>Bearbeiten</button>\n";
-    html += "<button type='button' class='action_delete'>Löschen</button>\n";
+    html += "<button class='action_update'>Bearbeiten</button>\n";
+    html += "<button class='action_delete'>Löschen</button>\n";
     html += "</div>";
     
     return(html);
@@ -109,9 +103,9 @@ function createOneElectricCircle (unitNr, jsObject){
     html += "<li><h2>" + jsObject[unitNr].titel + "</h2></li>\n";
     html += "</ul>\n";
     
-    html += "<button type='button' class='action_update'>Bearbeiten</button>\n";
-    html += "<button type='button' class='action_delete'>Löschen</button>\n";
-    html += "<button type='button' class='action_list_safty' list_id='" + unitNr.split("-")[1] + "'>Nächste Ebene</button>\n";
+    html += "<button class='action_update'>Bearbeiten</button>\n";
+    html += "<button class='action_delete'>Löschen</button>\n";
+    html += "<button class='action_list_safty' list_id='" + unitNr.split("-")[1] + "'>Nächste Ebene</button>\n";
     html += "</div>";
     
     return(html);
@@ -122,21 +116,41 @@ function createOneSafty (unitNr, jsObject){
     html += "<li><h2>" + jsObject[unitNr].titel + "</h2></li>\n";
     html += "</ul>\n";
     
-    html += "<button type='button' class='action_update'>Bearbeiten</button>\n";
-    html += "<button type='button' class='action_delete'>Löschen</button>\n";
-    html += "<button type='button' class='action_list_safty' list_id='" + unitNr.split("-")[1] + "'>Inhalt</button>\n";
+    html += "<button class='action_update'>Bearbeiten</button>\n";
+    html += "<button class='action_delete'>Löschen</button>\n";
+    html += "<button class='action_list_safty' list_id='" + unitNr.split("-")[1] + "'>Inhalt</button>\n";
     html += "</div>";
     
     return(html);
 }
 
-function createActionMenu (){
+function addDeleteMenu (){
     var html = "";
-    html += "<div class='menu'>"
+    html += "<div class='menu menu_delete ask'>"
     html += "<div class='titel'>Wirklich Löschen?</div>"
+    html += "<button class='action_submit'>Do it!</button>"
+    html += "</div>"
+    
+    return (html);
+}
+function addUpdateMenu (){
+    var html = "";
+    html += "<div class='menu menu_update ask'>"
+    html += "<div class='titel'>Neue Werte:</div>"
     html += "<div><input>Option blabliblu</div>"
     html += "<div><input>Option blabliblu</div>"
+    html += "<button class='action_submit'>Do it!</button>"
+    html += "</div>"
+    
+    return (html);
+}
+function addNewMenu (){
+    var html = "";
+    html += "<div class='menu menu_new ask'>"
+    html += "<div class='titel'>Neue Werte:</div>"
     html += "<div><input>Option blabliblu</div>"
+    html += "<div><input>Option blabliblu</div>"
+    html += "<button class='action_submit_new'>Do it!</button>"
     html += "</div>"
     
     return (html);

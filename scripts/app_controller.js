@@ -5,7 +5,7 @@ $(document).ready(function(){
 
     addContent(selectContent_createListTypeLine());
     
-    $("button").click(placeAction);
+//    $("button").click(placeAction);
 //    $("[list_id]").click(callSubFolder);
     $(".shut").click(tell);
 });
