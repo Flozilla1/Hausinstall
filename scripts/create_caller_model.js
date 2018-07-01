@@ -113,7 +113,7 @@ function ajaxCall(){
     $.ajax({
         url: "http://localhost/hausinstall/backend/index.php",
         type: "post",
-        data: requestString,
+        data: requestedString,
         success: function (data){
             console.log(data);
         },
