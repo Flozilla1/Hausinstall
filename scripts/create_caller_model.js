@@ -2,13 +2,13 @@ var requestedString = "";
 
 function placeAction (){
     that = this;
-    $(".menu").remove();
     
     var actionInput = that.getAttribute("class").split("_");
     
     if (actionInput[2] == "submit"){
         actionInput = ["", "submit"]    //"submit" muss für den Switch in einem Array an 2ter Stelle stehen
     } else {
+        $(".menu").remove();        //funktioniert, wenn es am Anfang der Methode steht
         parentId = that.getAttribute("list_id")     //Bei den Submit-Buttons steht ganz ökonomisch nicht nochmal extra die List_id drin, darum muss die List_id vom Ausgangs-Button gemerkt werden
     }
     
@@ -37,23 +37,24 @@ function placeAction (){
             
         case ("submit"):    //Ok-Buttons
             var submitAction = $(that).parent()[0].getAttribute("class").split(" ")[1].split("_")[1];
+            createActionLine();
+            var jsObject = selectContent_createListTypeLine()[0];
+            createParentIdLine();
+            
             switch (submitAction){
                 case ("new"):
-                    console.log("new")
+                    createSpecificationLine(readInputs());
                     break;
                 case ("update"):
-                    console.log("update")
+                    createSpecificationLine(readInputs());
                     break;
                 case ("delete"):
-                    createActionLine();
-                    selectContent_createListTypeLine();
-                    createParentIdLine();
-                    
-                    console.log(requestedString)
+                    requestedString += "\n}}"
                     break;
             }
             break;
     }
+    console.log(requestedString)
 }
 
 function createActionLine (){
@@ -69,9 +70,20 @@ function createListTypeLine (type){
     requestedString += listTypeLine;
 }
 function createParentIdLine (){
-    var parentIdLine = "\"parentid\": " + parentId + "\n}}";
+    var parentIdLine = "\"parentid\": " + parentId;
 
     requestedString += parentIdLine;
+}
+function createSpecificationLine (inputFields_userInputs){
+    var inputFields = inputFields_userInputs[0]
+    var userInputs = inputFields_userInputs[1]
+    var html = ",\n\"specification\":{\n";
+    
+    inputFields.forEach(function(val, key){
+        html += "\"" + val + "\": ";
+        html += "\"" + userInputs[key] + "\"\n";
+    })
+    requestedString += html + "}}";
 }
 
 function getNextList (){
@@ -79,14 +91,34 @@ function getNextList (){
     selectContent_createListTypeLine();
     createParentIdLine();
     
-//    ajaxCall();
-    
-    console.log(requestedString)
+    requestedString += "\n}}"
+    ajaxCall();
 }
-//function ajaxCall(){
-//    $.ajax({
-//        url: "http://localhost/lpauebung3/index.php",
-//        type: "post",
-//        data: JSON.stringify(requestedString)
-//    });
-//}
+function readInputs (){
+    var inputNodesArr = [];
+    var inputFields = [];
+    var userInputs = [];
+    
+    $.each($("input"), function(ix, value) {
+        inputNodesArr.push(value);
+    });
+    inputNodesArr.forEach(function(val, ix){
+        inputFields.push(val.getAttribute("placeholder"));
+        userInputs.push($("#val_" + ++ix).val());   //funktioniert irgendwie nicht mit .getAttribute("value")
+    })
+    return [inputFields, userInputs];
+}
+function ajaxCall(){
+    console.log("Hallo")
+    $.ajax({
+        url: "http://localhost/hausinstall/backend/index.php",
+        type: "post",
+        data: requestString,
+        success: function (data){
+            console.log(data);
+        },
+        error: function(data){
+            console.log ("ERROR",  data);
+        }
+    });
+}

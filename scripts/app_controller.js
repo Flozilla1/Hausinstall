@@ -39,7 +39,6 @@ function selectContent_createListTypeLine (){
             createListTypeLine("shoppingList");
             break;
         case "#cat-1":
-            console.log(target)
             createOneUnit = createOneProject;
             jsObject = ProjektObjekt;
             createListTypeLine("projects");
@@ -74,7 +73,6 @@ function selectContent_createListTypeLine (){
             jsObject = SicherungsObjekt;
             createListTypeLine("fuse");
     }
-//console.log(requestedString)
     return ([jsObject, createOneUnit]);
 }
 

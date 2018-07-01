@@ -137,8 +137,9 @@ function addUpdateMenu (){
     var html = "";
     html += "<div class='menu menu_update ask'>"
     html += "<div class='titel'>Neue Werte:</div>"
-    html += "<div><input>Option blabliblu</div>"
-    html += "<div><input>Option blabliblu</div>"
+    html += "<div>Titel:<input  id='val_1' placeholder='Titel'></div>"
+    html += "<div>Baumeister:<input  id='val_2' placeholder='Baumeister'></div>"
+    html += "<div>Kapital:<input  id='val_3' placeholder='Kapital'></div>"
     html += "<button class='action_update_submit'>Do it!</button>"
     html += "</div>"
     
@@ -155,3 +156,8 @@ function addNewMenu (){
     
     return (html);
 }
+//                    $.each(jsObject, function(key, value) {
+//                        $.each(value.specification, function(set, unit){
+//                            console.log(set + ": " + unit)
+//                        });
+//                    });

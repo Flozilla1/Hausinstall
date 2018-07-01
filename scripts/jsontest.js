@@ -22,14 +22,14 @@ EinkaufObjekt = {
 	}
 }
 ProjektObjekt = {
-    "project-1": {
-		"titel": "Under the Bridge",
+	"project-1": {
+		"titel": "The Chopper to get to",
         "parent_id": "1",
 		"specification": {
-			"baumeister": "Bob (der)",
-			"kapital": "1.000c"
+			"baumeister": "Arnold Schwarzenegger",
+			"kapital": "50.000$"
 		}
-	},
+    },
 	"project-2": {
 		"titel": "Todesstern",
         "parent_id": "1",
@@ -50,18 +50,10 @@ ProjektObjekt = {
 		"titel": "Angband",
         "parent_id": "1",
 		"specification": {
-			"baumeister": "Melkor aka Morgoth",
+			"baumeister": "Melkor aka Morgoth aka Sauron's Dominus",
 			"kapital": "∞"
 		}
-	},
-	"project-5": {
-		"titel": "Chopper",
-        "parent_id": "1",
-		"specification": {
-			"baumeister": "Arnold Schwarzenegger",
-			"kapital": "50.000$"
-		}
-    }
+	}
 }
 
 FloorObjekt = {
