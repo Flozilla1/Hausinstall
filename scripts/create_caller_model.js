@@ -1,5 +1,9 @@
 var requestedString = "";
 
+var requestJson;
+var type;
+var parentid;
+
 function placeAction (){
     that = this;
     
@@ -57,9 +61,80 @@ function placeAction (){
     console.log(requestedString)
 }
 
+// >>>>>>------------------------------------------ Wolfgang
+function createActionLine () {
+    console.log("createActionLine");
+    console.log(parentid);
+    requestJson = {
+        'action': that.getAttribute("class").split("_")[1],
+        'listtype': this.type,
+        'parentid': parentid
+    }
+}
+
+function createListTypeLine (type){
+    this.type= type;
+}
+
+function createParentIdLine (){
+    this.parentid =  parentId;
+}
+
+function getNextList (){
+    selectContent_createListTypeLine();
+    createParentIdLine();
+    createActionLine();
+    ajaxCall();
+}
+
+var json;
+
+function ajaxCall(){
+    console.log("Ajax Call");
+    json = {data: JSON.stringify(requestJson)}
+    console.log(requestJson);
+    console.log(json);
+
+    $.ajax({
+//        url: "http://localhost/hausinstall/backend/index.php",
+        url: "backend/index.php",
+        type: "post",
+//        data: requestedString,
+        data: json,
+        success: function (data){
+            console.log(data);
+        },
+        error: function(data){
+            console.log ("ERROR",  data);
+        }
+    });
+}
+// <<<<<<<------------------------------------------ Wolfgang
+
+
+
+
+
+
+function createSpecificationLine (inputFields_userInputs){
+    var inputFields = inputFields_userInputs[0]
+    var userInputs = inputFields_userInputs[1]
+    var html = ",\n\"specification\":{\n";
+    
+    inputFields.forEach(function(val, key){
+        html += "\"" + val + "\": ";
+        html += "\"" + userInputs[key] + "\"\n";
+    })
+//    requestedString += html + "}}";
+    requestedString += html + "}";
+}
+
+/* FLO Original
+
 function createActionLine (){
     requestedString = ""; //Rücksetzen
-    var actionLine = "{\n\"data\":\n{\n\"action\": \"";
+//    var actionLine = "{\n\"data\":\n{\n\"action\": \"";
+    var actionLine = "{\n\"action\": \"";
     actionLine += that.getAttribute("class").split("_")[1] + "\",\n";
     
     requestedString += actionLine;
@@ -83,7 +158,8 @@ function createSpecificationLine (inputFields_userInputs){
         html += "\"" + val + "\": ";
         html += "\"" + userInputs[key] + "\"\n";
     })
-    requestedString += html + "}}";
+//    requestedString += html + "}}";
+    requestedString += html + "}";
 }
 
 function getNextList (){
@@ -94,6 +170,14 @@ function getNextList (){
     requestedString += "\n}}"
     ajaxCall();
 }
+
+
+*/
+
+
+
+
+
 function readInputs (){
     var inputNodesArr = [];
     var inputFields = [];
@@ -108,17 +192,4 @@ function readInputs (){
     })
     return [inputFields, userInputs];
 }
-function ajaxCall(){
-    console.log("Hallo")
-    $.ajax({
-        url: "http://localhost/hausinstall/backend/index.php",
-        type: "post",
-        data: requestString,
-        success: function (data){
-            console.log(data);
-        },
-        error: function(data){
-            console.log ("ERROR",  data);
-        }
-    });
-}
+

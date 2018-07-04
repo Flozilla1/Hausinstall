@@ -52,10 +52,13 @@ listViewHandler.prototype.getLevel = function(params){
         json.parentid = params.id;
     }
 
+    requestData = {data: JSON.stringify(json)};
+    console.log(requestData);
+
     $.ajax({
         url: self.baseUrl + "index.php",
         type: "post",
-        data: {data: JSON.stringify(json)},
+        data: requestData,
         success: function (data){
             //aufruf der callback funktion
             self.fillTable(data);
