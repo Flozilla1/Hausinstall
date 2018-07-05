@@ -14,6 +14,7 @@ include "models/CreateModel.php";
 include "views/JsonView.php";
 
 define ("DBHost", "localhost");
+//define ("DBName", "uebung3_db");
 define ("DBName", "lpauebung3");
 define ("DBUser", "root");
 define ("DBPass", "");

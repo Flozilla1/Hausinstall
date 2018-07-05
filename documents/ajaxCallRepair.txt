@@ -1,0 +1,11 @@
+VOR DEM AJAX CALL
+OK, vom Lammer Frontend:  
+Object { data: "{\"action\":\"list\",\"listtype\":\"PROJECTS\"}" }
+Object { data: "{\"action\":\"list\",\"listtype\":\"FLOORS\",\"parentid\":\"1\"}" }
+
+NOK, vom FLO Frontend:
+Object { data: "\"{\\n\\\"action\\\": \\\"list\\\",\\n\\\"listtype\\\": \\\"floors\\\",\\n\\\"parentid\\\": 1\\n}}\"" }
+
+
+FLO Frontend Nach Repair:
+Object { data: "{\"action\":\"list\",\"listtype\":\"floors\",\"parentid\":\"1\"}" }
