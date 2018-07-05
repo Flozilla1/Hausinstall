@@ -4,9 +4,11 @@ function createAllUnits (jsObject, createOneUnit){
         
     var allUnits = "";
     $.each(jsObject, function(key, value) {
-        if (value.parent_id == parentId){       //&& createOneUnit != "createOneProjekt" (wenn die Projekte im Json keine parent_id haben)
-            allUnits += createOneUnit (key, jsObject);
-        }
+        $.each(value, function(key2, value2){
+            if (value2.parent_id == parentId || value2.parent_id == undefined){    //Es werden alle Rückgabewerte angezeigt, die keine parent_id haben (sollte vielleicht noch verbessert werden)
+                allUnits += createOneUnit (key2, value);
+            }
+        })
     });
     return (allUnits);
 }
@@ -24,9 +26,10 @@ function createOneShoppingList (unitNr, jsObject){
 }
 
 function createOneProject (unitNr, jsObject){
+    console.log("Baumodel erreicht: ", jsObject)
     var html = "<div class='cat_unit shut'>\n";
     html += "<ul>\n";
-    html += "<li><h2>" + jsObject[unitNr].titel + "</h2></li>\n";
+    html += "<li><h2>" + jsObject[unitNr].title + "</h2></li>\n";
     html += "<li><span>Baumeister: </span><span>" + jsObject[unitNr].specification.baumeister + "</span></li>\n";
     html += "<li><span>Kapital: </span><span>" + jsObject[unitNr].specification.kapital + "</span></li>\n";
     html += "</ul>\n";
@@ -44,7 +47,7 @@ function createOneProject (unitNr, jsObject){
 function createOneFloor (unitNr, jsObject){
     var html = "<div class='cat_unit shut'>\n";
     html += "<ul>\n";
-    html += "<li><h2>" + jsObject[unitNr].titel + "</h2></li>\n";
+    html += "<li><h2>" + jsObject[unitNr].title + "</h2></li>\n";
     html += "<li><span>Ebene: </span><span>" + jsObject[unitNr].specification.countFromBasement + "</span></li>\n";
     html += "</ul>\n";
     
@@ -58,7 +61,7 @@ function createOneFloor (unitNr, jsObject){
 function createOneRoom (unitNr, jsObject){
     var html = "<div class='cat_unit shut'>\n";
     html += "<ul>\n";
-    html += "<li><h2>" + jsObject[unitNr].titel + "</h2></li>\n";
+    html += "<li><h2>" + jsObject[unitNr].title + "</h2></li>\n";
     html += "<li><span>Fläche: </span><span>" + jsObject[unitNr].specification.Fläche + "</span></li>\n";
     html += "</ul>\n";
     
@@ -72,7 +75,7 @@ function createOneRoom (unitNr, jsObject){
 function createOneDevice (unitNr, jsObject){
     var html = "<div class='cat_unit shut'>\n";
     html += "<ul>\n";
-    html += "<li><h2>" + jsObject[unitNr].titel + "</h2></li>\n";
+    html += "<li><h2>" + jsObject[unitNr].title + "</h2></li>\n";
     html += "<li><span>Sicherung: </span><span>" + jsObject[unitNr].specification.Sicherung + "</span></li>\n";
     html += "</ul>\n";
     
@@ -87,7 +90,7 @@ function createOneDevice (unitNr, jsObject){
 function createOneSensor (unitNr, jsObject){
     var html = "<div class='cat_unit shut'>\n";
     html += "<ul>\n";
-    html += "<li><h2>" + jsObject[unitNr].titel + "</h2></li>\n";
+    html += "<li><h2>" + jsObject[unitNr].title + "</h2></li>\n";
     html += "</ul>\n";
     
     html += "<button class='action_update' list_id='" + unitNr.split("-")[1] + "'>Bearbeiten</button>\n";
@@ -100,7 +103,7 @@ function createOneSensor (unitNr, jsObject){
 function createOneElectricCircle (unitNr, jsObject){
     var html = "<div class='cat_unit shut'>\n";
     html += "<ul>\n";
-    html += "<li><h2>" + jsObject[unitNr].titel + "</h2></li>\n";
+    html += "<li><h2>" + jsObject[unitNr].title + "</h2></li>\n";
     html += "</ul>\n";
     
     html += "<button class='action_update' list_id='" + unitNr.split("-")[1] + "'>Bearbeiten</button>\n";
@@ -113,7 +116,7 @@ function createOneElectricCircle (unitNr, jsObject){
 function createOneSafty (unitNr, jsObject){
     var html = "<div class='cat_unit shut'>\n";
     html += "<ul>\n";
-    html += "<li><h2>" + jsObject[unitNr].titel + "</h2></li>\n";
+    html += "<li><h2>" + jsObject[unitNr].title + "</h2></li>\n";
     html += "</ul>\n";
     
     html += "<button class='action_update' list_id='" + unitNr.split("-")[1] + "'>Bearbeiten</button>\n";

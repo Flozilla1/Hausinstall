@@ -24,7 +24,6 @@ EinkaufObjekt = {
 ProjektObjekt = {
 	"project-1": {
 		"titel": "The Chopper to get to",
-        "parent_id": "1",
 		"specification": {
 			"baumeister": "Arnold Schwarzenegger",
 			"kapital": "50.000$"
@@ -32,7 +31,6 @@ ProjektObjekt = {
     },
 	"project-2": {
 		"titel": "Todesstern",
-        "parent_id": "1",
 		"specification": {
 			"baumeister": "Darth Vader & the bloody emperor",
 			"kapital": "100c"
@@ -40,7 +38,6 @@ ProjektObjekt = {
 	},
 	"project-3": {
 		"titel": "Große Höhle",
-        "parent_id": "1",
 		"specification": {
 			"baumeister": "Ulog der Mammutschlächter",
 			"kapital": "12 Steine"
@@ -48,7 +45,6 @@ ProjektObjekt = {
 	},
 	"project-4": {
 		"titel": "Angband",
-        "parent_id": "1",
 		"specification": {
 			"baumeister": "Melkor aka Morgoth aka Sauron's Dominus",
 			"kapital": "∞"

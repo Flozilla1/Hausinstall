@@ -1,12 +1,9 @@
-var requestedString = "";
-
-var requestJson;
+var requestJson = {'action': 'list','listtype': 'projects'};
 var type;
 var parentid;
 
 function placeAction (){
     that = this;
-    
     var actionInput = that.getAttribute("class").split("_");
     
     if (actionInput[2] == "submit"){
@@ -15,7 +12,6 @@ function placeAction (){
         $(".menu").remove();        //funktioniert, wenn es am Anfang der Methode steht
         parentId = that.getAttribute("list_id")     //Bei den Submit-Buttons steht ganz ökonomisch nicht nochmal extra die List_id drin, darum muss die List_id vom Ausgangs-Button gemerkt werden
     }
-    
     switch (actionInput[1]){
             
         case ("new"):
@@ -33,7 +29,7 @@ function placeAction (){
             $("button").click(placeAction);
             break;
             
-        case ("list"):
+        case ("list"): default:
             open(getTarget());
             addContent(selectContent_createListTypeLine());
             getNextList();
@@ -58,13 +54,10 @@ function placeAction (){
             }
             break;
     }
-    console.log(requestedString)
 }
 
 // >>>>>>------------------------------------------ Wolfgang
 function createActionLine () {
-    console.log("createActionLine");
-    console.log(parentid);
     requestJson = {
         'action': that.getAttribute("class").split("_")[1],
         'listtype': this.type,
@@ -73,7 +66,7 @@ function createActionLine () {
 }
 
 function createListTypeLine (type){
-    this.type= type;
+    this.type = type;
 }
 
 function createParentIdLine (){
@@ -90,31 +83,27 @@ function getNextList (){
 var json;
 
 function ajaxCall(){
-    console.log("Ajax Call");
-    json = {data: JSON.stringify(requestJson)}
-    console.log(requestJson);
-    console.log(json);
-
+    var json = {data: JSON.stringify(requestJson)}
+    console.log("\n\nREQUEST:\n", requestJson);
+    
     $.ajax({
-//        url: "http://localhost/hausinstall/backend/index.php",
         url: "backend/index.php",
         type: "post",
-//        data: requestedString,
         data: json,
         success: function (data){
-            console.log(data);
+            console.log("\nRESPONSE:\n\n", data);
+            if (requestJson.action == "list"){
+                addContent(data)
+            }
         },
-        error: function(data){
-            console.log ("ERROR",  data);
+        error: function(json){
+            console.log ("ERROR",  json);
         }
     });
 }
+
+
 // <<<<<<<------------------------------------------ Wolfgang
-
-
-
-
-
 
 function createSpecificationLine (inputFields_userInputs){
     var inputFields = inputFields_userInputs[0]
@@ -192,7 +181,8 @@ function readInputs (){
     })
     return [inputFields, userInputs];
 }
-<<<<<<< HEAD
+/*
+//<<<<<<< HEAD
 function ajaxCall(){
     console.log("Hallo")
     $.ajax({
@@ -207,6 +197,7 @@ function ajaxCall(){
         }
     });
 }
-=======
+//=======
 
->>>>>>> dev
+//>>>>>>> dev
+*/
