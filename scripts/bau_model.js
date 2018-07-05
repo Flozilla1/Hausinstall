@@ -140,7 +140,7 @@ function addUpdateMenu (){
     var html = "";
     html += "<div class='menu menu_update ask'>"
     html += "<div class='titel'>Neue Werte:</div>"
-    html += "<div>Titel:<input  id='val_1' placeholder='Titel'></div>"
+    html += "<div>Titel:<input id='val_1' placeholder='Titel'></div>"
     html += "<div>Baumeister:<input  id='val_2' placeholder='Baumeister'></div>"
     html += "<div>Kapital:<input  id='val_3' placeholder='Kapital'></div>"
     html += "<button class='action_update_submit'>Do it!</button>"
@@ -152,9 +152,10 @@ function addNewMenu (){
     var html = "";
     html += "<div class='menu menu_new ask'>"
     html += "<div class='titel'>Neue Werte:</div>"
-    html += "<div><input>Option blabliblu</div>"
-    html += "<div><input>Option blabliblu</div>"
-    html += "<button class='action_new_submit'>Do it!</button>"
+    html += "<div>Titel:<input id='val_1' placeholder='Titel'></div>"
+    html += "<div>Baumeister:<input  id='val_2' placeholder='Baumeister'></div>"
+    html += "<div>Kapital:<input  id='val_3' placeholder='Kapital'></div>"
+    html += "<button class='action_create_submit'>Do it!</button>"
     html += "</div>"
     
     return (html);

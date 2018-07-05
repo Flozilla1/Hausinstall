@@ -3,8 +3,6 @@ var target = "#cat-1";
 
 $(document).ready(function(){
     ajaxCall()
-
-    addContent(selectContent_createListTypeLine());
     
     $(".shut").click(tell);
 });
@@ -30,35 +28,28 @@ function selectContent_createListTypeLine (){
     switch (target){
         case "#cat-0":
             createOneUnit = createOneShoppingList;
-            createListTypeLine("shoppingList");
+            listtype = "shoppinglist"
             break;
         case "#cat-1":
             createOneUnit = createOneProject;
-            createListTypeLine("projects");
+            listtype = "projects"
             break;
         case "#cat-2":
             createOneUnit = createOneFloor;
-            createListTypeLine("floors");
+            listtype = "floors"
             break;
         case "#cat-3":
             createOneUnit = createOneRoom;
-            createListTypeLine("rooms");
+            listtype = "rooms"
             break;
         case "#cat-4":
             createOneUnit = createOneDevice;
-            createListTypeLine("device");
+            listtype = "device"
             break;
         case "#cat-5":
             createOneUnit = createOneSensor;
-            createListTypeLine("sensor");
+            listtype = "sensor"
             break;
-        case "#safty-2":
-            createOneUnit = createOneElectricCircle;
-            createListTypeLine("fi");
-            break;
-        case "#safty-3":
-            createOneUnit = createOneSafty;
-            createListTypeLine("fuse");
     }
     return (createOneUnit);
 }

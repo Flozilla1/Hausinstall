@@ -18,21 +18,8 @@
     width: 50px;
     box-shadow: 10px 0px 35px rgba(0,0,0,0.3);
 }
-.all_safties{
-    margin-bottom: 0px;
-    bottom: 0px;
-}
-.chosen_path{
-    height: 94vh;
-    transition: 0.5s;
-}
-.rejectet_path{
-    height: 6vh;
-    transition: 0.5s;
-}
-.split_path{
-    height: 50vh;
-    transition: 0.5s;
+.all_cats{
+    height: 100vh;
 }
 /* z-index musst folgend angepasst werden, wenn ein Folder dazu kommt */
 #cat-0{
@@ -90,23 +77,6 @@
 #cat-5 .cat_unit{
     background-color: rgb(120, 0, 0);
     color: rgb(220, 80, 40);
-}
-#safty-2{
-    background-color: rgb(181, 177, 73);
-    color: rgb(103, 86, 13);
-    z-index: 1;
-}
-#safty-2 .cat_unit{
-    background-color: rgb(103, 86, 13);
-    color: rgb(181, 177, 73);
-}
-#safty-3{
-    background-color: rgb(200, 110, 60);
-    color: rgb(116, 14, 5);
-}
-#safty-3 .cat_unit{
-    background-color: rgb(116, 14, 5);
-    color: rgb(200, 110, 60);
 }
 .action_new{
     background-color: #63ff63;

@@ -1,6 +1,6 @@
 var requestJson = {'action': 'list','listtype': 'projects'};
 var type;
-var parentid;
+var parentiId;
 
 function placeAction (){
     that = this;
@@ -38,49 +38,44 @@ function placeAction (){
         case ("submit"):    //Ok-Buttons
             var submitAction = $(that).parent()[0].getAttribute("class").split(" ")[1].split("_")[1];
             createActionLine();
-            var jsObject = selectContent_createListTypeLine()[0];
-            createParentIdLine();
             
             switch (submitAction){
                 case ("new"):
                     createSpecificationLine(readInputs());
                     break;
                 case ("update"):
+                    requestJson.itemId = parentId;
                     createSpecificationLine(readInputs());
                     break;
                 case ("delete"):
-                    requestedString += "\n}}"
+                    requestJson.itemId = parentId;
                     break;
             }
+            ajaxCall();
             break;
     }
+    console.log(requestJson)
 }
 
-// >>>>>>------------------------------------------ Wolfgang
 function createActionLine () {
-    requestJson = {
-        'action': that.getAttribute("class").split("_")[1],
-        'listtype': this.type,
-        'parentid': parentid
+    
+    if (listtype != "shoppinglist"){
+        requestJson = {
+            'action': that.getAttribute("class").split("_")[1],
+            'listtype': listtype
+        }
+    } else {    //Fall: ShoppingList
+        requestJson = {
+            'action': listtype
+        }
     }
 }
-
-function createListTypeLine (type){
-    this.type = type;
-}
-
-function createParentIdLine (){
-    this.parentid =  parentId;
-}
-
 function getNextList (){
     selectContent_createListTypeLine();
-    createParentIdLine();
     createActionLine();
+    requestJson.parentid = parentId;
     ajaxCall();
 }
-
-var json;
 
 function ajaxCall(){
     var json = {data: JSON.stringify(requestJson)}
@@ -101,71 +96,15 @@ function ajaxCall(){
         }
     });
 }
-
-
-// <<<<<<<------------------------------------------ Wolfgang
-
 function createSpecificationLine (inputFields_userInputs){
     var inputFields = inputFields_userInputs[0]
     var userInputs = inputFields_userInputs[1]
-    var html = ",\n\"specification\":{\n";
+    requestJson.specification = {}
     
     inputFields.forEach(function(val, key){
-        html += "\"" + val + "\": ";
-        html += "\"" + userInputs[key] + "\"\n";
+        requestJson.specification[val] = userInputs[key]   
     })
-//    requestedString += html + "}}";
-    requestedString += html + "}";
 }
-
-/* FLO Original
-
-function createActionLine (){
-    requestedString = ""; //Rücksetzen
-//    var actionLine = "{\n\"data\":\n{\n\"action\": \"";
-    var actionLine = "{\n\"action\": \"";
-    actionLine += that.getAttribute("class").split("_")[1] + "\",\n";
-    
-    requestedString += actionLine;
-}
-function createListTypeLine (type){
-    var listTypeLine = "\"listtype\": \"";
-    listTypeLine += type + "\",\n";
-    requestedString += listTypeLine;
-}
-function createParentIdLine (){
-    var parentIdLine = "\"parentid\": " + parentId;
-
-    requestedString += parentIdLine;
-}
-function createSpecificationLine (inputFields_userInputs){
-    var inputFields = inputFields_userInputs[0]
-    var userInputs = inputFields_userInputs[1]
-    var html = ",\n\"specification\":{\n";
-    
-    inputFields.forEach(function(val, key){
-        html += "\"" + val + "\": ";
-        html += "\"" + userInputs[key] + "\"\n";
-    })
-//    requestedString += html + "}}";
-    requestedString += html + "}";
-}
-
-function getNextList (){
-    createActionLine();
-    selectContent_createListTypeLine();
-    createParentIdLine();
-    
-    requestedString += "\n}}"
-    ajaxCall();
-}
-
-
-*/
-
-
-
-
 
 function readInputs (){
     var inputNodesArr = [];
@@ -181,23 +120,3 @@ function readInputs (){
     })
     return [inputFields, userInputs];
 }
-/*
-//<<<<<<< HEAD
-function ajaxCall(){
-    console.log("Hallo")
-    $.ajax({
-        url: "http://localhost/hausinstall/backend/index.php",
-        type: "post",
-        data: requestedString,
-        success: function (data){
-            console.log(data);
-        },
-        error: function(data){
-            console.log ("ERROR",  data);
-        }
-    });
-}
-//=======
-
-//>>>>>>> dev
-*/
