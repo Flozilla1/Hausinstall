@@ -1,0 +1,11 @@
+Frontend Missing/change:
+
+breadcrumb, bzw übersicht woher man kommt
+zurück button o.ä.
+backend call (post) und anzeige der rückgelieferten json daten
+button "Inhalt" gehört umbenannt auf die jeweilige ebene die folgt (zB"Stockwerke")
+?? Wie lösen wir den button "bearbeiten"
+
+Backend missing:
+
+how to copy frontend and backend
