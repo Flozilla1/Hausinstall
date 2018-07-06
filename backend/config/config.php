@@ -11,6 +11,7 @@ include "services/Database.php";
 include "models/ListModel.php";
 include "models/DeleteModel.php";
 include "models/CreateModel.php";
+include "models/UpdateModel.php";
 include "views/JsonView.php";
 
 define ("DBHost", "localhost");

@@ -9,3 +9,60 @@ Object { data: "\"{\\n\\\"action\\\": \\\"list\\\",\\n\\\"listtype\\\": \\\"floo
 
 FLO Frontend Nach Repair:
 Object { data: "{\"action\":\"list\",\"listtype\":\"floors\",\"parentid\":\"1\"}" }
+
+############################### LISTEN:   UMBAU auf FLO-format
+
+--------------- Original: 
+
+items: Array(5) [ {Ö}, {Ö}, {Ö}, Ö ]
+listtype: "ROOMS"
+listtypeNice: "Stockwerke"
+----
+items: (5) [Ö]
+0: Object { id: "1", name: "Keller", floor_count_from_basement: "0", Ö }
+1: Object { id: "2", name: "Erdgeschoﬂ", floor_count_from_basement: "1", Ö }
+2: Object { id: "3", name: "erster Stock", floor_count_from_basement: "2", Ö }
+3: Object { id: "11", name: "MyNewFloor", floor_count_from_basement: "2", Ö }
+4: Object { id: "12", name: "MyNewFloor", floor_count_from_basement: "2", Ö }
+listtype: "ROOMS"
+listtypeNice: "Stockwerke"
+-----
+0: {Ö}
+floor_count_from_basement: "0"
+id: "1"
+name: "Keller"
+url: "http://localhost/Uebung3/index.php?listtype=ROOMS&parentid=1"
+
+
+-------------  FLO-format .. lt. Doku
+{ProjektObjekt = 
+  {
+    "project-1": {
+        "titel": "Under the Bridge",
+        "specification": {S1}
+    } ,
+    "project-2": {
+        "titel": "Todesstern",
+        "specification": {S1}
+    } , ÖÖ
+  }
+}
+---->  :-) 
+{
+	"ProjectObject": {
+		"project-1": {
+			"title": "Haus Groﬂeltern",
+			"specification": {
+				"baumeister": "Harry Hurtig",
+				"kapital": "1234567"
+			}
+		},
+		"project-2": {
+			"title": "Geb‰ude 1200 Wien",
+			"specification": {
+				"baumeister": "Harry Hurtig",
+				"kapital": "1234567"
+			}
+		}
+	}
+}

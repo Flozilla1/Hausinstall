@@ -1,20 +1,17 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  * Description of CreateController
  *
- * @author helmuth
+ * @author helmuth  refactored by Wolfgang
  */
+
+
 class CUDController implements Controller {
     private $jsonView;
     private $response;
     private $inputData;
+    private $listType;
     
     public function __construct() {
         $this->jsonView = new JsonView();
@@ -25,19 +22,20 @@ class CUDController implements Controller {
     public function route($inputData) {
         
         $this->inputData = $inputData;
+        $this->listType = strtoupper($this->inputData->listtype);
         
         switch($this->inputData->action){
             case 'create':
                 $this->createItem();
                 break;
             case 'update':
-                $this->updateItem(); //fehlt
+                $this->updateItem(); // ###################### TODO
                 break;
             case 'delete':
                 $this->deleteItem();
                 break;
             default:
-                //TODO: errohandlingg
+                //############################# TODO: errohandlingg
                 break;
         }
         
@@ -46,54 +44,113 @@ class CUDController implements Controller {
     }
     
     private function createItem(){
-        
+   
         $createModel = new CreateModel();
-        
-        switch($this->inputData->listtype){
+              
+        switch($this->listType){
             case 'FLOORS':
-                $newId = $createModel->createFloor($this->inputData->parentId, $this->inputData->specification);
+                $newId = $createModel->createFloor($this->inputData->parentid, $this->inputData->specification);
                 break;
             case 'ROOMS':
-                $newId = $createModel->createRoom($this->inputData->parentId, $this->inputData->specification);
+                $newId = $createModel->createRoom($this->inputData->parentid, $this->inputData->specification);
                 break;
             case 'DEVICES':
-                $newId = $createModel->createDevice($this->inputData->parentId, $this->inputData->specification);
+                $newId = $createModel->createDevice($this->inputData->parentid, $this->inputData->specification);
                 break;
             case 'SENSORS':
-                $newId = $createModel->createSensor($this->inputData->parentId, $this->inputData->specification);
+                $newId = $createModel->createSensor($this->inputData->parentid, $this->inputData->specification);
+                break;
+            case 'FIS': 
+                $newId = $createModel->createFi($this->inputData->parentid, $this->inputData->specification);
+                break;
+            case 'FUSES': 
+                $newId = $createModel->createFuse($this->inputData->parentid, $this->inputData->specification);
                 break;
             case 'PROJECTS': 
                 $newId = $createModel->createProject($this->inputData->specification);
                 break;
             default:
                 //TODO: errorhanding
-                $newId = false;
+                $newId = "ErrorHugo";
                 break;
         }
         
         if(!is_null($newId)){
-            $this->response = array("status" => "OK", "newId" => $newId);
+            $this->response = array("status" => 1, "newId" => $newId);
         } else {
-            $this->response = array("status" => "NOK", "messgae" => "NO Entry was created");
+            $this->response = array("status" => 0, "message" => "NO Entry was created");
         }
        
     }
     
+    
+        private function updateItem(){
+   
+        $updateModel = new UpdateModel();
+              
+        switch($this->listType){
+            case 'FLOORS':
+                $newId = $updateModel->updateFloor($this->inputData->itemid, $this->inputData->specification);
+                break;
+            case 'ROOMS':
+                $newId = $updateModel->updateRoom($this->inputData->itemid, $this->inputData->specification);
+                break;
+            case 'DEVICES':
+                $newId = $updateModel->updateDevice($this->inputData->itemid, $this->inputData->specification);
+                break;
+            case 'SENSORS':
+                $newId = $updateModel->updateSensor($this->inputData->itemid, $this->inputData->specification);
+                break;
+            case 'FIS': 
+                $newId = $updateModel->updateFi($this->inputData->itemid, $this->inputData->specification);
+                break;
+            case 'FUSES': 
+                $newId = $updateModel->updateFuse($this->inputData->itemid, $this->inputData->specification);
+                break;
+            case 'PROJECTS': 
+                $newId = $updateModel->updateProject($this->inputData->itemid, $this->inputData->specification);
+                break;
+            default:
+                //TODO: errorhanding
+                $newId = "ErrorHugo";
+                break;
+        }
+        
+        if(!is_null($newId)){
+            $this->response = array("status" => 1, "newId" => $newId);
+        } else {
+            $this->response = array("status" => 0, "message" => "Update failed");
+        }
+       
+    }
+
+    
+    
+    
     private function deleteItem(){
         $deleteModel = new DeleteModel();
         
-        switch($this->inputData->listtype){
+        switch($this->listType){
             case 'FLOORS':
-                $newId = $deleteModel->deleteFloor($this->inputData->itemId);
+                $newId = $deleteModel->deleteFloor($this->inputData->itemid);
                 break;
             case 'ROOMS':
-                $newId = $deleteModel->deleteRoom($this->inputData->itemId);
+                $newId = $deleteModel->deleteRoom($this->inputData->itemid);
                 break;
             case 'DEVICES':
-                $newId = $deleteModel->deleteDevice($this->inputData->itemId);
+                $newId = $deleteModel->deleteDevice($this->inputData->itemid);
                 break;
             case 'SENSORS':
-                $newId = $deleteModel->deleteSensor($this->inputData->itemId);
+                $newId = $deleteModel->deleteSensor($this->inputData->itemid);
+                break;
+            case 'FIS': 
+                $newId = $deleteModel->deleteFi($this->inputData->itemid);
+                break;
+            case 'FUSES': 
+                $newId = $deleteModel->deleteFuse($this->inputData->itemid);
+                break;
+            case 'PROJECTS': 
+                $newId = $deleteModel->deleteProject ($this->inputData->itemid);
                 break;
 
             default:
@@ -102,8 +159,12 @@ class CUDController implements Controller {
                 break;
         }
         
-        $this->response = array("status" => "OK");
-    }
+        if(!is_null($newId)){
+            $this->response = array("status" => 1, "newId" => $newId);
+        } else {
+            $this->response = array("status" => 0, "message" => "Nothing deleted");
+        }
+}
     
     public function displayResponse($output) {
         $this->jsonView->streamOutput($output);

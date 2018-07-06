@@ -1,0 +1,21 @@
+TEST-jsonfür AjaxPOST caller (enthält sämtliche verwendeten key/value pairs)
+DAMIT funktioniert das Backend ..d.H hier sind die korrekten keys zu finden !
+
+{
+"action": "delete",
+"listtype": "fis",
+"parentid": 1,
+"itemid": 1,
+"specification":     {
+  "name":"GrossesLicht",
+  "type":"Schalter",
+  "contacts":2,
+  "unit": "A",
+  "value": "16",
+  "current": 12,
+  "countFromBasement":100,
+  "baumeister": "Jeff Baumann",
+  "kapital": 1379,
+  "flaeche": 999,
+  "fuseid": 1       }
+}

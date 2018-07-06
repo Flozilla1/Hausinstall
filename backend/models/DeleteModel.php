@@ -1,15 +1,10 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 /**
  * Description of CreateModel
  *
- * @author helmuth
+ * @author helmuth  refactored by Wolfgang
  */
 class DeleteModel {
     
@@ -34,12 +29,32 @@ class DeleteModel {
     public function deleteSensor($id){
         return $this->deleteFromTable('sensors', $id);
     }
+
+    public function deleteFi($id){
+        return $this->deleteFromTable('fis', $id);
+    }
+
+    public function deleteFuse($id){
+        return $this->deleteFromTable('fuses', $id);
+    }
+    
+    public function deleteProject($id){
+        return $this->deleteFromTable('projects', $id);
+    }
+
+
     
     private function deleteFromTable($tableNme, $id){
         $sql = "DELETE FROM $tableNme WHERE id = $id LIMIT 1 ";
-        $this->database->order($sql);
         
-        return true;
+        //DEBUG  ######################################  RAUS DAMIT im ECHTBETRIEB
+        return $sql;
+        
+        $this->database->order($sql);
+
+
+        return $this->database->lastInsertedId();   // MAL SEHEN, ob das bei Delete auch eine ID zurückliefert ???      
+        return true;  //######################################## TODO
     }
     
 }

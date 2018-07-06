@@ -1,13 +1,12 @@
 <?php
 
-
 /**
- * Description of CreateModel
+ * Description of UpdateModel
  *
- * @author helmuth  refactored by Wolfgang
+ * @author Wolfgang
  */
-class CreateModel {
-    
+class UpdateModel {
+       
     private $database;
      
     public function __construct() {
@@ -15,13 +14,13 @@ class CreateModel {
     }
     
    
-    public function createProject($specification){
+    public function updateProject($itemId, $specification){
         $name = $specification->name;
         $baumeister = $specification->baumeister;
         $kapital = $specification->kapital;
-        
-        $sql = "INSERT INTO projects (name, baumeister, kapital) VALUES ('$name', '$baumeister', $kapital) ";
-        
+
+        $sql = "UPDATE projects SET name = '$name' , baumeister = '$baumeister' , kapital = $kapital   WHERE id = $itemId " ;
+           
         //DEBUG
         return $sql; // ################################ TODO Weg damit im echtbetrieb
                
@@ -29,11 +28,11 @@ class CreateModel {
         return $this->database->lastInsertedId();
     }
      
-    public function createFloor($parentId, $specification){
+    public function updateFloor($itemId, $specification){        
         $floorCount = $specification->countFromBasement;
         $name = $specification->name;
-             
-        $sql = "INSERT INTO floors (projects_id, floor_count_from_basement, name) VALUES ($parentId, $floorCount, '$name') ";
+    
+        $sql = "UPDATE floors  SET   name = '$name' ,  floor_count_from_basement = $floorCount   WHERE id = $itemId " ;
          
         //DEBUG
         return $sql; // ################################ TODO Weg damit im echtbetrieb
@@ -42,11 +41,11 @@ class CreateModel {
         return $this->database->lastInsertedId();
     }
     
-    public function createRoom($parentId, $specification){
+    public function updateRoom($itemId, $specification){
         $name = $specification->name;
-        $flaeche = $specification->flaeche;
-        
-        $sql = "INSERT INTO rooms (floors_id, name, flaeche) VALUES ($parentId, '$name', $flaeche) ";
+        $flaeche = $specification->flaeche;       
+
+        $sql = "UPDATE rooms  SET   name = '$name' , flaeche = $flaeche    WHERE id = $itemId " ;
         
         //DEBUG
         return $sql; // ################################ TODO Weg damit im echtbetrieb
@@ -55,10 +54,11 @@ class CreateModel {
         return $this->database->lastInsertedId();
     }
     
-    public function createDevice($parentId, $specification){
+    public function updateDevice($itemId, $specification){
         $name = $specification->name;
         $fuseid = $specification->fuseid;
-        $sql = "INSERT INTO devices (rooms_id, name, fuseid) VALUES ($parentId, '$name', $fuseid) ";
+        
+        $sql = "UPDATE devices  SET   name = '$name' , fuseid = $fuseid    WHERE id = $itemId " ;
         
         //DEBUG
         return $sql; // ################################ TODO Weg damit im echtbetrieb
@@ -67,12 +67,12 @@ class CreateModel {
         return $this->database->lastInsertedId();
     }
     
-    public function createSensor($parentId, $specification){
+    public function updateSensor($itemId, $specification){
         $name = $specification->name;
         $unit = $specification->unit;
         $value = $specification->value;
         
-        $sql = "INSERT INTO sensors (devices_id, name, unit, value) VALUES ($parentId, '$name', '$unit', $value) ";
+        $sql = "UPDATE sensors  SET   name = '$name' , unit = '$unit', value = $value    WHERE id = $itemId " ;
         
         //DEBUG
         return $sql; // ################################ TODO Weg damit im echtbetrieb
@@ -81,11 +81,11 @@ class CreateModel {
         return $this->database->lastInsertedId();
     }
 
-    public function createFi($parentId, $specification){ 
+    public function updateFi($itemId, $specification){ //#################################TODO
         $current = $specification->current;
         $name = $specification->name;
         
-        $sql = "INSERT INTO fis (projects_id, name, current) VALUES ($parentId, '$name', $current) ";
+        $sql = "UPDATE fis  SET   name = '$name' , current = $current    WHERE id = $itemId " ;
         
         //DEBUG
         return $sql; // ################################ TODO Weg damit im echtbetrieb
@@ -94,11 +94,11 @@ class CreateModel {
         return $this->database->lastInsertedId();
     }
     
-    public function createFuse($parentId, $specification){ 
+    public function updateFuse($itemId, $specification){ //#################################TODO
         $current = $specification->current;
         $name = $specification->name;
         
-        $sql = "INSERT INTO fuses (fis_id, name, current) VALUES ($parentId, '$name', $current) ";
+        $sql = "UPDATE fuses  SET   name = '$name' , current = $current    WHERE id = $itemId " ;
         
         //DEBUG
         return $sql; // ################################ TODO Weg damit im echtbetrieb
@@ -107,4 +107,5 @@ class CreateModel {
         return $this->database->lastInsertedId();
     }
     
+
 }
