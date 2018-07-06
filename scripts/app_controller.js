@@ -44,11 +44,11 @@ function selectContent_createListTypeLine (){
             break;
         case "#cat-4":
             createOneUnit = createOneDevice;
-            listtype = "device"
+            listtype = "devices"
             break;
         case "#cat-5":
             createOneUnit = createOneSensor;
-            listtype = "sensor"
+            listtype = "sensors"
             break;
     }
     return (createOneUnit);
