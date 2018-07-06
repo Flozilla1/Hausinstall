@@ -26,7 +26,6 @@ function createOneShoppingList (unitNr, jsObject){
 }
 
 function createOneProject (unitNr, jsObject){
-    console.log("Baumodel erreicht: ", jsObject)
     var html = "<div class='cat_unit shut'>\n";
     html += "<ul>\n";
     html += "<li><h2>" + jsObject[unitNr].title + "</h2></li>\n";
@@ -140,9 +139,9 @@ function addUpdateMenu (){
     var html = "";
     html += "<div class='menu menu_update ask'>"
     html += "<div class='titel'>Neue Werte:</div>"
-    html += "<div>Titel:<input id='val_1' placeholder='Titel'></div>"
-    html += "<div>Baumeister:<input  id='val_2' placeholder='Baumeister'></div>"
-    html += "<div>Kapital:<input  id='val_3' placeholder='Kapital'></div>"
+    html += "<div>Titel:<input id='val_1' placeholder='name'></div>"
+    html += "<div>Baumeister:<input  id='val_2' placeholder='baumeister'></div>"
+    html += "<div>Kapital:<input  id='val_3' placeholder='kapital'></div>"
     html += "<button class='action_update_submit'>Do it!</button>"
     html += "</div>"
     
@@ -152,16 +151,11 @@ function addNewMenu (){
     var html = "";
     html += "<div class='menu menu_new ask'>"
     html += "<div class='titel'>Neue Werte:</div>"
-    html += "<div>Titel:<input id='val_1' placeholder='Titel'></div>"
-    html += "<div>Baumeister:<input  id='val_2' placeholder='Baumeister'></div>"
-    html += "<div>Kapital:<input  id='val_3' placeholder='Kapital'></div>"
+    html += "<div>Titel:<input id='val_1' placeholder='name'></div>"
+    html += "<div>Baumeister:<input  id='val_2' placeholder='baumeister'></div>"
+    html += "<div>Kapital:<input  id='val_3' placeholder='kapital'></div>"
     html += "<button class='action_create_submit'>Do it!</button>"
     html += "</div>"
     
     return (html);
 }
-//                    $.each(jsObject, function(key, value) {
-//                        $.each(value.specification, function(set, unit){
-//                            console.log(set + ": " + unit)
-//                        });
-//                    });

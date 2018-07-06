@@ -44,17 +44,16 @@ function placeAction (){
                     createSpecificationLine(readInputs());
                     break;
                 case ("update"):
-                    requestJson.itemId = parentId;
+                    requestJson.itemid = parentId;
                     createSpecificationLine(readInputs());
                     break;
                 case ("delete"):
-                    requestJson.itemId = parentId;
+                    requestJson.itemid = parentId;
                     break;
             }
             ajaxCall();
             break;
     }
-    console.log(requestJson)
 }
 
 function createActionLine () {
@@ -79,7 +78,7 @@ function getNextList (){
 
 function ajaxCall(){
     var json = {data: JSON.stringify(requestJson)}
-    console.log("\n\nREQUEST:\n", requestJson);
+    console.log("o——————————————————————————————o\n\n\nREQUEST:\n", requestJson);
     
     $.ajax({
         url: "backend/index.php",
@@ -91,8 +90,8 @@ function ajaxCall(){
                 addContent(data)
             }
         },
-        error: function(json){
-            console.log ("ERROR",  json);
+        error: function(data){
+            console.log ("ERROR:\n",  data);
         }
     });
 }
