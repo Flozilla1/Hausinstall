@@ -1,4 +1,13 @@
 var parentId = 1;
+var propertyList = {    //[AnzeigeName, programmName]
+    'projects': [["Baumeister", "baumeister"], ["Kapital", "kapital"]],
+    'floors': [["Ebene Nr", "countFromBasement"]],
+    'rooms': [["Fläche", "flaeche"]],
+    'devices': [["Sicherungs-Id", "fuseid"]],
+    'sensors': [["", "unit"], ["", "value"]],
+    'fis': [["", "current"]],
+    'fuses': [["", "current"]]
+}
 
 function createAllUnits (jsObject, createOneUnit){
         
@@ -139,9 +148,7 @@ function addUpdateMenu (){
     var html = "";
     html += "<div class='menu menu_update ask'>"
     html += "<div class='titel'>Neue Werte:</div>"
-    html += "<div>Titel:<input id='val_1' placeholder='name'></div>"
-    html += "<div>Baumeister:<input  id='val_2' placeholder='baumeister'></div>"
-    html += "<div>Kapital:<input  id='val_3' placeholder='kapital'></div>"
+    html += addInputFields()
     html += "<button class='action_update_submit'>Do it!</button>"
     html += "</div>"
     
@@ -151,11 +158,16 @@ function addNewMenu (){
     var html = "";
     html += "<div class='menu menu_new ask'>"
     html += "<div class='titel'>Neue Werte:</div>"
-    html += "<div>Titel:<input id='val_1' placeholder='name'></div>"
-    html += "<div>Baumeister:<input  id='val_2' placeholder='baumeister'></div>"
-    html += "<div>Kapital:<input  id='val_3' placeholder='kapital'></div>"
+    html += addInputFields()
     html += "<button class='action_create_submit'>Do it!</button>"
     html += "</div>"
     
     return (html);
+}
+function addInputFields (){
+    var html = "<div>Titel:<input id='val_1' placeholder='name'></div>"
+    propertyList[listtype].forEach(function(val, key){
+        html += "<div>" + val[0] + ":<input  id='val_" + (key + 2) + "' placeholder='" + val[1] + "'></div>"
+    })
+    return html
 }
