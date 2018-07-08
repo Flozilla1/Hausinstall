@@ -175,3 +175,8 @@ button{
 .ask{
     height: 150px;
 }
+.responseMessage{
+    float: right;
+    margin-top: -25px;
+    padding-right: 55px;
+}

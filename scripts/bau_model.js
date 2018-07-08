@@ -138,7 +138,7 @@ function createOneSafty (unitNr, jsObject){
 function addDeleteMenu (){
     var html = "";
     html += "<div class='menu menu_delete ask'>"
-    html += "<div class='titel'>Wirklich Löschen?</div>"
+    html += "<div class='titel'><b>Wirklich Löschen?</b></div>"
     html += "<button class='action_delete_submit'>Do it!</button>"
     html += "</div>"
     
@@ -147,7 +147,7 @@ function addDeleteMenu (){
 function addUpdateMenu (){
     var html = "";
     html += "<div class='menu menu_update ask'>"
-    html += "<div class='titel'>Neue Werte:</div>"
+    html += "<div class='titel'><b>Neue Werte:</b></div>"
     html += addInputFields()
     html += "<button class='action_update_submit'>Do it!</button>"
     html += "</div>"
@@ -157,7 +157,7 @@ function addUpdateMenu (){
 function addNewMenu (){
     var html = "";
     html += "<div class='menu menu_new ask'>"
-    html += "<div class='titel'>Neue Werte:</div>"
+    html += "<div class='titel'><b>Neue Werte:</b></div>"
     html += addInputFields()
     html += "<button class='action_create_submit'>Do it!</button>"
     html += "</div>"
@@ -170,4 +170,7 @@ function addInputFields (){
         html += "<div>" + val[0] + ":<input  id='val_" + (key + 2) + "' placeholder='" + val[1] + "'></div>"
     })
     return html
+}
+function displayResponseInMenu (response){
+    $(".menu")[0].innerHTML += "<div class='responseMessage'>" + response + "</div>";
 }

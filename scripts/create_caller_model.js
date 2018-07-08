@@ -35,7 +35,7 @@ function placeAction (){
             getNextList();
             break;
             
-        case ("submit"):    //Ok-Buttons
+        case ("submit"):    //"Do It!"-Buttons
             var submitAction = $(that).parent()[0].getAttribute("class").split(" ")[1].split("_")[1];
             createActionLine();
             
@@ -78,16 +78,19 @@ function getNextList (){
 
 function ajaxCall(){
     var json = {data: JSON.stringify(requestJson)}
-    console.log("o——————————————————————————————o\n\n\nREQUEST:\n", requestJson);
+    console.log("o————————————————————————————o\nREQUEST:\n", requestJson);
     
     $.ajax({
         url: "backend/index.php",
         type: "post",
         data: json,
         success: function (data){
-            console.log("\nRESPONSE:\n\n", data);
+            console.log("\nRESPONSE:\n", data, "\n\n");
             if (requestJson.action == "list"){
                 addContent(data)
+            } else {
+                //displayResponseInMenu(data.message)
+                displayResponseInMenu(data.newId)
             }
         },
         error: function(data){
