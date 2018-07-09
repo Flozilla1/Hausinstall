@@ -14,7 +14,6 @@ function placeAction (){
             parentId = that.getAttribute("list_id")     //Bei den Submit-Buttons steht ganz ökonomisch nicht nochmal extra die List_id drin, darum muss die List_id vom Ausgangs-Button gemerkt werden
         }
     }
-    console.log(parentId)
     switch (actionInput[1]){
             
         case ("new"):
