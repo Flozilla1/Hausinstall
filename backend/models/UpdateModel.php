@@ -22,7 +22,7 @@ class UpdateModel {
         $sql = "UPDATE projects SET name = '$name' , baumeister = '$baumeister' , kapital = $kapital   WHERE id = $itemId " ;
            
         //DEBUG
-        return $sql; // ################################ TODO Weg damit im echtbetrieb
+        //return $sql; // ################################ TODO Weg damit im echtbetrieb
                
         $this->database->order($sql);
         return $this->database->lastInsertedId();
@@ -35,7 +35,7 @@ class UpdateModel {
         $sql = "UPDATE floors  SET   name = '$name' ,  floor_count_from_basement = $floorCount   WHERE id = $itemId " ;
          
         //DEBUG
-        return $sql; // ################################ TODO Weg damit im echtbetrieb
+        //return $sql; // ################################ TODO Weg damit im echtbetrieb
                
        $this->database->order($sql);
         return $this->database->lastInsertedId();
@@ -48,7 +48,7 @@ class UpdateModel {
         $sql = "UPDATE rooms  SET   name = '$name' , flaeche = $flaeche    WHERE id = $itemId " ;
         
         //DEBUG
-        return $sql; // ################################ TODO Weg damit im echtbetrieb
+        //return $sql; // ################################ TODO Weg damit im echtbetrieb
                
         $this->database->order($sql);
         return $this->database->lastInsertedId();
@@ -61,7 +61,7 @@ class UpdateModel {
         $sql = "UPDATE devices  SET   name = '$name' , fuseid = $fuseid    WHERE id = $itemId " ;
         
         //DEBUG
-        return $sql; // ################################ TODO Weg damit im echtbetrieb
+        //return $sql; // ################################ TODO Weg damit im echtbetrieb
                
         $this->database->order($sql);
         return $this->database->lastInsertedId();
@@ -75,7 +75,7 @@ class UpdateModel {
         $sql = "UPDATE sensors  SET   name = '$name' , unit = '$unit', value = $value    WHERE id = $itemId " ;
         
         //DEBUG
-        return $sql; // ################################ TODO Weg damit im echtbetrieb
+        //return $sql; // ################################ TODO Weg damit im echtbetrieb
                
         $this->database->order($sql);
         return $this->database->lastInsertedId();
@@ -85,7 +85,7 @@ class UpdateModel {
         $current = $specification->current;
         $name = $specification->name;
         
-        $sql = "UPDATE fis  SET   name = '$name' , current = $current    WHERE id = $itemId " ;
+        //$sql = "UPDATE fis  SET   name = '$name' , current = $current    WHERE id = $itemId " ;
         
         //DEBUG
         return $sql; // ################################ TODO Weg damit im echtbetrieb
@@ -101,7 +101,7 @@ class UpdateModel {
         $sql = "UPDATE fuses  SET   name = '$name' , current = $current    WHERE id = $itemId " ;
         
         //DEBUG
-        return $sql; // ################################ TODO Weg damit im echtbetrieb
+        //return $sql; // ################################ TODO Weg damit im echtbetrieb
                
         $this->database->order($sql);
         return $this->database->lastInsertedId();

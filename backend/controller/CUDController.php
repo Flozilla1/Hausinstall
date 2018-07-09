@@ -29,7 +29,7 @@ class CUDController implements Controller {
                 $this->createItem();
                 break;
             case 'update':
-                $this->updateItem(); // ###################### TODO
+                $this->updateItem(); 
                 break;
             case 'delete':
                 $this->deleteItem();

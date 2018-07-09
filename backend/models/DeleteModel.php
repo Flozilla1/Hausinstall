@@ -48,7 +48,7 @@ class DeleteModel {
         $sql = "DELETE FROM $tableNme WHERE id = $id LIMIT 1 ";
         
         //DEBUG  ######################################  RAUS DAMIT im ECHTBETRIEB
-        return $sql;
+        //return $sql;
         
         $this->database->order($sql);
 

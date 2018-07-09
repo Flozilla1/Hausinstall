@@ -1,11 +1,37 @@
-Frontend Missing/change:
+Frontend  ... Fehlerbehebungen
 
-breadcrumb, bzw übersicht woher man kommt
-zurück button o.ä.
-backend call (post) und anzeige der rückgelieferten json daten
-button "Inhalt" gehört umbenannt auf die jeweilige ebene die folgt (zB"Stockwerke")
-?? Wie lösen wir den button "bearbeiten"
+raum flaeche geht nicht
+Verbraucher  sicherung geht nicht (Siehe doku  .. ich hab nebst der sicherungsid auch den sicherungsnamen mit in die specs gepackt)
+Sicherungszweig geht gar nicht (wenn man  im Projekt/im Verbraucher auf Fis drückt)
+Neue Ebene, Räume, verbraucher  anlegen geht nicht
 
-Backend missing:
+Frontend ..Verbesserungen
 
-how to copy frontend and backend
+Zurück -button (DRINGEND)
+Nach Update oder Insert (neu/bearbeiten) aktualisierte Liste anzeigen. 
+	Man kann noch kurz ein popup einblenden mit der Vollzugsmeldung (ZB Neuer datensatz eingefügt oder Geändert oder error)
+
+
+Breadcrumb
+EbenenName statt "nächste Ebene"
+Detailantzeige/Bearbeitungsanzeige --> gleich felder (nicht leer in bearbeiten)
+Bearbeitungsschirm, die feldbezeichnungen fehlen (bis auf titel .. den ich in "bezeichnung" umtaufen würde)
+Sensoren .. es fehlen die werte
+"Ausführen" statt "do it" 
+Tabs merken sich die werte nicht  (einmal bearbeiten --> löschen --> bearbeiten .... keine werte mehr in den bearbeiten feldern)
+
+Runde ecken
+Ebenenbezeichnungen in den auf/zugeklappten teilen (vertikaler text)
+
+
+            SELECT ss.name, count(ss.name) as count
+            FROM projects pj, floors fl, rooms ro, devices dv, sensors ss
+            WHERE fl.projects_id = pj.id 
+                AND ro.floors_id = fl.id
+                AND dv.rooms_id = ro.id
+                AND ss.devices_id = dv.id
+                AND pj.id = 1
+            GROUP BY ss.name
+            ;
+
+

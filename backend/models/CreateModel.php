@@ -23,7 +23,7 @@ class CreateModel {
         $sql = "INSERT INTO projects (name, baumeister, kapital) VALUES ('$name', '$baumeister', $kapital) ";
         
         //DEBUG
-        return $sql; // ################################ TODO Weg damit im echtbetrieb
+        //return $sql; // ################################ TODO Weg damit im echtbetrieb
                
         $this->database->order($sql);
         return $this->database->lastInsertedId();
@@ -36,7 +36,7 @@ class CreateModel {
         $sql = "INSERT INTO floors (projects_id, floor_count_from_basement, name) VALUES ($parentId, $floorCount, '$name') ";
          
         //DEBUG
-        return $sql; // ################################ TODO Weg damit im echtbetrieb
+        //return $sql; // ################################ TODO Weg damit im echtbetrieb
                
        $this->database->order($sql);
         return $this->database->lastInsertedId();
@@ -49,7 +49,7 @@ class CreateModel {
         $sql = "INSERT INTO rooms (floors_id, name, flaeche) VALUES ($parentId, '$name', $flaeche) ";
         
         //DEBUG
-        return $sql; // ################################ TODO Weg damit im echtbetrieb
+        //return $sql; // ################################ TODO Weg damit im echtbetrieb
                
         $this->database->order($sql);
         return $this->database->lastInsertedId();
@@ -61,7 +61,7 @@ class CreateModel {
         $sql = "INSERT INTO devices (rooms_id, name, fuseid) VALUES ($parentId, '$name', $fuseid) ";
         
         //DEBUG
-        return $sql; // ################################ TODO Weg damit im echtbetrieb
+        //return $sql; // ################################ TODO Weg damit im echtbetrieb
                
         $this->database->order($sql);
         return $this->database->lastInsertedId();
@@ -75,7 +75,7 @@ class CreateModel {
         $sql = "INSERT INTO sensors (devices_id, name, unit, value) VALUES ($parentId, '$name', '$unit', $value) ";
         
         //DEBUG
-        return $sql; // ################################ TODO Weg damit im echtbetrieb
+        //return $sql; // ################################ TODO Weg damit im echtbetrieb
                
         $this->database->order($sql);
         return $this->database->lastInsertedId();
@@ -88,7 +88,7 @@ class CreateModel {
         $sql = "INSERT INTO fis (projects_id, name, current) VALUES ($parentId, '$name', $current) ";
         
         //DEBUG
-        return $sql; // ################################ TODO Weg damit im echtbetrieb
+        //return $sql; // ################################ TODO Weg damit im echtbetrieb
                
         $this->database->order($sql);
         return $this->database->lastInsertedId();
@@ -101,7 +101,7 @@ class CreateModel {
         $sql = "INSERT INTO fuses (fis_id, name, current) VALUES ($parentId, '$name', $current) ";
         
         //DEBUG
-        return $sql; // ################################ TODO Weg damit im echtbetrieb
+        //return $sql; // ################################ TODO Weg damit im echtbetrieb
                
         $this->database->order($sql);
         return $this->database->lastInsertedId();

@@ -27,8 +27,8 @@ class AppController {
             case 'create': case 'update': case 'delete':
                 $subController = new CUDController();
                 break;
-            case 'get-shoppinglist':
-                $subController = new ShoppingListController();
+            case 'shoppinglist': case 'circuitlist':
+                $subController = new ReportController();
                 break;
             default: 
                 $subController = new CUDController();
