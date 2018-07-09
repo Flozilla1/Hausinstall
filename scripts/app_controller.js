@@ -57,7 +57,11 @@ function selectContent_createListTypeLine (){
 function addContent (jsObject) {
     
     var createOneUnit = selectContent_createListTypeLine();
-    var finishedHtml = createAllUnits(jsObject, createOneUnit);
+    if(jsObject.circuitlist == undefined){
+        var finishedHtml = createAllUnits(jsObject, createOneUnit);
+    } else {
+        var finishedHtml = createShoppingList(jsObject)
+    }
     var targetContentArea = target + " .cat_content";
 
     $(targetContentArea)[0].innerHTML += finishedHtml;

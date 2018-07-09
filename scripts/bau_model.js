@@ -22,6 +22,18 @@ function createAllUnits (jsObject, createOneUnit){
     return (allUnits);
 }
 
+function createShoppingList (jsObject){
+    var circuitsArr = jsObject.circuitlist
+    var html = "<div class='cat_unit'>\n";
+        html += "<ul>\n";
+    circuitsArr.forEach(function(val, key){
+        console.log(val)
+        html += "<li>" + val.name + " " + val.count + "x</li>\n";
+    })
+    html += "</ul>\n";
+    html += "</div>";
+    return(html);
+}
 //buttons dürfen nur eine Klasse haben, sonst muss man auch app_controller anpassen (spit(" ")[1])
 //buttons: Klassen: Syntax muss action_list/create/update/delete_optional sein
 function createOneShoppingList (unitNr, jsObject){
@@ -39,7 +51,7 @@ function createOneProject (unitNr, jsObject){
     html += "<ul>\n";
     html += "<li><h2>" + jsObject[unitNr].title + "</h2></li>\n";
     html += "<li><span>Baumeister: </span><span>" + jsObject[unitNr].specification.baumeister + "</span></li>\n";
-    html += "<li><span>Kapital: </span><span>" + jsObject[unitNr].specification.kapital + "</span></li>\n";
+    html += "<li><span>Kapital: </span><span>" + jsObject[unitNr].specification.kapital + " €</span></li>\n";
     html += "</ul>\n";
     
     html += "<button class='action_list_shopping' list_id='" + unitNr.split("-")[1] + "'>Einkaufsliste</button>\n";
@@ -89,7 +101,7 @@ function createOneDevice (unitNr, jsObject){
     
     html += "<button class='action_update' list_id='" + unitNr.split("-")[1] + "'>Bearbeiten</button>\n";
     html += "<button class='action_delete' list_id='" + unitNr.split("-")[1] + "'>Löschen</button>\n";
-    html += "<button class='action_list_safty' list_id='" + unitNr.split("-")[1] + "'>Sicherungen</button>\n";    
+//    html += "<button class='action_list_safty' list_id='" + unitNr.split("-")[1] + "'>Sicherungen</button>\n";    
     html += "<button class='action_list_cat' list_id='" + unitNr.split("-")[1] + "'>Nächste Ebene</button>\n";
     html += "</div>";
     

@@ -31,6 +31,13 @@
 #cat-0 .cat_unit{
     color: rgb(159, 229, 173);
     background-color: rgb(24, 109, 70);
+    height: 85vh;
+    text-align: right;
+    padding-right: 25px;
+    padding-top: 40px;
+}
+#cat-0 h1{
+    float: none;
 }
 #cat-1{
     background-color: rgb(140, 200, 120);
@@ -103,7 +110,7 @@
 h1{
     margin-right: 20px;
     float: left;
-    margin-top: -11px;
+    margin-top: -15px;
     font-family: 'Bungee Inline';
     font-size: 35pt;
 }
@@ -185,4 +192,8 @@ button{
     transform-origin: 0% top;
     margin-left: 53px;
     margin-top: 20px;
+}
+li{
+    font-size: 1.3em;
+    line-height: 1.5em;
 }
