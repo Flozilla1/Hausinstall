@@ -1,9 +1,9 @@
-﻿-- phpMyAdmin SQL Dump
+-- phpMyAdmin SQL Dump
 -- version 4.7.9
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 26. Jun 2018 um 00:53
+-- Erstellungszeit: 08. Jul 2018 um 21:39
 -- Server-Version: 10.1.31-MariaDB
 -- PHP-Version: 7.2.3
 
@@ -31,8 +31,8 @@ SET time_zone = "+00:00";
 CREATE TABLE `devices` (
   `id` int(10) UNSIGNED NOT NULL,
   `rooms_id` int(10) UNSIGNED NOT NULL,
-  `sicherungs_id` int(10) UNSIGNED NOT NULL,
   `name` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `fuseid` int(10) UNSIGNED NOT NULL,
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `last_change` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -41,29 +41,36 @@ CREATE TABLE `devices` (
 -- Daten für Tabelle `devices`
 --
 
-INSERT INTO `devices` (`id`, `rooms_id`, `sicherungs_id`, `name`, `created`, `last_change`) VALUES
-(1, 1, 3, 'Licht', '2018-04-17 14:21:04', NULL),
-(2, 1, 4, 'Rollo', '2018-04-17 14:21:04', NULL),
-(3, 16, 5, 'Steckdose Aufputz', '2018-06-25 20:55:52', NULL);
+INSERT INTO `devices` (`id`, `rooms_id`, `name`, `fuseid`, `created`, `last_change`) VALUES
+(1, 1, 'Licht', 3, '2018-04-17 14:21:04', NULL),
+(2, 5, 'Rollo', 2, '2018-04-17 14:21:04', NULL),
+(3, 6, 'Steckdose Aufputz', 1, '2018-06-25 20:55:52', NULL),
+(4, 9, 'Schalter Licht Decke', 2, '2018-06-25 20:55:52', NULL),
+(5, 10, 'Schalter Licht Wand', 3, '2018-06-25 20:55:52', NULL),
+(6, 11, 'Schalter Licht Balkon', 3, '2018-06-25 20:55:52', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `fi`
+-- Tabellenstruktur für Tabelle `fis`
 --
 
-CREATE TABLE `fi` (
-  `id` int(11) UNSIGNED NOT NULL,
-  `FI_name` varchar(255) NOT NULL
+CREATE TABLE `fis` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `projects_id` int(10) UNSIGNED NOT NULL,
+  `current` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Daten für Tabelle `fi`
+-- Daten für Tabelle `fis`
 --
 
-INSERT INTO `fi` (`id`, `FI_name`) VALUES
-(1, 'Steckdosen'),
-(2, 'Hauptstromkreis');
+INSERT INTO `fis` (`id`, `name`, `projects_id`, `current`) VALUES
+(1, 'FI Steckdosen', 1, 30),
+(2, 'FI Licht', 1, 100),
+(3, 'FI Steckdosen', 2, 30),
+(4, 'FI allgemein', 2, 100);
 
 -- --------------------------------------------------------
 
@@ -87,14 +94,29 @@ CREATE TABLE `floors` (
 INSERT INTO `floors` (`id`, `projects_id`, `floor_count_from_basement`, `name`, `created`, `last_change`) VALUES
 (1, 1, 0, 'Keller', '2018-04-17 14:10:35', NULL),
 (2, 1, 1, 'Erdgeschoß', '2018-04-17 14:10:35', NULL),
-(3, 1, 2, 'erster Stock', '2018-04-17 14:11:07', NULL),
-(4, 2, 0, 'Tiefgarage', '2018-04-17 14:11:07', NULL),
-(5, 2, 1, 'Erdgeschoß', '2018-04-17 14:11:23', NULL),
-(6, 2, 2, 'Mezanin', '2018-04-17 14:11:23', NULL),
-(7, 2, 3, 'Erster Stock', '2018-04-17 14:11:50', NULL),
-(8, 2, 4, 'Zweiter Stock', '2018-04-17 14:11:50', NULL),
-(9, 1, 1, 'Cassandra', '2018-06-13 20:26:04', NULL),
-(10, 1, 1, 'Penelope', '2018-06-13 20:26:24', NULL);
+(3, 1, 2, 'erster Stock', '2018-04-17 14:11:07', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `fuses`
+--
+
+CREATE TABLE `fuses` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `fis_id` int(10) UNSIGNED NOT NULL,
+  `current` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Daten für Tabelle `fuses`
+--
+
+INSERT INTO `fuses` (`id`, `name`, `fis_id`, `current`) VALUES
+(1, 'Steckdosen Erdgeschoss', 1, 12),
+(2, 'Licht Erdgeschoss', 2, 12),
+(3, 'Licht erster Stock', 2, 12);
 
 -- --------------------------------------------------------
 
@@ -105,6 +127,8 @@ INSERT INTO `floors` (`id`, `projects_id`, `floor_count_from_basement`, `name`, 
 CREATE TABLE `projects` (
   `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `baumeister` varchar(255) NOT NULL,
+  `kapital` int(11) NOT NULL,
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `last_change` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -113,9 +137,9 @@ CREATE TABLE `projects` (
 -- Daten für Tabelle `projects`
 --
 
-INSERT INTO `projects` (`id`, `name`, `created`, `last_change`) VALUES
-(1, 'Haus Großeltern', '2018-04-17 14:10:04', NULL),
-(2, 'Gebäude 1200 Wien', '2018-04-17 14:10:04', NULL);
+INSERT INTO `projects` (`id`, `name`, `baumeister`, `kapital`, `created`, `last_change`) VALUES
+(1, 'Haus UrGroßeltern', 'Lugner', 0, '2018-04-17 14:10:04', NULL),
+(2, 'Gebäude 1200 Wien', 'Coop Himmelbau', 0, '2018-04-17 14:10:04', NULL);
 
 -- --------------------------------------------------------
 
@@ -127,6 +151,7 @@ CREATE TABLE `rooms` (
   `id` int(10) UNSIGNED NOT NULL,
   `floors_id` int(10) UNSIGNED NOT NULL,
   `name` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `flaeche` int(11) NOT NULL,
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `last_change` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -135,46 +160,13 @@ CREATE TABLE `rooms` (
 -- Daten für Tabelle `rooms`
 --
 
-INSERT INTO `rooms` (`id`, `floors_id`, `name`, `created`, `last_change`) VALUES
-(1, 1, 'gesamter Keller', '2018-04-17 14:14:24', NULL),
-(2, 2, 'Stiegenhaus', '2018-04-17 14:14:24', NULL),
-(3, 2, 'Vorzimmer', '2018-04-17 14:14:24', NULL),
-(4, 2, 'WC', '2018-04-17 14:14:24', NULL),
-(5, 2, 'Küche', '2018-04-17 14:14:24', NULL),
-(6, 2, 'Wohnzimmer', '2018-04-17 14:14:24', NULL),
-(7, 2, 'Gästezimmer', '2018-04-17 14:14:24', NULL),
-(8, 2, 'Gäste Bad und WC', '2018-04-17 14:14:24', NULL),
-(9, 3, 'Schlafzimmer 1', '2018-04-17 14:14:24', NULL),
-(10, 3, 'Schlafzimmer 2', '2018-04-17 14:14:24', NULL),
-(11, 3, 'Badezimmer', '2018-04-17 14:14:24', NULL),
-(12, 3, 'WC', '2018-04-17 14:14:24', NULL),
-(13, 4, 'Technik Raum', '2018-04-17 14:14:24', NULL),
-(14, 4, 'alle Stellplätze', '2018-04-17 14:14:24', NULL),
-(15, 5, 'Aula', '2018-04-17 14:14:24', NULL),
-(16, 5, 'WC Herren', '2018-04-17 14:17:19', NULL),
-(17, 5, 'WC Damen', '2018-04-17 14:17:19', NULL),
-(18, 5, 'Küche', '2018-04-17 14:17:19', NULL),
-(19, 5, 'Putzkammer', '2018-04-17 14:17:19', NULL),
-(20, 6, 'Konferenzzimmer', '2018-04-17 14:17:19', NULL),
-(21, 6, 'Schulwartzimmer', '2018-04-17 14:17:19', NULL),
-(22, 6, 'Krankenstation', '2018-04-17 14:17:19', NULL),
-(23, 6, 'Lehrer WC', '2018-04-17 14:17:19', NULL),
-(24, 7, 'WC Damen', '2018-04-17 14:17:19', NULL),
-(25, 7, 'WC Herren', '2018-04-17 14:17:19', NULL),
-(26, 7, 'Klassenzimmer 1A', '2018-04-17 14:17:19', NULL),
-(27, 7, 'Klassenzimmer 1B', '2018-04-17 14:17:19', NULL),
-(28, 7, 'Klassenzimmer 2A', '2018-04-17 14:17:19', NULL),
-(29, 7, 'Klassenzimmer 2B', '2018-04-17 14:17:19', NULL),
-(30, 7, 'Klassenzimmer 3A', '2018-04-17 14:17:19', NULL),
-(31, 7, 'Klassenzimmer 3B', '2018-04-17 14:18:51', NULL),
-(32, 8, 'WC Damen', '2018-04-17 14:18:51', NULL),
-(33, 8, 'WC Herren', '2018-04-17 14:18:51', NULL),
-(34, 8, 'Klassenzimmer 4A', '2018-04-17 14:18:51', NULL),
-(35, 8, 'Klassenzimmer 4B', '2018-04-17 14:18:51', NULL),
-(36, 8, 'Biologiesaal', '2018-04-17 14:18:51', NULL),
-(37, 8, 'Phyisksaal', '2018-04-17 14:18:51', NULL),
-(38, 8, 'Zeichensaal', '2018-04-17 14:18:51', NULL),
-(39, 8, 'Aufenthaltsraum', '2018-04-17 14:18:51', NULL);
+INSERT INTO `rooms` (`id`, `floors_id`, `name`, `flaeche`, `created`, `last_change`) VALUES
+(1, 1, 'gesamter Keller - alles', 0, '2018-04-17 14:14:24', NULL),
+(5, 2, 'Küche', 0, '2018-04-17 14:14:24', NULL),
+(6, 2, 'Wohnzimmer', 0, '2018-04-17 14:14:24', NULL),
+(9, 3, 'Schlafzimmer 1', 0, '2018-04-17 14:14:24', NULL),
+(10, 3, 'Schlafzimmer 2', 0, '2018-04-17 14:14:24', NULL),
+(11, 3, 'Badezimmer', 0, '2018-04-17 14:14:24', NULL);
 
 -- --------------------------------------------------------
 
@@ -202,30 +194,6 @@ INSERT INTO `sensors` (`id`, `devices_id`, `name`, `unit`, `value`, `created`, `
 (5, 2, 'Helligkeitssensor', 'Lumen', NULL, '2018-04-17 14:23:08', NULL),
 (6, 3, 'Lichtsensor', 'Candela', '450 cd', '2018-06-25 20:56:20', NULL);
 
--- --------------------------------------------------------
-
---
--- Tabellenstruktur für Tabelle `sicherung`
---
-
-CREATE TABLE `sicherung` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `sicherungs_name` varchar(255) NOT NULL,
-  `fi_id` int(10) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Daten für Tabelle `sicherung`
---
-
-INSERT INTO `sicherung` (`id`, `sicherungs_name`, `fi_id`) VALUES
-(1, 'Herd', 2),
-(2, 'Steckdosen Küche', 1),
-(3, 'Sicherung Licht Obergeschoss', 2),
-(4, 'Sicherung Licht Erdgeschoss', 2),
-(5, 'Steckdosen Erdgeschoss', 1),
-(6, 'Steckdosen Obergeschoss', 1);
-
 --
 -- Indizes der exportierten Tabellen
 --
@@ -237,15 +205,21 @@ ALTER TABLE `devices`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indizes für die Tabelle `fi`
+-- Indizes für die Tabelle `fis`
 --
-ALTER TABLE `fi`
+ALTER TABLE `fis`
   ADD PRIMARY KEY (`id`);
 
 --
 -- Indizes für die Tabelle `floors`
 --
 ALTER TABLE `floors`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indizes für die Tabelle `fuses`
+--
+ALTER TABLE `fuses`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -267,12 +241,6 @@ ALTER TABLE `sensors`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indizes für die Tabelle `sicherung`
---
-ALTER TABLE `sicherung`
-  ADD PRIMARY KEY (`id`);
-
---
 -- AUTO_INCREMENT für exportierte Tabellen
 --
 
@@ -280,19 +248,25 @@ ALTER TABLE `sicherung`
 -- AUTO_INCREMENT für Tabelle `devices`
 --
 ALTER TABLE `devices`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT für Tabelle `fi`
+-- AUTO_INCREMENT für Tabelle `fis`
 --
-ALTER TABLE `fi`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+ALTER TABLE `fis`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT für Tabelle `floors`
 --
 ALTER TABLE `floors`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT für Tabelle `fuses`
+--
+ALTER TABLE `fuses`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT für Tabelle `projects`
@@ -310,12 +284,6 @@ ALTER TABLE `rooms`
 -- AUTO_INCREMENT für Tabelle `sensors`
 --
 ALTER TABLE `sensors`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT für Tabelle `sicherung`
---
-ALTER TABLE `sicherung`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
