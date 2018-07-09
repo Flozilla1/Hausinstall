@@ -46,7 +46,7 @@ function createOneProject (unitNr, jsObject){
     html += "<button class='action_update' list_id='" + unitNr.split("-")[1] + "'>Bearbeiten</button>\n";
     html += "<button class='action_delete' list_id='" + unitNr.split("-")[1] + "'>Löschen</button>\n";
     html += "<button class='action_list_cat' list_id='" + unitNr.split("-")[1] + "'>Nächste Ebene</button>\n";
-    html += "<button class='action_list_safty' list_id='" + unitNr.split("-")[1] + "'>Fi</button>\n";
+    html += "<button class='action_list_circ' list_id='" + unitNr.split("-")[1] + "'>Fi</button>\n";
     html += "</div>";
         
     return(html);

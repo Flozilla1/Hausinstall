@@ -1,6 +1,6 @@
 var requestJson = {'action': 'list','listtype': 'projects'};
 var type;
-var parentiId;
+var parentId = 1;
 
 function placeAction (){
     that = this;
@@ -10,8 +10,11 @@ function placeAction (){
         actionInput = ["", "submit"]    //"submit" muss für den Switch in einem Array an 2ter Stelle stehen
     } else {
         $(".menu").remove();        //funktioniert, wenn es am Anfang der Methode steht
-        parentId = that.getAttribute("list_id")     //Bei den Submit-Buttons steht ganz ökonomisch nicht nochmal extra die List_id drin, darum muss die List_id vom Ausgangs-Button gemerkt werden
+        if(that.hasAttribute("list_id") == true){       //Für den Fall: New-Button, damit die Parentid gespeichert bleibt, in den es eingefügt werden soll
+            parentId = that.getAttribute("list_id")     //Bei den Submit-Buttons steht ganz ökonomisch nicht nochmal extra die List_id drin, darum muss die List_id vom Ausgangs-Button gemerkt werden
+        }
     }
+    console.log(parentId)
     switch (actionInput[1]){
             
         case ("new"):
@@ -41,6 +44,7 @@ function placeAction (){
             
             switch (submitAction){
                 case ("new"):
+                    requestJson.parentid = parentId;
                     createSpecificationLine(readInputs());
                     break;
                 case ("update"):

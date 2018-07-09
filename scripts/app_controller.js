@@ -91,9 +91,9 @@ function directionAndNextType (btnType, currFoldNr){
             ++currFoldNr;
             nextType = "#cat";
             break;
-         case "action_list_safty":
-            ++currFoldNr;
-            nextType = "#safty";
+         case "action_list_circ":
+            --currFoldNr;
+            nextType = "#cat";
             break;
         case "action_list_shopping":
             --currFoldNr;

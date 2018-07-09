@@ -1,3 +1,4 @@
+ @import url('https://fonts.googleapis.com/css?family=Bungee+Inline');
 *{
     margin: 0px;
     padding: 0px;
@@ -25,7 +26,6 @@
 #cat-0{
     background-color: rgb(159, 229, 173);
     color: rgb(24, 109, 70);
-    height: 100vh;
     z-index: 5;
 }
 #cat-0 .cat_unit{
@@ -100,15 +100,11 @@
 .closed .cat_content{
     display: none;
 }
-.cat_title{
-    display: inline-block;
-    position: relative;
-    width: 100%;
-}
 h1{
     margin-right: 20px;
     float: left;
-    margin-top: -3px;
+    margin-top: -11px;
+    font-family: 'Bungee Inline';
     font-size: 35pt;
 }
 .cat_unit{
@@ -179,4 +175,14 @@ button{
     float: right;
     margin-top: -25px;
     padding-right: 55px;
+}
+.open .closed_cat_titel{
+    display: none;
+}
+.closed .closed_cat_titel{
+    display: block;
+    transform: rotate(90deg);
+    transform-origin: 0% top;
+    margin-left: 53px;
+    margin-top: 20px;
 }
