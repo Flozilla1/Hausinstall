@@ -13,6 +13,7 @@ include "models/DeleteModel.php";
 include "models/CreateModel.php";
 include "models/UpdateModel.php";
 include "models/ShoppingListModel.php";
+include "models/CircuitListModel.php";
 include "views/JsonView.php";
 
 define ("DBHost", "localhost");

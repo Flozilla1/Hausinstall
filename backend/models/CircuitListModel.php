@@ -1,18 +1,67 @@
 <?php
 /**
- * Description: Selektiert alle devices, sensors, fis, fuses aus der DB und reiht sie nacheinander in die ergebnisliste
- * Ausgegben werden alle namen und die anzahl gleicher namen
  * @author Wolfgang
  */
-class ShoppingListModel {
+class CircuitListModel {
     private $database;
     private $list;
+    private $fi;
+    private $fuse;
     
     public function __construct() {
         $this->database = new Database(DBHost, DBName, DBUser, DBPass);
     }
     
-    public function createReport($projectid){
+    public function createReport($projectid) {
+        
+        //FIs
+        $sql= "
+            SELECT fi.name, fi.current ,fi.id
+            FROM projects pj, fis fi
+            WHERE fi.projects_id = pj.id 
+                AND pj.id = {$projectid}
+            ;" ;
+        $fiData = $this->getListFromDatabase($sql);
+        //Format basteln 
+        $fiIndex = 0;
+        foreach($fiData as $content){
+            $this->list[$fiIndex]['name'] = $content['name'];
+            $this->list[$fiIndex]['value'] = $content['current'];
+//            $fiIndex++;
+            $this->fi = $content['id'];
+            //Alle fuses zum konkreten fi
+            $sql= "
+                SELECT fu.name, fu.current, fu.id
+                FROM fis fi, fuses fu
+                WHERE  fu.fis_id = {$this->fi}
+                ;" ;
+
+            $fuData = $this->getListFromDatabase($sql);
+            //Format basteln 
+            $fuIndex = 0;
+            foreach($fuData as $content1){
+                $this->list[$fiIndex]['fuses'][$fuIndex]['name'] = $content1['name'];
+                $this->list[$fiIndex]['fuses'][$fuIndex]['value'] = $content1['current'];
+//                $fuIndex++;
+                $this->fuse = $content1['id'];
+                
+                //Devices zur konkreten Sicherung
+                
+                //DUMMYDATA
+                $this->list[$fiIndex]['fuses'][$fuIndex]['devices'][0] = "Dummydevice 1";
+                $this->list[$fiIndex]['fuses'][$fuIndex]['devices'][1] = "Dummydevice 2";
+
+
+                $fuIndex++;                
+            }
+            $fiIndex++;
+        }
+        return $this->list;
+        
+    }
+
+// !! COPY OF SHOPPINGLIST
+    public function createReportREAL($projectid){  // Der gehört dann weiterentwickelt und enthält echtdaten
         //Devices
         $sql= "
             SELECT dv.name, count(dv.name) as count
@@ -30,6 +79,7 @@ class ShoppingListModel {
             $this->list[$index]['name'] = $content['name'];
             $this->list[$index]['count'] = $content['count'];
             $index++;
+            
         }
                                 
         //Sensors
@@ -96,9 +146,12 @@ class ShoppingListModel {
             }
         } catch (PDOException $ex){
             error_log("PDO ERROR: querying database: " . $ex->getMessage()."\n".$sql);
-        }       
+        }        
         return $result;
     }
-   
+
+    
+    
+    
 }
 
