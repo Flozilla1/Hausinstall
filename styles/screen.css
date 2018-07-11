@@ -1,4 +1,4 @@
- @import url('https://fonts.googleapis.com/css?family=Bungee+Inline');
+ @import url('https://fonts.googleapis.com/css?family=Bungee');
 *{
     margin: 0px;
     padding: 0px;
@@ -23,21 +23,27 @@
     height: 100vh;
 }
 /* z-index musst folgend angepasst werden, wenn ein Folder dazu kommt */
+#cat--1{
+    background-color: rgb(167, 240, 207);
+    color: rgb(10, 92, 85);
+    z-index: 6;
+}
+#cat--1 .cat_unit{
+    background-color: rgb(10, 92, 85);
+    color: rgb(167, 240, 207);
+}
 #cat-0{
-    background-color: rgb(159, 229, 173);
+    background-color: rgb(157, 227, 171);
     color: rgb(24, 109, 70);
     z-index: 5;
 }
 #cat-0 .cat_unit{
-    color: rgb(159, 229, 173);
+    color: rgb(157, 227, 171);
     background-color: rgb(24, 109, 70);
     height: 85vh;
     text-align: right;
     padding-right: 25px;
     padding-top: 40px;
-}
-#cat-0 h1{
-    float: none;
 }
 #cat-1{
     background-color: rgb(140, 200, 120);
@@ -109,9 +115,8 @@
 }
 h1{
     margin-right: 20px;
-    float: left;
-    margin-top: -15px;
-    font-family: 'Bungee Inline';
+    display: inline-block;
+    font-family: 'Bungee';
     font-size: 35pt;
 }
 .cat_unit{
@@ -195,5 +200,25 @@ button{
 }
 li{
     font-size: 1.3em;
-    line-height: 1.5em;
+    line-height: 1.4em;
+}
+#cat--1 ul :last-child{
+    padding-bottom: 20px;
+}
+#cat--1 li{
+    line-height: 1.1em;
+    font-size: 1.8em;
+}
+#cat--1 li :first-child{
+    padding-top: 10px;
+}
+#cat--1 li li{
+    line-height: 1.2em;
+    font-size: 0.8em;
+    padding-left: 30px;
+}
+#cat--1 li li li{
+    line-height: 1.3em;
+    font-size: 0.7em;
+    padding-left: 60px;
 }

@@ -31,7 +31,7 @@ function placeAction (){
             $("button").click(placeAction);
             break;
             
-        case ("list"): default:
+        case ("list"): default:     //shoppinglist & circuitlist = default
             open(getTarget());
             addContent(selectContent_createListTypeLine());
             getNextList();
@@ -61,7 +61,7 @@ function placeAction (){
 
 function createActionLine () {
     
-    if (listtype != "shoppinglist"){
+    if (listtype != "shoppinglist" && listtype != "circuitlist"){
         requestJson = {
             'action': that.getAttribute("class").split("_")[1],
             'listtype': listtype
@@ -75,7 +75,7 @@ function createActionLine () {
 function getNextList (){
     selectContent_createListTypeLine();
     createActionLine();
-    if(listtype != "shoppinglist"){
+    if(listtype != "shoppinglist" && listtype != "circuitlist"){
        requestJson.parentid = parentId;
     } else {        //Fall: Shoppinglist
        requestJson.projectid = parentId;        
@@ -93,7 +93,7 @@ function ajaxCall(){
         data: json,
         success: function (data){
             console.log("\nRESPONSE:\n", data, "\n\n");
-            if (requestJson.action == "list" || requestJson.action == "shoppinglist"){
+            if (requestJson.action == "list" || requestJson.action == "shoppinglist" || requestJson.action == "circuitlist"){
                 addContent(data)
             } else {
                 //displayResponseInMenu(data.message)

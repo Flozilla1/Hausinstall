@@ -10,7 +10,6 @@ var propertyList = {    //[AnzeigeName, programmName]
 }
 
 function createAllUnits (jsObject, createOneUnit){
-        
     var allUnits = "";
     $.each(jsObject, function(key, value) {
         $.each(value, function(key2, value2){
@@ -22,12 +21,39 @@ function createAllUnits (jsObject, createOneUnit){
     return (allUnits);
 }
 
-function createShoppingList (jsObject){
+function createCircList (jsObject){
     var circuitsArr = jsObject.circuitlist
     var html = "<div class='cat_unit'>\n";
         html += "<ul>\n";
-    circuitsArr.forEach(function(val, key){
-        console.log(val)
+        circuitsArr.forEach(function(val, key){
+            html += "<li>+—————Stromkreis #" + key + "—————+</li>"
+            html += "<li><b>Name</b>: " + val.name + "</li>\n"
+            html += "<li><b>Stärke</b>: " + val.value + "</li>\n"
+            html += "<li><b>Sicherungen</b>:\n"
+            html += "<ul>\n"
+            val.fuses.forEach(function(val2, key2){
+                html += "<li><b>Name</b>: " + val2.name + "</li>\n"
+                html += "<li><b>Stärke</b>: " + val2.value + "</li>\n"
+                html += "<li><b>Verbraucher</b>:\n"
+                html += "<ul>\n"
+                val2.devices.forEach(function(val3, key3){
+                    html += "<li><b>Name</b>: " + val3 + "</li>\n"
+                })
+                html += "</ul>\n</li>\n"
+            })
+            html += "</ul>\n</li>\n\n"
+    })
+    html += "</ul>\n";
+    html += "</div>";
+    return(html);
+}
+
+function createShoppingList (jsObject){
+    console.log(jsObject)
+    var circuitsArr = jsObject.shoppinglist
+    var html = "<div class='cat_unit'>\n";
+        html += "<ul>\n";
+        circuitsArr.forEach(function(val, key){
         html += "<li>" + val.name + " " + val.count + "x</li>\n";
     })
     html += "</ul>\n";
@@ -55,10 +81,10 @@ function createOneProject (unitNr, jsObject){
     html += "</ul>\n";
     
     html += "<button class='action_list_shopping' list_id='" + unitNr.split("-")[1] + "'>Einkaufsliste</button>\n";
+    html += "<button class='action_circlist' list_id='" + unitNr.split("-")[1] + "'>Fi</button>\n";
     html += "<button class='action_update' list_id='" + unitNr.split("-")[1] + "'>Bearbeiten</button>\n";
     html += "<button class='action_delete' list_id='" + unitNr.split("-")[1] + "'>Löschen</button>\n";
     html += "<button class='action_list_cat' list_id='" + unitNr.split("-")[1] + "'>Nächste Ebene</button>\n";
-    html += "<button class='action_list_circ' list_id='" + unitNr.split("-")[1] + "'>Fi</button>\n";
     html += "</div>";
         
     return(html);
@@ -115,33 +141,6 @@ function createOneSensor (unitNr, jsObject){
     
     html += "<button class='action_update' list_id='" + unitNr.split("-")[1] + "'>Bearbeiten</button>\n";
     html += "<button class='action_delete' list_id='" + unitNr.split("-")[1] + "'>Löschen</button>\n";
-    html += "</div>";
-    
-    return(html);
-}
-
-function createOneElectricCircle (unitNr, jsObject){
-    var html = "<div class='cat_unit shut'>\n";
-    html += "<ul>\n";
-    html += "<li><h2>" + jsObject[unitNr].title + "</h2></li>\n";
-    html += "</ul>\n";
-    
-    html += "<button class='action_update' list_id='" + unitNr.split("-")[1] + "'>Bearbeiten</button>\n";
-    html += "<button class='action_delete' list_id='" + unitNr.split("-")[1] + "'>Löschen</button>\n";
-    html += "<button class='action_list_safty' list_id='" + unitNr.split("-")[1] + "'>Nächste Ebene</button>\n";
-    html += "</div>";
-    
-    return(html);
-}
-function createOneSafty (unitNr, jsObject){
-    var html = "<div class='cat_unit shut'>\n";
-    html += "<ul>\n";
-    html += "<li><h2>" + jsObject[unitNr].title + "</h2></li>\n";
-    html += "</ul>\n";
-    
-    html += "<button class='action_update' list_id='" + unitNr.split("-")[1] + "'>Bearbeiten</button>\n";
-    html += "<button class='action_delete' list_id='" + unitNr.split("-")[1] + "'>Löschen</button>\n";
-    html += "<button class='action_list_safty' list_id='" + unitNr.split("-")[1] + "'>Inhalt</button>\n";
     html += "</div>";
     
     return(html);

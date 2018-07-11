@@ -3,7 +3,7 @@ var target = "#cat-1";
 
 $(document).ready(function(){
     ajaxCall()
-    
+
     $(".shut").click(tell);
 });
 
@@ -26,6 +26,10 @@ function selectContent_createListTypeLine (){
     var createOneUnit;
     var jsObject;
     switch (target){
+        case "#cat--1":
+            createOneUnit = createCircList;
+            listtype = "circuitlist"
+            break;
         case "#cat-0":
             createOneUnit = createOneShoppingList;
             listtype = "shoppinglist"
@@ -57,10 +61,14 @@ function selectContent_createListTypeLine (){
 function addContent (jsObject) {
     
     var createOneUnit = selectContent_createListTypeLine();
-    if(jsObject.circuitlist == undefined){
+    if(jsObject.shoppinglist == undefined && jsObject.circuitlist == undefined){
         var finishedHtml = createAllUnits(jsObject, createOneUnit);
     } else {
-        var finishedHtml = createShoppingList(jsObject)
+        if(jsObject.shoppinglist == undefined){
+            var finishedHtml = createCircList(jsObject)
+        } else {
+            var finishedHtml = createShoppingList(jsObject)
+        }
     }
     var targetContentArea = target + " .cat_content";
 
@@ -89,14 +97,13 @@ function getCurrFold (){
 }
 function directionAndNextType (btnType, currFoldNr){
     var nextType;
-    
     switch (btnType){
         case "action_list_cat":
             ++currFoldNr;
             nextType = "#cat";
             break;
-         case "action_list_circ":
-            --currFoldNr;
+         case "action_circlist":
+            currFoldNr = currFoldNr - 2;
             nextType = "#cat";
             break;
         case "action_list_shopping":
