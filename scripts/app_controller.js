@@ -18,8 +18,9 @@ function open (nextType) {
     
     $(".chosen_path").addClass("rejectet_path").removeClass("chosen_path");
     $(nextType).addClass("chosen_path").removeClass("rejectet_path");
-
-    addContent(selectContent_createListTypeLine);
+    
+    addBreadcrum()
+    addContent(selectContent_createListTypeLine)
 }
 function selectContent_createListTypeLine (){
         
@@ -106,7 +107,7 @@ function directionAndNextType (btnType, currFoldNr){
             currFoldNr = currFoldNr - 2;
             nextType = "#cat";
             break;
-        case "action_list_shopping":
+        case "action_shopping":
             --currFoldNr;
             nextType = "#cat";
             break;

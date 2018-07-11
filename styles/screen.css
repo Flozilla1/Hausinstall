@@ -20,7 +20,8 @@
     box-shadow: 10px 0px 35px rgba(0,0,0,0.3);
 }
 .all_cats{
-    height: 100vh;
+    height: 94vh;
+    top: 6vh;
 }
 /* z-index musst folgend angepasst werden, wenn ein Folder dazu kommt */
 #cat--1{
@@ -48,7 +49,6 @@
 #cat-1{
     background-color: rgb(140, 200, 120);
     color: rgb(24, 109, 70);
-    height: 100vh;
     z-index: 4;
 }
 #cat-1 .cat_unit{
@@ -221,4 +221,23 @@ li{
     line-height: 1.3em;
     font-size: 0.7em;
     padding-left: 60px;
+}
+
+#breadcrums{
+    position: fixed;
+    width: 100vw;
+    height: 6vh;
+    background: linear-gradient(to right, rgb(167, 240, 207), rgb(220, 80, 40));
+    z-index: 100;
+    overflow: scroll;
+    border-bottom: solid 3px black;
+    box-shadow: 0px 3px 35px rgba(0,0,0,0.3);    
+    
+    padding-top: 5px;
+    padding-left: 20px;
+}
+#breadcrums span{
+    font-family: 'Bungee';
+    font-size: 2em;
+    cursor: pointer;
 }

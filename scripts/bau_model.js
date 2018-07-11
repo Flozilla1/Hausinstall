@@ -73,14 +73,14 @@ function createOneShoppingList (unitNr, jsObject){
 }
 
 function createOneProject (unitNr, jsObject){
-    var html = "<div class='cat_unit shut'>\n";
+    var html = "<div class='cat_unit shut' name='" + jsObject[unitNr].title + "'>\n";
     html += "<ul>\n";
     html += "<li><h2>" + jsObject[unitNr].title + "</h2></li>\n";
     html += "<li><span>Baumeister: </span><span>" + jsObject[unitNr].specification.baumeister + "</span></li>\n";
     html += "<li><span>Kapital: </span><span>" + jsObject[unitNr].specification.kapital + " €</span></li>\n";
     html += "</ul>\n";
     
-    html += "<button class='action_list_shopping' list_id='" + unitNr.split("-")[1] + "'>Einkaufsliste</button>\n";
+    html += "<button class='action_shopping' list_id='" + unitNr.split("-")[1] + "'>Einkaufsliste</button>\n";
     html += "<button class='action_circlist' list_id='" + unitNr.split("-")[1] + "'>Fi</button>\n";
     html += "<button class='action_update' list_id='" + unitNr.split("-")[1] + "'>Bearbeiten</button>\n";
     html += "<button class='action_delete' list_id='" + unitNr.split("-")[1] + "'>Löschen</button>\n";
@@ -91,7 +91,7 @@ function createOneProject (unitNr, jsObject){
 }
 
 function createOneFloor (unitNr, jsObject){
-    var html = "<div class='cat_unit shut'>\n";
+    var html = "<div class='cat_unit shut' name='" + jsObject[unitNr].title + "'>\n";
     html += "<ul>\n";
     html += "<li><h2>" + jsObject[unitNr].title + "</h2></li>\n";
     html += "<li><span>Ebene: </span><span>" + jsObject[unitNr].specification.countFromBasement + "</span></li>\n";
@@ -105,7 +105,7 @@ function createOneFloor (unitNr, jsObject){
     return(html);
 }
 function createOneRoom (unitNr, jsObject){
-    var html = "<div class='cat_unit shut'>\n";
+    var html = "<div class='cat_unit shut' name='" + jsObject[unitNr].title + "'>\n";
     html += "<ul>\n";
     html += "<li><h2>" + jsObject[unitNr].title + "</h2></li>\n";
     html += "<li><span>Fläche: </span><span>" + jsObject[unitNr].specification.Fläche + "</span></li>\n";
@@ -119,7 +119,7 @@ function createOneRoom (unitNr, jsObject){
     return(html);
 }
 function createOneDevice (unitNr, jsObject){
-    var html = "<div class='cat_unit shut'>\n";
+    var html = "<div class='cat_unit shut' name='" + jsObject[unitNr].title + "'>\n";
     html += "<ul>\n";
     html += "<li><h2>" + jsObject[unitNr].title + "</h2></li>\n";
     html += "<li><span>Sicherung: </span><span>" + jsObject[unitNr].specification.Sicherung + "</span></li>\n";
@@ -134,7 +134,7 @@ function createOneDevice (unitNr, jsObject){
     return(html);
 }
 function createOneSensor (unitNr, jsObject){
-    var html = "<div class='cat_unit shut'>\n";
+    var html = "<div class='cat_unit shut' name='" + jsObject[unitNr].title + "'>\n";
     html += "<ul>\n";
     html += "<li><h2>" + jsObject[unitNr].title + "</h2></li>\n";
     html += "</ul>\n";
