@@ -32,7 +32,7 @@ class CircuitListModel {
             //Alle fuses zum konkreten fi
             $sql= "
                 SELECT fu.name, fu.current, fu.id
-                FROM fis fi, fuses fu
+                FROM fuses fu
                 WHERE  fu.fis_id = {$this->fi}
                 ;" ;
 
@@ -44,6 +44,7 @@ class CircuitListModel {
                 $this->list[$fiIndex]['fuses'][$fuIndex]['value'] = $content1['current'];
 //                $fuIndex++;
                 $this->fuse = $content1['id'];
+                $this->list[$fiIndex]['fuses'][$fuIndex]['fuseid'] = $this->fuse;
                 
                 //Devices zur konkreten Sicherung
                 
