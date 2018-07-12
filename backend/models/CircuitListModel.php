@@ -47,10 +47,22 @@ class CircuitListModel {
                 $this->list[$fiIndex]['fuses'][$fuIndex]['fuseid'] = $this->fuse;
                 
                 //Devices zur konkreten Sicherung
+                $sql= "
+                    SELECT name
+                    FROM devices
+                    WHERE  fuseid = {$this->fuse}
+                    ;" ;
+                $dvData = $this->getListFromDatabase($sql);
                 
-                //DUMMYDATA
-                $this->list[$fiIndex]['fuses'][$fuIndex]['devices'][0] = "Dummydevice 1";
-                $this->list[$fiIndex]['fuses'][$fuIndex]['devices'][1] = "Dummydevice 2";
+                $dvIndex = 0;
+                foreach($dvData as $content2){
+                    $this->list[$fiIndex]['fuses'][$fuIndex]['devices'][$dvIndex] = $content2['name'];
+                    $dvIndex++;
+                }
+                
+                //DUMMYDATA ..zum testen wenn nix echtes da ist
+                $this->list[$fiIndex]['fuses'][$fuIndex]['devices'][$dvIndex] = "Dummydevice 1";
+                $this->list[$fiIndex]['fuses'][$fuIndex]['devices'][$dvIndex+1] = "Dummydevice 2";
 
 
                 $fuIndex++;                
