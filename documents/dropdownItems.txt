@@ -1,0 +1,41 @@
+DEVICES:
+Steckdose 230V Unterputz
+Steckdose 230V Aufputz
+Steckdose 400V
+Glühbirnenfassung E24
+LED Balken
+FeuchtraumLeuchte
+Untertisch-speicher
+E-Herd
+Waschmaschine
+Geschirrspüler
+Markise
+Torantrieb
+Sprinkleranlage
+...u.s.w
+
+SENSORS:
+Schalter Unterputz
+Schalter Aufputz
+Schalter Feuchtraum
+Windsensor
+Feuchtesensor
+...u.s.w.
+
+FI:
+1ph 30mA
+1ph 100mA
+1ph 300mA
+3ph 100mA
+3ph 400mA
+
+SICHERUNGEN:
+1ph 4A
+1ph+N 10A
+1ph+N 12A
+1ph+N 16A
+3ph+N 16A
+3ph+N 20A
+
+
+
