@@ -33,8 +33,8 @@ function placeAction (){
             
         case ("list"): default:     //shoppinglist & circuitlist = default
             open(getTarget());
-            addContent(selectContent_createListTypeLine());
             getNextList();
+            ajaxCall()
             break;
             
         case ("submit"):    //"Do It!"-Buttons
@@ -73,19 +73,18 @@ function createActionLine () {
     }
 }
 function getNextList (){
-    selectContent_createListTypeLine();
+    setListType();
     createActionLine();
     if(listtype != "shoppinglist" && listtype != "circuitlist"){
        requestJson.parentid = parentId;
     } else {        //Fall: Shoppinglist
        requestJson.projectid = parentId;        
     }
-    ajaxCall();
 }
 
 function ajaxCall(){
     var json = {data: JSON.stringify(requestJson)}
-    console.log("o———————————————————————o\nREQUEST:\n", requestJson);
+    console.log("—————————————————————\nREQUEST:\n", requestJson);
     
     $.ajax({
         url: "backend/index.php",

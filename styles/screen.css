@@ -23,74 +23,6 @@
     height: 94vh;
     top: 6vh;
 }
-/* z-index musst folgend angepasst werden, wenn ein Folder dazu kommt */
-#cat--1{
-    background-color: rgb(167, 240, 207);
-    color: rgb(10, 92, 85);
-    z-index: 6;
-}
-#cat--1 .cat_unit{
-    background-color: rgb(10, 92, 85);
-    color: rgb(167, 240, 207);
-}
-#cat-0{
-    background-color: rgb(157, 227, 171);
-    color: rgb(24, 109, 70);
-    z-index: 5;
-}
-#cat-0 .cat_unit{
-    color: rgb(157, 227, 171);
-    background-color: rgb(24, 109, 70);
-    height: 85vh;
-    text-align: right;
-    padding-right: 25px;
-    padding-top: 40px;
-}
-#cat-1{
-    background-color: rgb(140, 200, 120);
-    color: rgb(24, 109, 70);
-    z-index: 4;
-}
-#cat-1 .cat_unit{
-    background-color: rgb(24, 109, 70);
-    color: rgb(140, 200, 120);
-}
-#cat-2{
-    background-color: rgb(160, 170, 100);
-    color: rgb(60, 90, 50);
-    z-index: 3;
-}
-#cat-2 .cat_unit{
-    background-color: rgb(60, 90, 50);
-    color: rgb(160, 170, 100);
-
-}
-#cat-3{
-    background-color: rgb(180, 140, 80);
-    color: rgb(80, 61, 31);
-    z-index: 2;
-}
-#cat-3 .cat_unit{
-    background-color: rgb(80, 61, 31);
-    color:  rgb(180, 140, 80);
-}
-#cat-4{
-    background-color: rgb(200, 110, 60);
-    color: rgb(100, 30, 10);
-    z-index: 1;
-}
-#cat-4 .cat_unit{
-    background-color: rgb(100, 30, 10);
-    color: rgb(200, 110, 60);
-}
-#cat-5{
-    background-color: rgb(220, 80, 40);
-    color: rgb(120, 0, 0);
-}
-#cat-5 .cat_unit{
-    background-color: rgb(120, 0, 0);
-    color: rgb(220, 80, 40);
-}
 .action_new{
     background-color: #63ff63;
 }
@@ -111,6 +43,9 @@
     margin-top: 20px;
 }
 .closed .cat_content{
+    display: none;
+}
+.closed ::-webkit-scrollbar{
     display: none;
 }
 h1{
@@ -196,7 +131,7 @@ button{
     transform: rotate(90deg);
     transform-origin: 0% top;
     margin-left: 53px;
-    margin-top: 20px;
+    margin-top: 27px;
 }
 li{
     font-size: 1.3em;
@@ -226,12 +161,9 @@ li{
 #breadcrums{
     position: fixed;
     width: 100vw;
-    height: 6vh;
-    background: linear-gradient(to right, rgb(167, 240, 207), rgb(220, 80, 40));
+    height: 6.5vh;
     z-index: 100;
     overflow: scroll;
-    border-bottom: solid 3px black;
-    box-shadow: 0px 3px 35px rgba(0,0,0,0.3);    
     
     padding-top: 5px;
     padding-left: 20px;

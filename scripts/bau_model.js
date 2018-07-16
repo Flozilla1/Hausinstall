@@ -1,26 +1,48 @@
 var parentId = 1;
-var propertyList = {    //[AnzeigeName, programmName]
-    'projects': [["Baumeister", "baumeister"], ["Kapital", "kapital"]],
-    'floors': [["Ebene Nr", "countFromBasement"]],
-    'rooms': [["Fläche", "flaeche"]],
-    'devices': [["Sicherungs-Id", "fuseid"]],
-    'sensors': [["", "unit"], ["", "value"]],
-    'fis': [["", "current"]],
-    'fuses': [["", "current"]]
+var propertyList = {    
+    //listtyp: [btn>[[programmName, Anzeigename]], Atribute>[[AnzeigeName, programmName]]]
+    'projects': [[["action_shopping", "Einkaufsliste"], ["action_circlist", "Stromkreise"], ["action_update", "Bearbeiten"], ["action_delete", "Löschen"], ["action_list_cat", "Ebenen >"]],
+                 [["Baumeister", "baumeister"], ["Kapital", "kapital"]]],
+    'floors': [[["action_update", "Bearbeiten"], ["action_delete", "Löschen"], ["action_list_cat", "Räume >"]],
+               [["Ebene Nr", "countFromBasement"]]],
+    'rooms': [[["action_update", "Bearbeiten"], ["action_delete", "Löschen"], ["action_list_cat", "Verbraucher >"]],
+              [["Fläche", "flaeche"]]],
+    'devices': [[["action_update", "Bearbeiten"], ["action_delete", "Löschen"], ["action_list_cat", "Sensoren >"]],
+                [["Sicherungs-Id", "fuseid"]]],
+    'sensors': [[["action_update", "Bearbeiten"], ["action_delete", "Löschen"]],
+                [["", "unit"], ["", "value"]]],
+    'fis': [[""], [""], [""]],
+    'fuses': [[""], [""], [""]]
 }
 
-function createAllUnits (jsObject, createOneUnit){
+function createAllUnits (jsObject){
     var allUnits = "";
     $.each(jsObject, function(key, value) {
         $.each(value, function(key2, value2){
             if (value2.parent_id == parentId || value2.parent_id == undefined){    //Es werden alle Rückgabewerte angezeigt, die keine parent_id haben (sollte vielleicht noch verbessert werden)
-                allUnits += createOneUnit (key2, value);
+                allUnits += addUnit(key2, value)
             }
         })
     });
     return (allUnits);
 }
 
+//List-btn muss an letzter Stelle bleiben (last child) —> app_controller
+function addUnit (unitNr, jsObject){
+    var html = "<div class='cat_unit shut' name='" + jsObject[unitNr].title + "'>\n";
+    html += "<ul>\n";
+    html += "<li><h2>" + jsObject[unitNr].title + "</h2></li>\n";
+    propertyList[listtype][1].forEach(function(val, key){
+        html += "<li><span>" + val[0] + ": </span><span>" + jsObject[unitNr].specification[val[1]] + "</span></li>\n";
+    })
+    html += "</ul>\n";
+    propertyList[listtype][0].forEach(function(val, key){
+        html += "<button class='" + val[0] + "' list_id='" + unitNr.split("-")[1] + "'>" + val[1] + "</button>\n";
+    })
+    html += "</div>"
+    
+    return html
+}
 function createCircList (jsObject){
     var circuitsArr = jsObject.circuitlist
     var html = "<div class='cat_unit'>\n";
@@ -49,7 +71,6 @@ function createCircList (jsObject){
 }
 
 function createShoppingList (jsObject){
-    console.log(jsObject)
     var circuitsArr = jsObject.shoppinglist
     var html = "<div class='cat_unit'>\n";
         html += "<ul>\n";
@@ -62,90 +83,6 @@ function createShoppingList (jsObject){
 }
 //buttons dürfen nur eine Klasse haben, sonst muss man auch app_controller anpassen (spit(" ")[1])
 //buttons: Klassen: Syntax muss action_list/create/update/delete_optional sein
-function createOneShoppingList (unitNr, jsObject){
-    var html = "<div class='cat_unit shut'>\n";
-    html += "<ul>\n";
-    html += "<li><h2>" + jsObject[unitNr].titel + "</h2></li>\n";
-    html += "<li><span>Preis: </span><span>" + jsObject[unitNr].specification.preis + "</span></li>\n";
-    html += "</ul>\n";
-    html += "</div>";
-    return(html);
-}
-
-function createOneProject (unitNr, jsObject){
-    var html = "<div class='cat_unit shut' name='" + jsObject[unitNr].title + "'>\n";
-    html += "<ul>\n";
-    html += "<li><h2>" + jsObject[unitNr].title + "</h2></li>\n";
-    html += "<li><span>Baumeister: </span><span>" + jsObject[unitNr].specification.baumeister + "</span></li>\n";
-    html += "<li><span>Kapital: </span><span>" + jsObject[unitNr].specification.kapital + " €</span></li>\n";
-    html += "</ul>\n";
-    
-    html += "<button class='action_shopping' list_id='" + unitNr.split("-")[1] + "'>Einkaufsliste</button>\n";
-    html += "<button class='action_circlist' list_id='" + unitNr.split("-")[1] + "'>Fi</button>\n";
-    html += "<button class='action_update' list_id='" + unitNr.split("-")[1] + "'>Bearbeiten</button>\n";
-    html += "<button class='action_delete' list_id='" + unitNr.split("-")[1] + "'>Löschen</button>\n";
-    html += "<button class='action_list_cat' list_id='" + unitNr.split("-")[1] + "'>Nächste Ebene</button>\n";
-    html += "</div>";
-        
-    return(html);
-}
-
-function createOneFloor (unitNr, jsObject){
-    var html = "<div class='cat_unit shut' name='" + jsObject[unitNr].title + "'>\n";
-    html += "<ul>\n";
-    html += "<li><h2>" + jsObject[unitNr].title + "</h2></li>\n";
-    html += "<li><span>Ebene: </span><span>" + jsObject[unitNr].specification.countFromBasement + "</span></li>\n";
-    html += "</ul>\n";
-    
-    html += "<button class='action_update' list_id='" + unitNr.split("-")[1] + "'>Bearbeiten</button>\n";
-    html += "<button class='action_delete' list_id='" + unitNr.split("-")[1] + "'>Löschen</button>\n";
-    html += "<button class='action_list_cat' list_id='" + unitNr.split("-")[1] + "'>Nächste Ebene</button>\n";
-    html += "</div>";
-    
-    return(html);
-}
-function createOneRoom (unitNr, jsObject){
-    var html = "<div class='cat_unit shut' name='" + jsObject[unitNr].title + "'>\n";
-    html += "<ul>\n";
-    html += "<li><h2>" + jsObject[unitNr].title + "</h2></li>\n";
-    html += "<li><span>Fläche: </span><span>" + jsObject[unitNr].specification.Fläche + "</span></li>\n";
-    html += "</ul>\n";
-    
-    html += "<button class='action_update' list_id='" + unitNr.split("-")[1] + "'>Bearbeiten</button>\n";
-    html += "<button class='action_delete' list_id='" + unitNr.split("-")[1] + "'>Löschen</button>\n";
-    html += "<button class='action_list_cat' list_id='" + unitNr.split("-")[1] + "'>Nächste Ebene</button>\n";
-    html += "</div>";
-    
-    return(html);
-}
-function createOneDevice (unitNr, jsObject){
-    var html = "<div class='cat_unit shut' name='" + jsObject[unitNr].title + "'>\n";
-    html += "<ul>\n";
-    html += "<li><h2>" + jsObject[unitNr].title + "</h2></li>\n";
-    html += "<li><span>Sicherung: </span><span>" + jsObject[unitNr].specification.Sicherung + "</span></li>\n";
-    html += "</ul>\n";
-    
-    html += "<button class='action_update' list_id='" + unitNr.split("-")[1] + "'>Bearbeiten</button>\n";
-    html += "<button class='action_delete' list_id='" + unitNr.split("-")[1] + "'>Löschen</button>\n";
-//    html += "<button class='action_list_safty' list_id='" + unitNr.split("-")[1] + "'>Sicherungen</button>\n";    
-    html += "<button class='action_list_cat' list_id='" + unitNr.split("-")[1] + "'>Nächste Ebene</button>\n";
-    html += "</div>";
-    
-    return(html);
-}
-function createOneSensor (unitNr, jsObject){
-    var html = "<div class='cat_unit shut' name='" + jsObject[unitNr].title + "'>\n";
-    html += "<ul>\n";
-    html += "<li><h2>" + jsObject[unitNr].title + "</h2></li>\n";
-    html += "</ul>\n";
-    
-    html += "<button class='action_update' list_id='" + unitNr.split("-")[1] + "'>Bearbeiten</button>\n";
-    html += "<button class='action_delete' list_id='" + unitNr.split("-")[1] + "'>Löschen</button>\n";
-    html += "</div>";
-    
-    return(html);
-}
-
 function addDeleteMenu (){
     var html = "";
     html += "<div class='menu menu_delete ask'>"
@@ -177,7 +114,7 @@ function addNewMenu (){
 }
 function addInputFields (){
     var html = "<div>Titel:<input id='val_1' placeholder='name'></div>"
-    propertyList[listtype].forEach(function(val, key){
+    propertyList[listtype][1].forEach(function(val, key){
         html += "<div>" + val[0] + ":<input  id='val_" + (key + 2) + "' placeholder='" + val[1] + "'></div>"
     })
     return html

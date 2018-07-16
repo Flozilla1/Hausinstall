@@ -1,69 +1,61 @@
 var that;
 var target = "#cat-1";
+var openedUnit
 
 $(document).ready(function(){
+    colorize()
     ajaxCall()
-
-    $(".shut").click(tell);
+    
+    document.addEventListener("keypress", function (pressed){
+        keyboardCtrl(pressed)
+    })
 });
 
 function tell () {
-    $(".cat_unit").addClass("shut");
-    $(this).removeClass("shut");
+    $(".cat_unit").addClass("shut").removeClass("telling")
+    $(this).removeClass("shut").addClass("telling")
+    openedUnit = this
 }
 
 function open (nextType) {
     $(".all_fold-ups").removeClass("open").addClass("closed");
     $(target).addClass("open").removeClass("closed");
     
-    $(".chosen_path").addClass("rejectet_path").removeClass("chosen_path");
-    $(nextType).addClass("chosen_path").removeClass("rejectet_path");
-    
+    //$(".chosen_path").addClass("rejectet_path").removeClass("chosen_path");
+    //$(nextType).addClass("chosen_path").removeClass("rejectet_path");
+
     addBreadcrum()
-    addContent(selectContent_createListTypeLine)
 }
-function selectContent_createListTypeLine (){
-        
-    var createOneUnit;
-    var jsObject;
+function setListType (){
     switch (target){
         case "#cat--1":
-            createOneUnit = createCircList;
             listtype = "circuitlist"
             break;
         case "#cat-0":
-            createOneUnit = createOneShoppingList;
             listtype = "shoppinglist"
             break;
         case "#cat-1":
-            createOneUnit = createOneProject;
             listtype = "projects"
             break;
         case "#cat-2":
-            createOneUnit = createOneFloor;
             listtype = "floors"
             break;
         case "#cat-3":
-            createOneUnit = createOneRoom;
             listtype = "rooms"
             break;
         case "#cat-4":
-            createOneUnit = createOneDevice;
             listtype = "devices"
             break;
         case "#cat-5":
-            createOneUnit = createOneSensor;
             listtype = "sensors"
             break;
     }
-    return (createOneUnit);
 }
 
 function addContent (jsObject) {
-    
-    var createOneUnit = selectContent_createListTypeLine();
+    var createOneUnit = setListType();
     if(jsObject.shoppinglist == undefined && jsObject.circuitlist == undefined){
-        var finishedHtml = createAllUnits(jsObject, createOneUnit);
+        var finishedHtml = createAllUnits(jsObject);
     } else {
         if(jsObject.shoppinglist == undefined){
             var finishedHtml = createCircList(jsObject)
@@ -72,10 +64,15 @@ function addContent (jsObject) {
         }
     }
     var targetContentArea = target + " .cat_content";
-
     $(targetContentArea)[0].innerHTML += finishedHtml;
     $(".shut").click(tell);
     $("button").click(placeAction);
+}
+function removeContent (which){
+    var those = "#cat-" + which + " .cat_unit"
+    $(those).each(function (key, val){
+        $(val).remove()
+    })
 }
 function getTarget (){
     
