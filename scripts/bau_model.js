@@ -1,20 +1,3 @@
-var parentId = 1;
-var propertyList = {    
-    //listtyp: [btn>[[programmName, Anzeigename]], Atribute>[[AnzeigeName, programmName]]]
-    'projects': [[["action_shopping", "Einkaufsliste"], ["action_circlist", "Stromkreise"], ["action_update", "Bearbeiten"], ["action_delete", "Löschen"], ["action_list_cat", "Ebenen >"]],
-                 [["Baumeister", "baumeister"], ["Kapital", "kapital"]]],
-    'floors': [[["action_update", "Bearbeiten"], ["action_delete", "Löschen"], ["action_list_cat", "Räume >"]],
-               [["Ebene Nr", "countFromBasement"]]],
-    'rooms': [[["action_update", "Bearbeiten"], ["action_delete", "Löschen"], ["action_list_cat", "Verbraucher >"]],
-              [["Fläche", "flaeche"]]],
-    'devices': [[["action_update", "Bearbeiten"], ["action_delete", "Löschen"], ["action_list_cat", "Sensoren >"]],
-                [["Sicherungs-Id", "fuseid"]]],
-    'sensors': [[["action_update", "Bearbeiten"], ["action_delete", "Löschen"]],
-                [["", "unit"], ["", "value"]]],
-    'fis': [[""], [""], [""]],
-    'fuses': [[""], [""], [""]]
-}
-
 function createAllUnits (jsObject){
     var allUnits = "";
     $.each(jsObject, function(key, value) {
@@ -29,16 +12,35 @@ function createAllUnits (jsObject){
 
 //List-btn muss an letzter Stelle bleiben (last child) —> app_controller
 function addUnit (unitNr, jsObject){
-    var html = "<div class='cat_unit shut' name='" + jsObject[unitNr].title + "'>\n";
-    html += "<ul>\n";
-    html += "<li><h2>" + jsObject[unitNr].title + "</h2></li>\n";
+    var html = "<div class='cat_unit shut' name='" + jsObject[unitNr].title + "'>\n"
+    html += "<ul>\n"
+    html += "<li><h2 class='name'>" + jsObject[unitNr].title + "</h2>"
+    html += "<span>\n"
+    if (propertyList[listtype][2] != undefined){
+        propertyList[listtype][2].forEach(function(val, key){
+            html += "<button class='" + val[0] + "' list_id='" + unitNr.split("-")[1] + "'>" + val[1] + "</button>"
+        })
+    }
+    html += "\n</span></li>\n"
     propertyList[listtype][1].forEach(function(val, key){
-        html += "<li><span>" + val[0] + ": </span><span>" + jsObject[unitNr].specification[val[1]] + "</span></li>\n";
+        html += "<li><span>" + val[0] + ": </span><span class='" + val[1] + "'>" + jsObject[unitNr].specification[val[1]] + "</span></li>\n"
     })
-    html += "</ul>\n";
+    html += "</ul>\n"
     propertyList[listtype][0].forEach(function(val, key){
-        html += "<button class='" + val[0] + "' list_id='" + unitNr.split("-")[1] + "'>" + val[1] + "</button>\n";
+        html += "<button class='" + val[0] + "' list_id='" + unitNr.split("-")[1] + "'>" + val[1] + "</button>\n"
     })
+    html += "</div>"
+    
+    return html
+}
+function addEmtyUnit (){
+    var html = "<div class='cat_unit telling' id='unfinished_unit' name=''>\n"
+    html += "<ul>\n"
+    html += "<li><h2 class='name'>Name</h2>"
+    propertyList[listtype][1].forEach(function(val, key){
+        html += "<li><span>" + val[0] + ": </span><span class='" + val[1] + "'>" + val[0] + "</span></li>\n"
+    })
+    html += "</ul>\n"
     html += "</div>"
     
     return html
@@ -83,42 +85,45 @@ function createShoppingList (jsObject){
 }
 //buttons dürfen nur eine Klasse haben, sonst muss man auch app_controller anpassen (spit(" ")[1])
 //buttons: Klassen: Syntax muss action_list/create/update/delete_optional sein
-function addDeleteMenu (){
-    var html = "";
-    html += "<div class='menu menu_delete ask'>"
-    html += "<div class='titel'><b>Wirklich Löschen?</b></div>"
-    html += "<button class='action_delete_submit'>Do it!</button>"
+function addMenu (type){
+    var html = ""
+    html += "<div class='menu menu_" + type + " ask'>"
+    html += "<div class='titel'><b>" + menuHelpList[type][0] + "</b></div>"
+    if (menuHelpList[type][1] == "fkt-yes"){
+    html += addInputFields()        
+    }
+    html += "<button class='action_" + menuHelpList[type][2] + "_submit'>Do it!</button>"
     html += "</div>"
     
-    return (html);
-}
-function addUpdateMenu (){
-    var html = "";
-    html += "<div class='menu menu_update ask'>"
-    html += "<div class='titel'><b>Neue Werte:</b></div>"
-    html += addInputFields()
-    html += "<button class='action_update_submit'>Do it!</button>"
-    html += "</div>"
-    
-    return (html);
-}
-function addNewMenu (){
-    var html = "";
-    html += "<div class='menu menu_new ask'>"
-    html += "<div class='titel'><b>Neue Werte:</b></div>"
-    html += addInputFields()
-    html += "<button class='action_create_submit'>Do it!</button>"
-    html += "</div>"
-    
-    return (html);
+    return (html)
 }
 function addInputFields (){
-    var html = "<div>Titel:<input id='val_1' placeholder='name'></div>"
-    propertyList[listtype][1].forEach(function(val, key){
-        html += "<div>" + val[0] + ":<input  id='val_" + (key + 2) + "' placeholder='" + val[1] + "'></div>"
+    var html = "<div>Titel: <input id='val_1' placeholder='name' maxlength='20'></div>"
+    propertyList[listtype][1].forEach(function (val, key){
+        html += "<div>" + val[0] + ": <input  id='val_" + (key + 2) + "' placeholder='" + val[1] + "' maxlength='20'></div>"
     })
+    if (selectOptionList[listtype] != undefined){
+        html += "<div>Typ: <select>"
+        selectOptionList[listtype].forEach(function (val, key){
+            html += "<option value='" + val + "'>" + val + "</option>"
+        })
+        html += "</select></div>"
+    }
     return html
 }
 function displayResponseInMenu (response){
     $(".menu")[0].innerHTML += "<div class='responseMessage'>" + response + "</div>";
+}
+function removeMenu (){
+    $(".menu")[0].style.height = "0px"
+    $(".menu")[0].style.marginTop = "0px"
+    setTimeout(function (){
+        $(".menu").remove()                    
+    }, 1000)
+}
+function removeUnit (toRemove){
+    toRemove.style.opacity = "0"
+    setTimeout(function (){
+        toRemove.remove()                        
+    }, 300)
 }

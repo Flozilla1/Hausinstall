@@ -5,21 +5,23 @@
         <meta name="viewport" content="width=device-width,initial-scale=1">
         <title>Hausinstallation</title>
         <link rel="stylesheet" href="styles/screen.css">
-        <script src="scripts/__.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>    
         <script src="scripts/jquery-3.3.1.min.js"></script>
+        <script src="scripts/global-vars.js"></script>
         <script src="scripts/app_controller.js"></script>
         <script src="scripts/bau_model.js"></script>
         <script src="scripts/create_caller_model.js"></script>
         <script src="scripts/nav_model.js"></script>
         <script src="scripts/css_helper.js"></script>
+        <script src="scripts/input_ux.js"></script>
+        <script src="scripts/buttons_fkt.js"></script>
     </head>
     
     <body>
-        <div id="breadcrums"><span>Willkommen!</span></div>
+        <div id="breadcrums"><div>Willkommen!</div></div>
         
         <div class="all_fold-ups all_cats closed" id="cat--1">
-            <h1 class="closed_cat_titel">Stromkreise</h1>
+            <h1 class="closed_cat_title">Stromkreise</h1>
             <div class="cat_content">
                 
                 <div class="cat_title">
@@ -30,7 +32,7 @@
         </div>
         
         <div class="all_fold-ups all_cats closed" id="cat-0">
-            <h1 class="closed_cat_titel">Einkaufsliste</h1>
+            <h1 class="closed_cat_title">Einkaufsliste</h1>
             <div class="cat_content">
                 
                 <div class="cat_title">
@@ -41,10 +43,10 @@
         </div>
         
         <div class="all_fold-ups all_cats open" id="cat-1">
-                <h1 class="closed_cat_titel">Projekte</h1>
+                <h1 class="closed_cat_title">Projekte</h1>
                 <div class="cat_content">
                     
-                    <div class="cat_titel">
+                    <div class="cat_title">
                         <h1>Projekte</h1>
                         <button type="button" class="action_new">Neu</button>
                     </div>
@@ -52,11 +54,12 @@
                 </div>
             </div>
         
+        <div class="chosen_path cat_path">
             <div class="all_fold-ups all_cats closed" id="cat-2">
-                <h1 class="closed_cat_titel">Ebenen</h1>
+                <h1 class="closed_cat_title">Ebenen</h1>
                 <div class="cat_content">
                     
-                    <div class="cat_titel">
+                    <div class="cat_title">
                         <h1>Ebenen</h1>
                         <button type="button" class="action_new">Neu</button>
                     </div>
@@ -65,10 +68,10 @@
                 </div>
             
             <div class="all_fold-ups all_cats closed" id="cat-3">
-                <h1 class="closed_cat_titel">Raeume</h1>
+                <h1 class="closed_cat_title">Raeume</h1>
                 <div class="cat_content">
                     
-                    <div class="row cat_titel">
+                    <div class="cat_title">
                         <h1>Räume</h1>
                         <button type="button" class="action_new">Neu</button>
                     </div>
@@ -77,10 +80,10 @@
                 </div>
             
             <div class="all_fold-ups all_cats closed" id="cat-4">
-                <h1 class="closed_cat_titel">Verbraucher</h1>
+                <h1 class="closed_cat_title">Verbraucher</h1>
                 <div class="cat_content">
                     
-                    <div class="row cat_titel">
+                    <div class="cat_title">
                         <h1>Verbraucher</h1>
                         <button type="button" class="action_new">Neu</button>
                     </div>
@@ -89,16 +92,78 @@
                 </div>
             
             <div class="all_fold-ups all_cats closed" id="cat-5">
-                <h1 class="closed_cat_titel">Sensoren</h1>
+                <h1 class="closed_cat_title">Sensoren</h1>
                 <div class="cat_content">
                     
-                    <div class="cat_titel">
+                    <div class="cat_title">
                     <h1>Sensoren</h1>
                     <button type="button" class="action_new">Neu</button>
                     
                     </div>    
                 </div>
             </div>
+        </div>
+
+        <div class="rejected_path fis_path">
+            <div class="all_fold-ups all_fis closed" id="fis-2">
+                <h1 class="closed_cat_title">FIs</h1>
+                <div class="cat_content">
+                    
+                    <div class="cat_title">
+                    <h1>FIs</h1>
+                    <button type="button" class="action_new">Neu</button>
+                    
+                    </div>
+                </div>
+            </div>
+            
+            <div class="all_fold-ups all_fis closed" id="fis-3">
+                <h1 class="closed_cat_title">Sicherungen</h1>
+                <div class="cat_content">
+                    
+                    <div class="cat_title">
+                    <h1>Sicherungen</h1>
+                    <button type="button" class="action_new">Neu</button>
+                    
+                    </div>
+                </div>
+            </div>        
+        </div>
         
+        <div class="background">
+            Nimm das!<br><br>
+            
+            <div class="keyboard-style">^</div><br>
+            <div class="keyboard-style">&lt;</div>
+            <div class="keyboard-style">v</div>
+            <div class="keyboard-style">&gt;</div>
+            <div class="legend">
+                <span>v = Auswahl abwärts</span><br>
+                <span>^ = Auswahl aufwärts</span><br>
+                <span>&gt; = Tiefer in <br> ausgewählte Einheit</span><br>
+                <span>&lt; = Schritt zurück</span><br>
+            </div><br>
+            
+            <div class="keyboard-style keyboard-style-normal">f</div>
+            <div class="keyboard-style keyboard-style-normal">n</div>
+            <div class="keyboard-style keyboard-style-normal">b</div>
+            <div class="keyboard-style keyboard-style-normal">l</div>
+            <br>
+            <div class="legend">
+                <span>f = Projekte-> FIs</span><br>
+                <span>n = Neu</span><br>
+                <span>b = Bearbeiten</span><br>
+                <span>l = Löschen</span><br>
+            </div><br>
+            
+            <div class="keyboard-style keyboard-style-normal">1</div>
+            <div class="keyboard-style keyboard-style-normal keyboard-style-esc">esc</div>
+            <div class="legend">
+                <span>1 = Zurück zu Projekten</span><br>
+                <span>esc = schließen</span><br>
+            </div><br>
+            
+        </div>
+        <img id="kame-house" src="images/tumblr_o0ndweAeE01tb8cbpo1_1280.jpg">
     </body>
 </html>

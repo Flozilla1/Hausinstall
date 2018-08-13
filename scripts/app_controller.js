@@ -1,61 +1,46 @@
-var that;
-var target = "#cat-1";
-var openedUnit
-
 $(document).ready(function(){
     colorize()
-    ajaxCall()
-    
-    document.addEventListener("keypress", function (pressed){
-        keyboardCtrl(pressed)
-    })
+    ajaxCall("list")
+    enableKeyboard()
 });
 
 function tell () {
     $(".cat_unit").addClass("shut").removeClass("telling")
+    $("#unfinished_unit").remove()
+    $(".menu_new").remove()
     $(this).removeClass("shut").addClass("telling")
-    openedUnit = this
-}
-
-function open (nextType) {
-    $(".all_fold-ups").removeClass("open").addClass("closed");
-    $(target).addClass("open").removeClass("closed");
     
-    //$(".chosen_path").addClass("rejectet_path").removeClass("chosen_path");
-    //$(nextType).addClass("chosen_path").removeClass("rejectet_path");
-
-    addBreadcrum()
-}
-function setListType (){
-    switch (target){
-        case "#cat--1":
-            listtype = "circuitlist"
-            break;
-        case "#cat-0":
-            listtype = "shoppinglist"
-            break;
-        case "#cat-1":
-            listtype = "projects"
-            break;
-        case "#cat-2":
-            listtype = "floors"
-            break;
-        case "#cat-3":
-            listtype = "rooms"
-            break;
-        case "#cat-4":
-            listtype = "devices"
-            break;
-        case "#cat-5":
-            listtype = "sensors"
-            break;
+    openedUnit = this
+    var currFoldDom = $(openedUnit).parents(".all_fold-ups")[0]
+    if (currFoldDom != undefined){
+        var currFold = currFoldDom.getAttribute("id")
+    }
+    if ("#" + currFold == target){
+        addBreadcrumOpen()
     }
 }
 
+function open (nextType, direction) {
+    $(".all_fold-ups").removeClass("open").addClass("closed");
+    $(target).addClass("open").removeClass("closed");
+
+    if (direction != "back"){
+        pinBreadcrum()
+    }
+}
+function choosePath (which){
+
+    $(".chosen_path").addClass("rejected_path").removeClass("chosen_path");
+    var path = "." + which + "_path"
+    $(path).addClass("chosen_path").removeClass("rejected_path");    
+}
 function addContent (jsObject) {
-    var createOneUnit = setListType();
+    
+    $(".telling").addClass("shut").removeClass("telling")
+
+    listtype = listtypeList[target]
     if(jsObject.shoppinglist == undefined && jsObject.circuitlist == undefined){
-        var finishedHtml = createAllUnits(jsObject);
+        var finishedHtml = createAllUnits(jsObject)
     } else {
         if(jsObject.shoppinglist == undefined){
             var finishedHtml = createCircList(jsObject)
@@ -63,27 +48,37 @@ function addContent (jsObject) {
             var finishedHtml = createShoppingList(jsObject)
         }
     }
-    var targetContentArea = target + " .cat_content";
-    $(targetContentArea)[0].innerHTML += finishedHtml;
-    $(".shut").click(tell);
-    $("button").click(placeAction);
+    var targetContentArea = target + " .cat_content"
+    $(targetContentArea)[0].innerHTML += finishedHtml
+    $(".shut").click(tell)
+    $("button").click(placeAction)
 }
-function removeContent (which){
-    var those = "#cat-" + which + " .cat_unit"
-    $(those).each(function (key, val){
-        $(val).remove()
-    })
+function removeContent (until){
+    for (ix = 7; ix > until; --ix){
+        var those ="#cat-" + ix + " .cat_unit"
+        $(those).each(function (key, val){
+            $(val).remove()
+        })
+    }
+
+}
+function removeContentBevoreTarget (until){
+    for (ix = -1; ix < until; ++ix){
+        var those ="#cat-" + ix + " .cat_unit"
+        $(those).each(function (key, val){
+            $(val).remove()
+        })
+    }
 }
 function getTarget (){
     
     var currFoldName = getCurrFold();
-    var currFoldNr = currFoldName.split("-")[1];
-    
+    var currFoldNr = currFoldName.slice(4);
+
     var btnType = that.getAttribute("class")
     var ArrDirectionAndNextType = directionAndNextType(btnType, currFoldNr);
 
-    var nextFoldNr = ArrDirectionAndNextType[0];
-    var nextFold = ArrDirectionAndNextType[1] + "-" + nextFoldNr;
+    var nextFold = ArrDirectionAndNextType[1] + "-" + ArrDirectionAndNextType[0];
     
     target = nextFold;
     return ArrDirectionAndNextType[1];  //Für die List-Fkt
@@ -94,21 +89,56 @@ function getCurrFold (){
     return currFoldName;
 }
 function directionAndNextType (btnType, currFoldNr){
-    var nextType;
+    var nextType
     switch (btnType){
         case "action_list_cat":
-            ++currFoldNr;
-            nextType = "#cat";
-            break;
+            ++currFoldNr
+            nextType = "#cat"
+            break
          case "action_circlist":
-            currFoldNr = currFoldNr - 2;
-            nextType = "#cat";
-            break;
-        case "action_shopping":
-            --currFoldNr;
-            nextType = "#cat";
-            break;
+            currFoldNr = currFoldNr - 2
+            nextType = "#cat"
+            break
+        case "action_shoppinglist":
+            --currFoldNr
+            nextType = "#cat"
+            break
+        case "action_list_fis":
+            ++currFoldNr
+            nextType = "#fis"
+            break
+         case "action_list":
+            ++currFoldNr
+            if ($(that).parents(".all_cats,.all_fis")[0].getAttribute("id").substr(0,3) == "cat"){
+                nextType = "#cat"
+            } else {
+                nextType = "#fis"
+            }
+            break
     }
-    var typeAndNr = [currFoldNr/*(= eigentlich nextFoldNr)*/, nextType];
-    return typeAndNr;
+    var typeAndNr = [currFoldNr/*(= eigentlich nextFoldNr)*/, nextType]
+    return typeAndNr
+}
+function protectAndShowInput (){
+
+    //Bugs: wenn blur, dann einheit öffnen => falsche Einheit wird bearbeited
+    
+    if ($("input").parents(".menu_new")[0] != undefined){   //if (create Neu)
+        $(".cat_unit").addClass("shut").removeClass("telling")
+        $(addEmtyUnit()).insertAfter($("input").parents(".menu_new")[0])
+    }
+    $("input").focus(function (){
+        document.body.removeEventListener("keypress", doThis)
+        markTarget(this)
+        placeInputLetters(this)
+    })
+    $("input").blur(function (){
+        enableKeyboard()
+        unMarkTarget(this)
+    })
+}
+function enableKeyboard (){
+    document.body.addEventListener("keypress", doThis = function (pressed){
+        keyboardCtrl(pressed)
+    })
 }
