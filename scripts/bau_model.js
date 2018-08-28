@@ -55,16 +55,18 @@ function createCircList (jsObject){
             html += "<li><b>Stärke</b>: " + val.value + "</li>\n"
             html += "<li><b>Sicherungen</b>:\n"
             html += "<ul>\n"
-            val.fuses.forEach(function(val2, key2){
-                html += "<li><b>Name</b>: " + val2.name + "</li>\n"
-                html += "<li><b>Stärke</b>: " + val2.value + "</li>\n"
-                html += "<li><b>Verbraucher</b>:\n"
-                html += "<ul>\n"
-                val2.devices.forEach(function(val3, key3){
-                    html += "<li><b>Name</b>: " + val3 + "</li>\n"
+            if (val.fuses != undefined){
+                val.fuses.forEach(function(val2, key2){
+                    html += "<li><b>Name</b>: " + val2.name + "</li>\n"
+                    html += "<li><b>Stärke</b>: " + val2.value + "</li>\n"
+                    html += "<li><b>Verbraucher</b>:\n"
+                    html += "<ul>\n"
+                    val2.devices.forEach(function(val3, key3){
+                        html += "<li><b>Name</b>: " + val3 + "</li>\n"
+                    })
+                    html += "</ul>\n</li>\n"
                 })
-                html += "</ul>\n</li>\n"
-            })
+            }
             html += "</ul>\n</li>\n\n"
     })
     html += "</ul>\n";
@@ -103,17 +105,43 @@ function addInputFields (){
         html += "<div>" + val[0] + ": <input  id='val_" + (key + 2) + "' placeholder='" + val[1] + "' maxlength='20'></div>"
     })
     if (selectOptionList[listtype] != undefined){
-        html += "<div>Typ: <select>"
         selectOptionList[listtype].forEach(function (val, key){
-            html += "<option value='" + val + "'>" + val + "</option>"
+            html += "<div>" + val[0][1] + ": <select placeholder='" + val[0][0] + "'"
+            if (val[0][0] != "fname"){
+                html += ">"
+                val[1].forEach(function (val2, key){
+                    html += "<option value='" + val2 + "'>" + val2 + "</option>"                
+                })
+            } else {
+                html += " id='select_fuses'>"
+                createFusesSelectOptions()
+            }
+            html += "</select></div>"
         })
-        html += "</select></div>"
     }
     return html
 }
-function displayResponseInMenu (response){
-    $(".menu")[0].innerHTML += "<div class='responseMessage'>" + response + "</div>";
+function createFusesSelectOptions (){
+    requestJson = {
+        'action': 'circuitlist',
+        'projectid': projectId
+    }
+    ajaxCall("circuitlistOptionList")
 }
+function insertFusesOptions (data){
+    var html = ""
+    data.circuitlist.forEach(function (val2, key){  //Fis
+        if (val2.fuses != undefined){
+            val2.fuses.forEach(function (val3, key){    //Sicherungen
+                html += "<option fuse_id='" + val3.fuseid + "' value='" + val3.name + "'>" + val3.name + "</option>"
+            })
+    }})
+    if (html == "") {
+            html += "<option>gibt hier noch keine Sicherungen!</option>"
+    }
+    document.getElementById('select_fuses').innerHTML = html
+}
+
 function removeMenu (){
     $(".menu")[0].style.height = "0px"
     $(".menu")[0].style.marginTop = "0px"
@@ -126,4 +154,21 @@ function removeUnit (toRemove){
     setTimeout(function (){
         toRemove.remove()                        
     }, 300)
+}
+function responsePopup (response){
+    var popup = $("#response_popup")[0]
+    popup.innerHTML = response
+    popup.style.width = "25vw"
+    if (document.getElementsByClassName("menu")[0] != undefined){
+        removeMenu()
+    }
+    setTimeout(function (){
+        popup.style.width = "0vw"
+    }, 2000)
+}
+function removeEmtyMessage (){
+    $(".open .empty_response").remove()
+}
+function createFiList (){
+    return ["test"]
 }

@@ -50,7 +50,7 @@ function keyboardCtrl (pressed){
             break
         case ("Escape"):
             if ($(".menu").length > 0){
-                removeMenu()
+                updateSetBack()
             } else {
                 $(".telling").removeClass("telling").addClass("shut")
             }
@@ -64,7 +64,14 @@ function keyboardCtrl (pressed){
             openBread(1)
             openedUnit = undefined
             break
+        case ("Enter"):
+            var menu = document.getElementsByClassName("menu")[0]
+            if (menu != undefined){
+                menu.lastChild.click()
+            }
+            break
     }
+    console.log(pressed.key)
 }
 
 function addBreadcrumOpen (){

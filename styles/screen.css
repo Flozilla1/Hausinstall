@@ -116,9 +116,6 @@ h1{
     transition: 0.4s;
     box-shadow: 10px 10px 10px rgba(0,0,0,0.3);
 }
-.shut:hover{
-    margin-left: -6px;
-}
 .cat_unit li:first-child{
     height: 72px;
     margin-bottom: 10px;
@@ -271,30 +268,41 @@ li{
 }
 .background{
     position: absolute;
-    top: 100px;
+    top: 80px;
     right: 0px;
     width: 320px;
-    z-index: -100;
     padding-top: 20px;
     padding-left: 30px;
     font-size: 2em;
-    background-color: rgb(210,210,210);
-    color: rgb(130,130,130);
+    background-color: rgb(180,180,180);
+    color: rgb(100,100,100);
     text-align: center;
+    opacity: 0.5;
+    transition: 0.5s;
+}
+.background:hover{
+    opacity: 1;
+    background-color: rgb(210,210,210);
 }
 .keyboard-style{
     display: inline-block;
-    border: solid 3px rgb(130,130,130);
+    border: solid 3px rgb(100,100,100);
+    background-color: rgb(180,180,180);
     margin-right: 15px;
     margin-bottom: 15px;
     padding: 5px;
     height: 50px;
     width: 50px;
     border-radius: 25%;
+    transition: 0.5s;
 }
 .keyboard-style-esc{
     width: 70px;
     border-radius: 20%;
+}
+.keyboard-style-enter{
+    width: 95px;
+    border-radius: 15%;
 }
 .keyboard-style-normal{
     float: left;
@@ -342,4 +350,25 @@ select{
         padding-bottom: 30px;
         max-height: 200px;
     }
+}
+#response_popup{
+    background-color: darkolivegreen;
+    color: white;
+    text-align: center;
+    padding-top: 40vh;
+    font-size: 3em;
+    font-weight: 800;
+    height: 100vh;
+    right: 0px;
+    bottom: 0px;
+    width: 0vw;
+    position: fixed;
+    z-index: 90;
+    border-left: solid 8px rgb(255, 204, 90);
+    transition: 0.5s;
+}
+.empty_response{
+    font-size: 1.5em;
+    margin-top: 50px;
+    padding-left: 50px;
 }

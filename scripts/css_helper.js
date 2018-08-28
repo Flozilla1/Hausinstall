@@ -10,7 +10,7 @@ function colorize (){
     'green2': 139,
     'blue2': 80
     }
-    var zindex = 7
+    var zindex = 8
     
     var breadcrums = document.getElementById("breadcrums").style
     breadcrums.backgroundColor = "rgb(" + (colors.red + 3 * colorSteps.r) + ", " + (colors.green + 3 * colorSteps.g) + ", " + (colors.blue + 3 * colorSteps.b) + ")"

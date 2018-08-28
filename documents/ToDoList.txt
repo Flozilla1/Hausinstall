@@ -39,4 +39,4 @@ Backend  ..Anregungen
 
 Wenn man viele neue creates durchführt, und die Items wieder löscht, wächst die List-id trotzdem weiter (wird nicht zurückgesetzt) Soll heißen, am Ende hat man ein Item mit ListID = zb 120 oder so
 
-Wenn ich die fis eines Projektes abfrage, in dem es tatsächlich welche gibt, bekomme ich einen Fehler/Error zurück, ansonsten (also wenn ich ein Projekt nach Fis abfrage, das keine hat) funktionierts (mit leerem Response als Ergebnis natürlich) (Siehe Konsole)
+Wenn ich ich die fis eines Projektes abfrage, in dem es tatsächlich welche gibt, bekomme ich einen Fehler/Error zurück, ansonsten funktionierts (mit leerem Response als Ergebnis natürlich)

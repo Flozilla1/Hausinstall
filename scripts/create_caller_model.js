@@ -37,17 +37,23 @@ function ajaxCall (reqType){
                     break
                 case "new":
                     pinCreatedUnit(data.newId)
+                    responsePopup(data.newId)
                     break
                 case "update":
-                    displayResponseInMenu(data.newId)
+                    responsePopup(data.newId)
                     break
                 case "delete":
                     removeBreadcrumDelete()
+                    responsePopup(data.newId)
+                    break
+                case "circuitlistOptionList":
+                    insertFusesOptions(data)
                     break
             }
         },
         error: function(data){
             console.log ("ERROR:\n",  data);
+            responsePopup("Fehler :(")
         }
     });
 }
@@ -60,23 +66,22 @@ function createSpecificationLine (inputFields_userInputs){
         requestJson.specification[val] = userInputs[key]   
     })
 }
-
 function readInputs (){
-    var inputNodesArr = []
     var inputFields = []
     var userInputs = []
     
-    $.each($("input"), function(ix, value) {
-        inputNodesArr.push(value)
-    });
-    inputNodesArr.forEach(function(val, ix){
-        inputFields.push(val.getAttribute("placeholder"));
-        userInputs.push($("#val_" + ++ix).val());   //funktioniert irgendwie nicht mit .getAttribute("value")
+    $.each($(".telling input, .menu_new input"), function(ix, val) {
+        inputFields.push(val.getAttribute("placeholder"))
+        userInputs.push($("#val_" + ++ix).val())   //funktioniert irgendwie nicht mit .getAttribute("value")
     })
-    var selectTagText = document.getElementsByTagName("select")[0]
-    if (selectTagText != undefined){
-        userInputs.push(selectTagText.selectedOptions[0].text)
-        inputFields.push("type")
-    }
+    var selectTagText = document.getElementsByTagName("select")
+    $.each($(selectTagText), function(key, val) {
+        inputFields.push(val.getAttribute("placeholder"))
+        userInputs.push(val.selectedOptions[0].text)
+        if (val.selectedOptions[0].hasAttribute("fuse_id") == true){
+            inputFields.push("fuse_id")
+            userInputs.push(val.selectedOptions[0].getAttribute("fuse_id"))
+        }
+    })
     return [inputFields, userInputs];
 }

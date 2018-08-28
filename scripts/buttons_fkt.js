@@ -52,6 +52,7 @@ function placeAction (){
                     requestJson.parentid = parentId;
                     createSpecificationLine(readInputs());
                     removeMenu()
+                    removeEmtyMessage()
                     break;
                 case ("update"):
                     requestJson.itemid = parentId;

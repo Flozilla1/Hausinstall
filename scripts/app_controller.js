@@ -26,6 +26,9 @@ function open (nextType, direction) {
 
     if (direction != "back"){
         pinBreadcrum()
+        if (target == "#cat-2" || target == "#fis-2"){
+            projectId = parentId
+        }
     }
 }
 function choosePath (which){
@@ -48,6 +51,9 @@ function addContent (jsObject) {
             var finishedHtml = createShoppingList(jsObject)
         }
     }
+    if (finishedHtml == ""){
+        finishedHtml = "<div class='empty_response'>Hier gibt es noch gar nichts! Baue mehr!</div>"
+    }
     var targetContentArea = target + " .cat_content"
     $(targetContentArea)[0].innerHTML += finishedHtml
     $(".shut").click(tell)
@@ -55,7 +61,7 @@ function addContent (jsObject) {
 }
 function removeContent (until){
     for (ix = 7; ix > until; --ix){
-        var those ="#cat-" + ix + " .cat_unit"
+        var those ="#cat-" + ix + " .cat_unit, #cat-" + ix + " .empty_response"
         $(those).each(function (key, val){
             $(val).remove()
         })
@@ -64,7 +70,7 @@ function removeContent (until){
 }
 function removeContentBevoreTarget (until){
     for (ix = -1; ix < until; ++ix){
-        var those ="#cat-" + ix + " .cat_unit"
+        var those ="#cat-" + ix + " .cat_unit, #cat-" + ix + " .empty_response"
         $(those).each(function (key, val){
             $(val).remove()
         })

@@ -1,8 +1,9 @@
-var that;
-var target = "#cat-1";
+var that
+var target = "#cat-1"
 var openedUnit
 var countOfCrums = 1
-var parentId = 1;
+var parentId = 1
+var projectId
 var fadeAndBlurSteps = 0.1
 var requestJson = {'action': 'list','listtype': 'projects'}
 var type
@@ -39,7 +40,7 @@ var propertyList = {
               [["Fläche", "flaeche"]],
              [["action_list", "Verbraucher >"]]],
     'devices': [[["action_update", "Bearbeiten"], ["action_delete", "Löschen"]],
-                [["Name d. Sicherung", "fname"]],
+                [],
                [["action_list", "Sensoren >"]]],
     'sensors': [[["action_update", "Bearbeiten"], ["action_delete", "Löschen"]],
                 [["Einheit", "unit"], ["Wert", "value"]],],
@@ -50,10 +51,10 @@ var propertyList = {
             [["Stärke", "current"]]]
 }
 var selectOptionList = {
-'devices': ["Steckdose 230V Unterputz","Steckdose 230V Aufputz","Steckdose 400V","Glühbirnenfassung E24","LED Balken","FeuchtraumLeuchte","Untertisch-speicher","E-Herd","Waschmaschine","Geschirrspüler","Markise","Torantrieb","Sprinkleranlage"],
-'sensors': ["Schalter Unterputz","Schalter Aufputz","Schalter Feuchtraum","Windsensor","Feuchtigkeitssensor"],
-'fis': ["1ph 30mA","1ph 100mA","1ph 300mA","3ph 100mA","3ph 400mA"],
-'fuses': ["1ph 4A","1ph+N 10A","1ph+N 12A","1ph+N 16A","3ph+N 16A","3ph+N 20A"]
+    'devices': [[["fname", "Name d. Sicherung"]],[["type", "Typ"], ["Steckdose 230V Unterputz","Steckdose 230V Aufputz","Steckdose 400V","Glühbirnenfassung E24","LED Balken","FeuchtraumLeuchte","Untertisch-speicher","E-Herd","Waschmaschine","Geschirrspüler","Markise","Torantrieb","Sprinkleranlage"]]],
+    'sensors': [[["type", "Typ"], ["Schalter Unterputz","Schalter Aufputz","Schalter Feuchtraum","Windsensor","Feuchtigkeitssensor"]]],
+    'fis': [[["type", "Typ"], ["1ph 30mA","1ph 100mA","1ph 300mA","3ph 100mA","3ph 400mA"]]],
+    'fuses': [[["type", "Typ"], ["1ph 4A","1ph+N 10A","1ph+N 12A","1ph+N 16A","3ph+N 16A","3ph+N 20A"]]]
 }
 var menuHelpList = {
     'new': ["Neue Werte:", "fkt-yes", "create"],
