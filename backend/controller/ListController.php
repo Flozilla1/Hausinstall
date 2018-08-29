@@ -29,7 +29,7 @@ class ListController implements Controller{
 private $itemprefix;
 private $itemtitle;
     
-    private function createRequestedList($parentId){
+    private function createRequestedList($parentId){   // SQL basteln und DBabfrage  -> ergebnis über getter (getCurrentList)
         $this->listModel->setListType($this->listType);
         switch(strtoupper($this->listType)){
            
@@ -78,7 +78,7 @@ private $itemtitle;
     private function formatAndDisplayListDataFLO(){
  
         $itemList = array();
-        $data = $this->listModel->getCurrentList();  //Daten aus der DB holen
+        $data = $this->listModel->getCurrentList();  // abfrageliste holen
         
         foreach($data as $content){
 //            $content = $this->getSpecificationTable($row); // Listentries aufbereiten ..obsolet, da ich sowieso auf jeden einzelnen Key gehen muss

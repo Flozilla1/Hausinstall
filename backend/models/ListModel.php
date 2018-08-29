@@ -34,7 +34,7 @@ class ListModel {
                 return $this->getDevicesSpecs($content);
             case 'SENSORS':
                 return $this->getSensorsSpecs($content);
-            case 'FI': 
+            case 'FIS': 
                 return $this->getFisSpecs($content);
             case 'FUSES': 
                 return $this->getFusesSpecs($content);
@@ -161,8 +161,8 @@ class ListModel {
   
     
 
-    public function listFis($projectsId){  
-        $sql = " SELECT id, name, current FROM fis WHERE projects_id = {$projectsId} ";
+    public function listFis($projectId){  
+        $sql = " SELECT id, name, current FROM fis WHERE projects_id = {$projectId} ";
         $this->list = $this->getListFromDatabase($sql);
         $this->childListType = false;
     }
