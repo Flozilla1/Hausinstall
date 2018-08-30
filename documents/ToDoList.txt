@@ -1,27 +1,27 @@
 Frontend  ... Fehlerbehebungen
 
-raum flaeche geht nicht
-Verbraucher  sicherung geht nicht (Siehe doku  .. ich hab nebst der sicherungsid auch den sicherungsnamen mit in die specs gepackt)
-Sicherungszweig geht gar nicht (wenn man  im Projekt/im Verbraucher auf Fis dr¸ckt)
-Neue Ebene, R‰ume, verbraucher  anlegen geht nicht
+OK --raum flaeche geht nicht
+NOK --Verbraucher  sicherung geht nicht (Siehe doku  .. ich hab nebst der sicherungsid auch den sicherungsnamen mit in die specs gepackt)
+OK --Sicherungszweig geht gar nicht (wenn man  im Projekt auf Fis dr¸ckt)
+OK --Neue Ebene, R‰ume, verbraucher  anlegen geht nicht --OK
 
 Frontend ..Verbesserungen
 
-Zur¸ck -button (DRINGEND)
-Nach Update oder Insert (neu/bearbeiten) aktualisierte Liste anzeigen. 
+NOK --Zur¸ck -button (DRINGEND)
+OK --Nach Update oder Insert (neu/bearbeiten) aktualisierte Liste anzeigen. 
 	Man kann noch kurz ein popup einblenden mit der Vollzugsmeldung (ZB Neuer datensatz eingef¸gt oder Ge‰ndert oder error)
 
-
-Breadcrumb
-EbenenName statt "n‰chste Ebene"
-Detailantzeige/Bearbeitungsanzeige --> gleich felder (nicht leer in bearbeiten)
+OK --Breadcrumb
+NOK --Breadcrumb funktioniert nicht, wenn man bei einem element direkt die n‰chste ebene anclickt
+OK --EbenenName statt "n‰chste Ebene"
+OK --Detailantzeige/Bearbeitungsanzeige --> gleich felder (nicht leer in bearbeiten)
 Bearbeitungsschirm, die feldbezeichnungen fehlen (bis auf titel .. den ich in "bezeichnung" umtaufen w¸rde)
-Sensoren .. es fehlen die werte
+OK --Sensoren .. es fehlen die werte
 "Ausf¸hren" statt "do it" 
 Tabs merken sich die werte nicht  (einmal bearbeiten --> lˆschen --> bearbeiten .... keine werte mehr in den bearbeiten feldern)
 
-Runde ecken
-Ebenenbezeichnungen in den auf/zugeklappten teilen (vertikaler text)
+((Runde ecken))
+OK --Ebenenbezeichnungen in den auf/zugeklappten teilen (vertikaler text)
 
 
             SELECT ss.name, count(ss.name) as count
@@ -34,9 +34,16 @@ Ebenenbezeichnungen in den auf/zugeklappten teilen (vertikaler text)
             GROUP BY ss.name
             ;
 
+NOK --Projekt mit pfeiltasten oder maus ausw‰hlen, dann "f" oder maus f¸r FIS  ... mit jedem mal wird die liste der FIS l‰nger, egal welches projekt man ausgew‰hlt hat.
+NOK --Detto bei auswahl FIS und sicherungen
+NOK --Werte f¸r Verbraucher werden nur bei "bearbeiten" angezeigt
+
+NOK --googleapis  font bungee macht anzeige im firefox und chrome unlesbar --> vorschlag: weglassen, dann geht die anzeige
+screen.css  -->   @import url('https://fonts.googleapis.com/css?family=Bungee');
+
 
 Backend  ..Anregungen
-
-Wenn man viele neue creates durchführt, und die Items wieder löscht, wächst die List-id trotzdem weiter (wird nicht zurückgesetzt) Soll heißen, am Ende hat man ein Item mit ListID = zb 120 oder so
-
-Wenn ich ich die fis eines Projektes abfrage, in dem es tatsächlich welche gibt, bekomme ich einen Fehler/Error zurück, ansonsten funktionierts (mit leerem Response als Ergebnis natürlich)
+=====================
+OK --Wenn man viele neue creates durchführt, und die Items wieder löscht, wächst die List-id trotzdem weiter (wird nicht zurückgesetzt) Soll heißen, am Ende hat man ein Item mit ListID = zb 120 oder so
+--> macht die DB , kann man im backend nicht beeinflussen
+OK --Wenn ich ich die fis eines Projektes abfrage, in dem es tatsächlich welche gibt, bekomme ich einen Fehler/Error zurück, ansonsten funktionierts (mit leerem Response als Ergebnis natürlich)
