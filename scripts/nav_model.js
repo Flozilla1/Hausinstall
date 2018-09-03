@@ -99,9 +99,6 @@ function goToClickedBread (){
 }
 function openBread (tarCat){
     tarCat = checkDirection(tarCat)
-//    damit beim Schritt/Klick zurück die Einheit gleich aufgeht
-//    var tarUnit = $("[cat= " + tarCat + "]")[0].innerHTML.slice(6)
-//    $("[name= '" + tarUnit + "']")[0].click()
     var catOrFis = checkCatOrFis(tarCat)
     target = catOrFis + tarCat
     listtype = listtypeList[target]
@@ -111,9 +108,8 @@ function openBread (tarCat){
 }
 function checkCatOrFis (tarCat){
     var catOrFis = $(".open")[0].getAttribute("id").split("-")[0]
-    console.log("tarCat= " + tarCat)
     var catOrFis
-    if (catOrFis == "fis" && tarCat > 2){
+    if (catOrFis == "fis" && tarCat >= 2){
         catOrFis = "#fis-"
     } else {
         catOrFis = "#cat-"
