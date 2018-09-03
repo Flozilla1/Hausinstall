@@ -1,4 +1,4 @@
-
+ /*@import url('https://fonts.googleapis.com/css?family=Bungee');*/
 *{
     margin: 0px;
     padding: 0px;
@@ -279,6 +279,7 @@ li{
     text-align: center;
     opacity: 0.5;
     transition: 0.5s;
+    transition-delay: 0.4s;
 }
 .background:hover{
     opacity: 1;
@@ -317,15 +318,6 @@ li{
     text-align: left;
     float: left;
     margin-right: 45%;
-}
-#kame-house{
-    position: fixed;
-    right: -270px;
-    top: -70px;
-    z-index: -101;
-    filter: saturate(0);
-    opacity: 0.5;
-    display: none;
 }
 select{
     height: 22px;

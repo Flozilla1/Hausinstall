@@ -36,6 +36,7 @@ function keyboardCtrl (pressed){
                 break
             case ("f"):
                 $("[name='" + openedUnit.getAttribute("name") + "'] .action_list_fis").click()
+                openedUnit = undefined
                 break
         }
     }
@@ -101,17 +102,18 @@ function openBread (tarCat){
 //    damit beim Schritt/Klick zurück die Einheit gleich aufgeht
 //    var tarUnit = $("[cat= " + tarCat + "]")[0].innerHTML.slice(6)
 //    $("[name= '" + tarUnit + "']")[0].click()
-    var catOrFis = checkCatOrFis()
+    var catOrFis = checkCatOrFis(tarCat)
     target = catOrFis + tarCat
     listtype = listtypeList[target]
     countOfCrums = tarCat
     open(target, "back")
     cleanUpRemains(tarCat)
 }
-function checkCatOrFis (){
-    var catOrFisNr = $(".open")[0].getAttribute("id").split("-")
+function checkCatOrFis (tarCat){
+    var catOrFis = $(".open")[0].getAttribute("id").split("-")[0]
+    console.log("tarCat= " + tarCat)
     var catOrFis
-    if (catOrFisNr[0] == "fis" && catOrFisNr[1] > 2){
+    if (catOrFis == "fis" && tarCat > 2){
         catOrFis = "#fis-"
     } else {
         catOrFis = "#cat-"

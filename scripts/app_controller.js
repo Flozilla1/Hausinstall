@@ -62,6 +62,7 @@ function addContent (jsObject) {
 function removeContent (until){
     for (ix = 7; ix > until; --ix){
         var those ="#cat-" + ix + " .cat_unit, #cat-" + ix + " .empty_response"
+        var those ="#fis-" + ix + " .cat_unit, #fis-" + ix + " .empty_response"
         $(those).each(function (key, val){
             $(val).remove()
         })
