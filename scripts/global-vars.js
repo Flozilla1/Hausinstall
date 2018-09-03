@@ -40,7 +40,7 @@ var propertyList = {
               [["Fläche", "flaeche"]],
              [["action_list", "Verbraucher >"]]],
     'devices': [[["action_update", "Bearbeiten"], ["action_delete", "Löschen"]],
-                [],
+                [["Sicherung", "fname"]],
                [["action_list", "Sensoren >"]]],
     'sensors': [[["action_update", "Bearbeiten"], ["action_delete", "Löschen"]],
                 [["Einheit", "unit"], ["Wert", "value"]],],
