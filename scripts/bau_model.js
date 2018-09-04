@@ -50,26 +50,26 @@ function createCircList (jsObject){
     var html = "<div class='cat_unit'>\n";
         html += "<ul>\n";
         circuitsArr.forEach(function(val, key){
-            html += "<li>+—————Stromkreis #" + key + "—————+</li>"
-            html += "<li><b>Name</b>: " + val.name + "</li>\n"
-            html += "<li><b>Stärke</b>: " + val.value + "</li>\n"
-            html += "<li><b>Sicherungen</b>:\n"
-            html += "<ul>\n"
+            html += "<li><b>STROMKREIS #" + key + "————————————</b></li>"
+            html += "<li><b>\"" + val.name + "\"</b>"
+            html += " Stärke: " + val.value + "</li>"
+            html += "<li>Sicherungen:"
+            html += "<ul>"
             if (val.fuses != undefined){
                 val.fuses.forEach(function(val2, key2){
-                    html += "<li><b>Name</b>: " + val2.name + "</li>\n"
-                    html += "<li><b>Stärke</b>: " + val2.value + "</li>\n"
-                    html += "<li><b>Verbraucher</b>:\n"
-                    html += "<ul>\n"
+                    html += "<li><b>\"" + val2.name + "\"</b>"
+                    html += " Stärke: " + val2.value + "</li>"
+                    html += "<li>Verbraucher:"
+                    html += "<ul>"
                     val2.devices.forEach(function(val3, key3){
-                        html += "<li><b>Name</b>: " + val3 + "</li>\n"
+                        html += "<li><b>" + val3 + "</b></li>"
                     })
-                    html += "</ul>\n</li>\n"
+                    html += "</ul></li>"
                 })
             }
-            html += "</ul>\n</li>\n\n"
+            html += "</ul></li>"
     })
-    html += "</ul>\n";
+    html += "</ul>";
     html += "</div>";
     return(html);
 }
@@ -102,7 +102,9 @@ function addMenu (type){
 function addInputFields (){
     var html = "<div>Titel: <input id='val_1' placeholder='name' maxlength='20'></div>"
     propertyList[listtype][1].forEach(function (val, key){
-        html += "<div>" + val[0] + ": <input  id='val_" + (key + 2) + "' placeholder='" + val[1] + "' maxlength='20'></div>"
+        if (val[1] != selectOptionList[listtype][0][0][0]){
+            html += "<div>" + val[0] + ": <input  id='val_" + (key + 2) + "' placeholder='" + val[1] + "' maxlength='20'></div>"
+        }
     })
     if (selectOptionList[listtype] != undefined){
         selectOptionList[listtype].forEach(function (val, key){

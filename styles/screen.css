@@ -118,7 +118,6 @@ h1{
 }
 .cat_unit li:first-child{
     height: 72px;
-    margin-bottom: 10px;
 }
 #cat--1 .cat_unit li:first-child, #cat-0 .cat_unit li:first-child{
     padding-top: 20px;
@@ -234,9 +233,6 @@ li{
 #cat--1 li{
     line-height: 1.1em;
     font-size: 1.8em;
-}
-#cat--1 li :first-child{
-    padding-top: 10px;
 }
 #cat--1 li li{
     line-height: 1.2em;
