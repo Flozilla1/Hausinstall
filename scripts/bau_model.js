@@ -102,8 +102,12 @@ function addMenu (type){
 function addInputFields (){
     var html = "<div>Titel: <input id='val_1' placeholder='name' maxlength='20'></div>"
     propertyList[listtype][1].forEach(function (val, key){
-        if (val[1] != selectOptionList[listtype][0][0][0]){
+        if (selectOptionList[listtype] == undefined){
             html += "<div>" + val[0] + ": <input  id='val_" + (key + 2) + "' placeholder='" + val[1] + "' maxlength='20'></div>"
+        } else {
+            if (val[1] != selectOptionList[listtype][0][0][0]){
+                html += "<div>" + val[0] + ": <input  id='val_" + (key + 2) + "' placeholder='" + val[1] + "' maxlength='20'></div>"
+            }
         }
     })
     if (selectOptionList[listtype] != undefined){
