@@ -79,7 +79,7 @@ function readInputs (){
         inputFields.push(val.getAttribute("placeholder"))
         userInputs.push(val.selectedOptions[0].text)
         if (val.selectedOptions[0].hasAttribute("fuse_id") == true){
-            inputFields.push("fuse_id")
+            inputFields.push("fuseid")
             userInputs.push(val.selectedOptions[0].getAttribute("fuse_id"))
         }
     })

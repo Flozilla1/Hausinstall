@@ -51,7 +51,7 @@ function keyboardCtrl (pressed){
             break
         case ("Escape"):
             if ($(".menu").length > 0){
-                updateSetBack()
+                removeMenu()
             } else {
                 $(".telling").removeClass("telling").addClass("shut")
             }
@@ -72,7 +72,7 @@ function keyboardCtrl (pressed){
             }
             break
     }
-    console.log(pressed.key)
+    console.log("You pressed: " + pressed.key)
 }
 
 function addBreadcrumOpen (){
