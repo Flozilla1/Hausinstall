@@ -37,14 +37,14 @@ function ajaxCall (reqType){
                     break
                 case "new":
                     pinCreatedUnit(data.newId)
-                    responsePopup(data.newId)
+                    responsePopup(data.message)
                     break
                 case "update":
-                    responsePopup(data.newId)
+                    responsePopup(data.message)
                     break
                 case "delete":
                     removeBreadcrumDelete()
-                    responsePopup(data.newId)
+                    responsePopup(data.message)
                     break
                 case "circuitlistOptionList":
                     insertFusesOptions(data)
