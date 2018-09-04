@@ -1,0 +1,7 @@
+diff a/styles/screen.css b/styles/screen.css	(rejected hunks)
+@@ -1,4 +0,4 @@
+- @import url('https://fonts.googleapis.com/css?family=Bungee');
++
+ *{
+     margin: 0px;
+     padding: 0px;
