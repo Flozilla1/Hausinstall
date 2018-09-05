@@ -4,7 +4,7 @@ $(document).ready(function(){
     enableKeyboard()
 });
 
-function tell () {
+function tell (){
     $(".cat_unit").addClass("shut").removeClass("telling")
     $("#unfinished_unit").remove()
     $(".menu_new").remove()
@@ -40,6 +40,7 @@ function choosePath (which){
 function addContent (jsObject) {
     
     $(".telling").addClass("shut").removeClass("telling")
+    openedUnit = undefined
 
     listtype = listtypeList[target]
     if(jsObject.shoppinglist == undefined && jsObject.circuitlist == undefined){

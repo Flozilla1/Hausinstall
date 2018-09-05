@@ -54,6 +54,10 @@ function keyboardCtrl (pressed){
                 removeMenu()
             } else {
                 $(".telling").removeClass("telling").addClass("shut")
+                $(".curr_selected")[0].remove()
+                if ($("#breadcrums")[0].innerHTML == ""){
+                    $("#breadcrums")[0].innerHTML = "<div>Willkommen!</div>"
+                }
             }
             var unfUnit = document.getElementById("unfinished_unit")
             if (unfUnit != undefined){
