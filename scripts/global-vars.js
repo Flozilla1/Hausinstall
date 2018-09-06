@@ -7,6 +7,7 @@ var projectId
 var fadeAndBlurSteps = 0.1
 var requestJson = {'action': 'list','listtype': 'projects'}
 var type
+var originalValues = []
 
 var catArr = ["#cat--1", "#cat-0", "#cat-1", "#cat-2", "#cat-3", "#cat-4", "#cat-5", "#fis-2", "#fis-3"]
 var colorSteps = {   // r/g/b x7 +/- red/green/blue darf 0/255 nicht überschreiten

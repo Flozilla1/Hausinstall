@@ -98,6 +98,7 @@ function addMenu (type){
     }
     html += "<button class='action_" + menuHelpList[type][2] + "_submit'>Do it!</button>"
     html += "</div>"
+    resetUnitValues()
     
     return (html)
 }

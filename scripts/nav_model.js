@@ -52,6 +52,7 @@ function keyboardCtrl (pressed){
         case ("Escape"):
             if ($(".menu").length > 0){
                 removeMenu()
+                resetUnitValues()
             } else {
                 $(".telling").removeClass("telling").addClass("shut")
                 $(".curr_selected")[0].remove()

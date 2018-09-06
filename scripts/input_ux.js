@@ -1,11 +1,13 @@
 function placeInputLetters (thisInputField){
     //wenn das Window focus verliert, und ihn wieder bekommt, wiederholt sich die hier ausgelöste fkt!
     var editThis = $(".telling" + " ." + thisInputField.getAttribute("placeholder"))[0]
-    var originalValue = editThis.innerHTML
+    var originalVal = editThis.innerHTML
+    originalValues.push([editThis, originalVal])
+    
     thisInputField.addEventListener("keyup", function (pressed){
         editThis.innerHTML = thisInputField.value
         if(thisInputField.value == ""){
-            editThis.innerHTML = originalValue
+            editThis.innerHTML = originalVal
         }
     })
 }
@@ -40,4 +42,11 @@ function pinCreatedUnit (newID){
     $(unfUnit).click(tell)
 
     openedUnit = unfUnit
+}
+
+function resetUnitValues (){
+    originalValues.forEach(function (val, key){
+        originalValues[key][0].innerHTML = originalValues[key][1]
+    })
+    originalValues = []
 }
