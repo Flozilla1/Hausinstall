@@ -38,6 +38,8 @@ function placeAction (){
             
         case ("list"): default:     //shoppinglist & circuitlist = default
             openedUnit = $(that).parents(".cat_unit")[0]
+            addBreadcrumOpen()
+            
             open(getTarget())
             getNextList()
             ajaxCall(actionInput[1])
