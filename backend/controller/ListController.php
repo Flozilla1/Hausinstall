@@ -63,11 +63,36 @@ private $itemtitle;
                 $this->itemprefix = "fuse";
                 $this->listModel->listFuses($parentId); 
                 break;          
+            
+            //Types
+            case 'DEVICETYPES': 
+                $this->itemtitle = "DevicetypeObject";
+                $this->itemprefix = "devicetype";
+                $this->listModel->listDevicetypes();
+                break;          
+            case 'SENSORTYPES': 
+                $this->itemtitle = "SensortypeObject";
+                $this->itemprefix = "sensortype";
+                $this->listModel->listSensortypes();
+                break;          
+            case 'FITYPES': 
+                $this->itemtitle = "FitypeObject";
+                $this->itemprefix = "fitype";
+                $this->listModel->listFitypes();
+                break;          
+            case 'FUSETYPES': 
+                $this->itemtitle = "FusetypeObject";
+                $this->itemprefix = "fusetype";
+                $this->listModel->listFusetypes();
+                break;       
+    
+            
             case 'PROJECTS': default:
                 $this->itemtitle = "ProjectObject";
                 $this->itemprefix = "project";
                 $this->listModel->listProjects();
-                break;          
+                break; 
+
          }
           
     }

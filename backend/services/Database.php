@@ -38,6 +38,7 @@ class Database{
     }
     
     public function lastInsertedId(){
-        return $this->pdo->lastInsertId('id');
+//        return $this->pdo->lastInsertId('id');
+        return $this->pdo->lastInsertId();
     }
 }

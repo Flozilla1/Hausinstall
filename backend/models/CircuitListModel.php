@@ -61,8 +61,8 @@ class CircuitListModel {
                 }
                 
                 //DUMMYDATA ..zum testen wenn nix echtes da ist
-                $this->list[$fiIndex]['fuses'][$fuIndex]['devices'][$dvIndex] = "Dummydevice 1";
-                $this->list[$fiIndex]['fuses'][$fuIndex]['devices'][$dvIndex+1] = "Dummydevice 2";
+                //$this->list[$fiIndex]['fuses'][$fuIndex]['devices'][$dvIndex] = "Dummydevice 1";
+                //$this->list[$fiIndex]['fuses'][$fuIndex]['devices'][$dvIndex+1] = "Dummydevice 2";
 
 
                 $fuIndex++;                

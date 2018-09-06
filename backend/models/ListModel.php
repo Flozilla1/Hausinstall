@@ -38,31 +38,22 @@ class ListModel {
                 return $this->getFisSpecs($content);
             case 'FUSES': 
                 return $this->getFusesSpecs($content);
+
+            case 'DEVICETYPES':   
+                return $this->getTypeDummySpecs($content);
+            case 'SENSORTYPES': 
+                return $this->getTypeDummySpecs($content);
+            case 'FITYPES': 
+                return $this->getTypeDummySpecs($content);
+            case 'FUSETYPES': 
+                return $this->getTypeDummySpecs($content);
+                 
+                          
             case 'PROJECTS': default:
                 return $this->getProjectsSpecs($content);
        }      
     }
     
- 
-
-//  ORIGINAL  .... für Meine Version überflüssig
-/*    
-    public function getListNameByType(){
-        switch($this->listType){
-             case 'FLOORS':
-                 return "Stockwerke";
-            case 'ROOMS':
-                return "Zimmer";
-            case 'DEVICES':
-                return "Geräte";
-            case 'SENSORS':
-                return "Sensoren";
-            case 'PROJECTS': default:
-                return "Projekte";
-        }
-    }
- * 
- */
     
     public function getCurrentList(){
         return $this->list;
@@ -75,19 +66,6 @@ class ListModel {
             return "";
         }
     }
-
-
-    /*  ORIGINAL
-       public function getChildListType(){
-        if($this->childListType){
-            return $this->childListType;
-        } else {
-            return "";
-        }
-    }
-
-     */
-
 
     
     public function listProjects(){
@@ -185,55 +163,63 @@ class ListModel {
         return  $specs;
     }
     
+ // types
     
-    
-// ------------------------------------------------    
-/*    
-    public function getProjectName($projectId){
-        $sql = "SELECT name FROM projects WHERE id = ".$projectId." LIMIT 1";
-        $result = $this->getListFromDatabase($sql);
-        
-        return $result[0]['name'];
+    public function listDevicetypes(){  
+        $sql = " SELECT id, name FROM devicetypes ";
+        $this->list = $this->getListFromDatabase($sql);
+        $this->childListType = false;
+    }
+
+    public function getTypeDummySpecs($content){  // bekommt EINE zeile aus dem gefundenen Tabellinhalt und holt alle specifications heraus
+        $specs['dummy'] = "nix";           
+        return  $specs;
     }
     
-    public function getDivecesOfProject($projectId){
-        $sql = "SELECT d.id, d.name AS deviceName FROM devices d "
-            . " JOIN rooms r ON r.id = d.rooms_id "
-            . " JOIN floors f ON f.id = r.floors_id "
-            . " JOIN projects p ON p.id = f.projects_id "
-            . "WHERE p.id = ".$projectId;
-        
-        $devices = $this->getListFromDatabase($sql);
-        
-        $devicesList = $this->getUniqueDevicesWithSensors($devices);
-        return $devicesList;
+
+    public function listSensortypes(){  
+        $sql = " SELECT id, name FROM sensortypes ";
+        $this->list = $this->getListFromDatabase($sql);
+        $this->childListType = false;
+    }
+
+    public function getSensortypeSpecs($content){  // bekommt EINE zeile aus dem gefundenen Tabellinhalt und holt alle specifications heraus
+        $specs['current'] = $content['current'];           
+        return  $specs;
     }
     
-    private function getUniqueDevicesWithSensors($devicesList){
-        $uniqueDevices = array();
-        foreach($devicesList as $device){
-            
-            $currentSql = "SELECT name FROM sensors WHERE devices_id = ".$device['id'];
-            $sensors = $this->getListFromDatabase($currentSql);
-            //erzeugen eines eindeutigen index - der string des json objektes und der name des geräts müssen gleich sein
-            $uniqueIdentifier = md5( $device['deviceName'].json_encode($sensors) );
-            
-            if(!isset($uniqueDevices[$uniqueIdentifier])){
-                $uniqueDevices[$uniqueIdentifier] = array(
-                    'deviceName' => $device['deviceName'],
-                    'amount' => 1,
-                    'sensors' => $sensors
-                );
-                
-            } else {
-                $uniqueDevices[$uniqueIdentifier]['amount']++;
-            }
-            
-        }
-        
-        return $uniqueDevices;
+
+    public function listFitypes(){  
+        $sql = " SELECT id, name FROM fitypes ";
+        $this->list = $this->getListFromDatabase($sql);
+        $this->childListType = false;
     }
-*/    
+
+    public function getFitypeSpecs($content){  // bekommt EINE zeile aus dem gefundenen Tabellinhalt und holt alle specifications heraus
+        $specs['current'] = $content['current'];           
+        return  $specs;
+    }
+    
+
+    public function listFusetypes(){  
+        $sql = " SELECT id, name FROM fusetypes ";
+        $this->list = $this->getListFromDatabase($sql);
+        $this->childListType = false;
+    }
+
+    public function getFusetypeSpecs($content){  // bekommt EINE zeile aus dem gefundenen Tabellinhalt und holt alle specifications heraus
+        $specs['current'] = $content['current'];           
+        return  $specs;
+    }
+    
+
+    
+
+    
+    
+    
+    
+    
     private function getListFromDatabase($sql){
         $result = array();
         try{
