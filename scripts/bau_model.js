@@ -61,9 +61,11 @@ function createCircList (jsObject){
                     html += " Stärke: " + val2.value + "</li>"
                     html += "<li>Verbraucher:"
                     html += "<ul>"
-                    val2.devices.forEach(function(val3, key3){
-                        html += "<li><b>" + val3 + "</b></li>"
-                    })
+                    if (val2.devices != undefined){
+                        val2.devices.forEach(function(val3, key3){
+                            html += "<li><b>" + val3 + "</b></li>"
+                        })
+                    }
                     html += "</ul></li>"
                 })
             }
