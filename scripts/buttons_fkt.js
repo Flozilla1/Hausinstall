@@ -22,19 +22,24 @@ function placeAction (){
             $(".curr_selected").remove()
             protectAndShowInput()
             $("button").off("click").click(placeAction)
-            break;
+            break
+            
+        case ("back"):
+            oneStepBack()
+            openedUnit = undefined
+            break
             
         case ("update"):
             $(addMenu("update")).insertAfter($("[list_id=" + that.getAttribute("list_id") + "] ~ .action_delete"))
             protectAndShowInput()
             $("button").off("click").click(placeAction)
-            break;
+            break
             
         case ("delete"):
             $(addMenu("delete")).insertAfter(that)
             protectAndShowInput()
             $("button").off("click").click(placeAction)
-            break;
+            break
             
         case ("list"): default:     //shoppinglist & circuitlist = default
             openedUnit = $(that).parents(".cat_unit")[0]
@@ -43,31 +48,31 @@ function placeAction (){
             open(getTarget())
             getNextList()
             ajaxCall(actionInput[1])
-            break;
+            break
             
         case ("submit"):    //"Do It!"-Buttons
-            var submitAction = $(that).parent()[0].getAttribute("class").split(" ")[1].split("_")[1];
-            createActionLine();
+            var submitAction = $(that).parent()[0].getAttribute("class").split(" ")[1].split("_")[1]
+            createActionLine()
             
             switch (submitAction){
                 case ("new"):
-                    requestJson.parentid = parentId;
-                    createSpecificationLine(readInputs());
+                    requestJson.parentid = parentId
+                    createSpecificationLine(readInputs())
                     removeMenu()
                     removeEmtyMessage()
                     break;
                 case ("update"):
-                    requestJson.itemid = parentId;
-                    createSpecificationLine(readInputs());
-                    break;
+                    requestJson.itemid = parentId
+                    createSpecificationLine(readInputs())
+                    break
                 case ("delete"):
-                    requestJson.itemid = parentId;
+                    requestJson.itemid = parentId
                     var toRemove = $(this).parents(".cat_unit")[0]
                     removeUnit(toRemove)
-                    break;
+                    break
             }
             
-            ajaxCall(submitAction);
-            break;
+            ajaxCall(submitAction)
+            break
     }
 }

@@ -48,6 +48,12 @@ body{
     margin-top: 11px;
     box-shadow: 5px 5px 5px rgba(0,0,0,0.2);
 }
+.action_back{
+    background-color: #74a9ff;
+    float: inline-start;
+    margin-top: 11px;
+    box-shadow: 5px 5px 5px rgba(0,0,0,0.2);
+}
 .action_update{
     background-color: skyblue;
 }

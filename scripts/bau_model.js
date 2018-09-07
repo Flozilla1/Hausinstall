@@ -94,7 +94,7 @@ function addMenu (type){
     html += "<div class='menu menu_" + type + " ask'>"
     html += "<div class='titel'><b>" + menuHelpList[type][0] + "</b></div>"
     if (menuHelpList[type][1] == "fkt-yes"){
-    html += addInputFields()        
+        html += addInputFields()        
     }
     html += "<button class='action_" + menuHelpList[type][2] + "_submit'>Do it!</button>"
     html += "</div>"
