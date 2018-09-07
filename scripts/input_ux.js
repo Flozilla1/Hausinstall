@@ -2,14 +2,29 @@ function placeInputLetters (thisInputField){
     //wenn das Window focus verliert, und ihn wieder bekommt, wiederholt sich die hier ausgelöste fkt!
     var editThis = $(".telling" + " ." + thisInputField.getAttribute("placeholder"))[0]
     var originalVal = editThis.innerHTML
-    originalValues.push([editThis, originalVal])
+    AddItemIfNew(editThis, originalVal)
     
     thisInputField.addEventListener("keyup", function (pressed){
         editThis.innerHTML = thisInputField.value
         if(thisInputField.value == ""){
-            editThis.innerHTML = originalVal
+            originalValues.forEach(function (val, key){
+                if(editThis == val[0]){
+                    editThis.innerHTML = val[1]                    
+                }
+            })
         }
     })
+}
+function AddItemIfNew (editThis, originalVal){
+    var check = true
+    originalValues.forEach(function (val, key){
+        if (editThis == val[0]){
+            check = false
+        }
+    })
+    if (originalValues.length == 0 || check == true){
+        originalValues.push([editThis, originalVal])
+    }
 }
 function markTarget (thisInputField){
     var editThis = $(".telling" + " ." + thisInputField.getAttribute("placeholder"))[0]

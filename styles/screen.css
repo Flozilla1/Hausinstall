@@ -46,6 +46,7 @@ body{
     background-color: #2ed12e;
     float: inline-start;
     margin-top: 11px;
+    box-shadow: 5px 5px 5px rgba(0,0,0,0.2);
 }
 .action_update{
     background-color: skyblue;
@@ -66,7 +67,6 @@ button{
     font-weight: 800;
     font-size: 12pt;
     border: none;
-    box-shadow: 2px 2px 3px rgba(0,0,0,0.3);
 }
 .cat_unit button{
     margin-top: 20px;
@@ -220,8 +220,9 @@ span + span{
     display: block;
     transform: rotate(90deg);
     transform-origin: 0% top;
-    margin-left: 54px;
+    margin-left: 50px;
     margin-top: 27px;
+    font-size: 30pt;
 }
 li{
     font-size: 1.3em;
