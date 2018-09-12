@@ -1,4 +1,4 @@
- /*@import url('https://fonts.googleapis.com/css?family=Bungee');*/
+/*@import url('https://fonts.googleapis.com/css?family=Bungee');*/
 *{
     margin: 0px;
     padding: 0px;
@@ -229,6 +229,25 @@ span + span{
     margin-left: 50px;
     margin-top: 27px;
     font-size: 30pt;
+}
+.rejected_path .closed .closed_cat_title{
+    display: none;
+}
+.rejected_path .all_fold-ups{
+    box-shadow: none;
+}
+.rejected_path :first-child{
+    overflow: visible;
+}
+.rejected_path :first-child .closed_cat_title{
+    display: block;
+    transform: none;
+    margin-left: 20px;
+    margin-top: 20px;
+    font-size: 25pt;
+}
+.rejected_path :first-child .closed_cat_title:after{
+    content: "…>";
 }
 li{
     font-size: 1.3em;

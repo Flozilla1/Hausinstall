@@ -36,15 +36,27 @@ function ajaxCall (reqType){
                     addContent(data)
                     break
                 case "new":
-                    pinCreatedUnit(data.newId)
+                    if (data.status == 1){
+                        pinCreatedUnit(data.newId)                        
+                    } else {
+                        removeMenu()
+                        document.getElementById("unfinished_unit").outerHTML = null
+                        openedUnit = undefined
+                    }
                     responsePopup(data.message)
                     break
                 case "update":
+                    if (data.status != 1){
+                        resetUnitValues()                        
+                    }
                     responsePopup(data.message)
                     break
                 case "delete":
-                    removeBreadcrumDelete()
-                    responsePopup(data.message)
+                    if (data.status == 1){
+                        removeThisUnit()
+                        removeBreadcrumDelete()
+                    }
+                    responsePopup(data.message)   
                     break
                 case "circuitlistOptionList":
                     insertFusesOptions(data)

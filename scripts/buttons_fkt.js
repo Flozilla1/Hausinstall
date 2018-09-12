@@ -67,12 +67,14 @@ function placeAction (){
                     break
                 case ("delete"):
                     requestJson.itemid = parentId
-                    var toRemove = $(this).parents(".cat_unit")[0]
-                    removeUnit(toRemove)
                     break
             }
             
             ajaxCall(submitAction)
             break
     }
+}
+function removeThisUnit (){
+    var toRemove = $(that).parents(".cat_unit")[0]
+    removeUnit(toRemove)
 }
