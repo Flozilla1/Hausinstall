@@ -4,15 +4,11 @@ function placeInputLetters (thisInputField){
     var originalVal = editThis.innerHTML
     AddItemIfNew(editThis, originalVal)
     
+    thisInputField.addEventListener("change", function (pressed){
+        showAndSaveInput(pressed, editThis, thisInputField)
+    })
     thisInputField.addEventListener("keyup", function (pressed){
-        editThis.innerHTML = thisInputField.value
-        if(thisInputField.value == ""){
-            originalValues.forEach(function (val, key){
-                if(editThis == val[0]){
-                    editThis.innerHTML = val[1]                    
-                }
-            })
-        }
+        showAndSaveInput(pressed, editThis, thisInputField)
     })
 }
 function AddItemIfNew (editThis, originalVal){
@@ -64,4 +60,14 @@ function resetUnitValues (){
         originalValues[key][0].innerHTML = originalValues[key][1]
     })
     originalValues = []
+}
+function showAndSaveInput (pressed, editThis, thisInputField){
+    editThis.innerHTML = thisInputField.value
+    if(thisInputField.value == ""){
+        originalValues.forEach(function (val, key){
+            if(editThis == val[0]){
+                editThis.innerHTML = val[1]                    
+            }
+        })
+    }
 }

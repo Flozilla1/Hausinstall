@@ -38,6 +38,14 @@ function keyboardCtrl (pressed){
                 $("[name='" + openedUnit.getAttribute("name") + "'] .action_list_fis").click()
                 openedUnit = undefined
                 break
+            case ("s"):
+                $("[name='" + openedUnit.getAttribute("name") + "'] .action_circlist").click()
+                openedUnit = undefined
+                break
+            case ("e"):
+                $("[name='" + openedUnit.getAttribute("name") + "'] .action_shoppinglist").click()
+                openedUnit = undefined
+                break
         }
     }
     switch (pressed.key){

@@ -131,16 +131,16 @@ function protectAndShowInput (){
 
     //Bugs: wenn blur, dann einheit öffnen => falsche Einheit wird bearbeited
     
-    if ($("input").parents(".menu_new")[0] != undefined){   //if (create Neu)
+    if ($("input, select").parents(".menu_new")[0] != undefined){   //if (create Neu)
         $(".cat_unit").addClass("shut").removeClass("telling")
         $(addEmtyUnit()).insertAfter($("input").parents(".menu_new")[0])
     }
-    $("input").focus(function (){
+    $("input, select").focus(function (){
         document.body.removeEventListener("keypress", doThis)
         markTarget(this)
         placeInputLetters(this)
     })
-    $("input").blur(function (){
+    $("input, select").blur(function (){
         enableKeyboard()
         unMarkTarget(this)
     })

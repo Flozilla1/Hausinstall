@@ -107,10 +107,8 @@ function addInputFields (){
     propertyList[listtype][1].forEach(function (val, key){
         if (selectOptionList[listtype] == undefined){
             html += "<div>" + val[0] + ": <input  id='val_" + (key + 2) + "' placeholder='" + val[1] + "' maxlength='20'></div>"
-        } else {
-            if (val[1] != selectOptionList[listtype][0][0][0]){
+        } else if (val[1] != selectOptionList[listtype][0][0][0]){
                 html += "<div>" + val[0] + ": <input  id='val_" + (key + 2) + "' placeholder='" + val[1] + "' maxlength='20'></div>"
-            }
         }
     })
     if (selectOptionList[listtype] != undefined){
@@ -155,13 +153,13 @@ function removeMenu (){
     $(".menu")[0].style.height = "0px"
     $(".menu")[0].style.marginTop = "0px"
     setTimeout(function (){
-        $(".menu").remove()                    
+        $(".menu").remove()
     }, 1000)
 }
 function removeUnit (toRemove){
     toRemove.style.opacity = "0"
     setTimeout(function (){
-        toRemove.remove()                        
+        toRemove.remove()
     }, 300)
 }
 function responsePopup (response){
