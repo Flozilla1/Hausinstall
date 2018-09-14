@@ -78,7 +78,7 @@ class CUDController implements Controller {
 //        if(!is_null($newId)){
         if($newId > 0){
 //            $this->response = array("status" => 1, "message" => $newId + " created");
-            $this->response = array("status" => 1, "message" => "New Item created");
+            $this->response = array("status" => 1, "message" => "New Item created", "newid" => $newId);
         } else {
             $this->response = array("status" => 0, "message" => "NO Entry was created");
         }
@@ -118,8 +118,8 @@ class CUDController implements Controller {
                 break;
         }
         
-//        if(!is_null($newId)){
-        if($newId > 0){
+        if(!is_null($newId)){
+//        if($newId > 0){
 //            $this->response = array("status" => 1, "message" => $newId + " updated");
             $this->response = array("status" => 1, "message" => "Item updated");
         } else {
@@ -163,8 +163,8 @@ class CUDController implements Controller {
                 break;
         }
         
-//        if(!is_null($newId)){
-        if($newId > 0){
+        if(!is_null($newId)){
+//        if($newId > 0){
             $this->response = array("status" => 1, "message" => "Item deleted");
         } else {
             $this->response = array("status" => 0, "message" => "Delete failed");

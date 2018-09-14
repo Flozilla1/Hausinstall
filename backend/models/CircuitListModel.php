@@ -74,6 +74,7 @@ class CircuitListModel {
     }
 
 // !! COPY OF SHOPPINGLIST
+    /*
     public function createReportREAL($projectid){  // Der gehört dann weiterentwickelt und enthält echtdaten
         //Devices
         $sql= "
@@ -150,7 +151,7 @@ class CircuitListModel {
                  
         return $this->list;
     }
-    
+    */
     private function getListFromDatabase($sql){
         $result = array();
         try{

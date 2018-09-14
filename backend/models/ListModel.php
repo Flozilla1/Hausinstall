@@ -39,15 +39,17 @@ class ListModel {
             case 'FUSES': 
                 return $this->getFusesSpecs($content);
 
-            case 'DEVICETYPES':   
+            case 'DEVICETYPES':  case 'SENSORTYPES': case 'FITYPES': case 'FUSETYPES':
                 return $this->getTypeDummySpecs($content);
+
+ /*
             case 'SENSORTYPES': 
                 return $this->getTypeDummySpecs($content);
             case 'FITYPES': 
                 return $this->getTypeDummySpecs($content);
             case 'FUSETYPES': 
                 return $this->getTypeDummySpecs($content);
-                 
+ */                
                           
             case 'PROJECTS': default:
                 return $this->getProjectsSpecs($content);
@@ -183,11 +185,12 @@ class ListModel {
         $this->childListType = false;
     }
 
+    /*
     public function getSensortypeSpecs($content){  // bekommt EINE zeile aus dem gefundenen Tabellinhalt und holt alle specifications heraus
         $specs['current'] = $content['current'];           
         return  $specs;
     }
-    
+    */
 
     public function listFitypes(){  
         $sql = " SELECT id, name FROM fitypes ";
@@ -195,11 +198,12 @@ class ListModel {
         $this->childListType = false;
     }
 
+    /*
     public function getFitypeSpecs($content){  // bekommt EINE zeile aus dem gefundenen Tabellinhalt und holt alle specifications heraus
         $specs['current'] = $content['current'];           
         return  $specs;
     }
-    
+    */
 
     public function listFusetypes(){  
         $sql = " SELECT id, name FROM fusetypes ";
@@ -207,18 +211,13 @@ class ListModel {
         $this->childListType = false;
     }
 
+    /*
     public function getFusetypeSpecs($content){  // bekommt EINE zeile aus dem gefundenen Tabellinhalt und holt alle specifications heraus
         $specs['current'] = $content['current'];           
         return  $specs;
     }
-    
+    */
 
-    
-
-    
-    
-    
-    
     
     private function getListFromDatabase($sql){
         $result = array();
