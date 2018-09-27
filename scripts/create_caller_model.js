@@ -37,7 +37,7 @@ function ajaxCall (reqType){
                     break
                 case "new":
                     if (data.status == 1){
-                        pinCreatedUnit(data.newId)                        
+                        pinCreatedUnit(data.newid)                        
                     } else {
                         removeMenu()
                         document.getElementById("unfinished_unit").outerHTML = null
