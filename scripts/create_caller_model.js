@@ -84,8 +84,10 @@ function readInputs (){
     
     $.each($(".telling input, .menu_new input"), function(ix, val) {
         inputFields.push(val.getAttribute("placeholder"))
-        userInputs.push($("#val_" + ++ix).val())   //funktioniert irgendwie nicht mit .getAttribute("value")
+        userInputs.push($(val).val())   //funktioniert irgendwie nicht mit .getAttribute("value")
+        console.log(val)
     })
+    console.log(inputFields, userInputs)
     var selectTagText = document.getElementsByTagName("select")
     $.each($(selectTagText), function(key, val) {
         inputFields.push(val.getAttribute("placeholder"))
