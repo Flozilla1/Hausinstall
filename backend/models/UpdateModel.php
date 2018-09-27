@@ -85,10 +85,10 @@ class UpdateModel {
         $current = $specification->current;
         $name = $specification->name;
         
-        //$sql = "UPDATE fis  SET   name = '$name' , current = $current    WHERE id = $itemId " ;
+        $sql = "UPDATE fis  SET   name = '$name' , current = $current    WHERE id = $itemId " ;
         
         //DEBUG
-        return $sql; // ################################ TODO Weg damit im echtbetrieb
+        //return $sql; // ################################ TODO Weg damit im echtbetrieb
                
         $this->database->order($sql);
         return $this->database->lastInsertedId();
